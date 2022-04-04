@@ -4,7 +4,7 @@
 
 `$ nodemon serveur`
 
-# ROUTES
+# ROUTES `USERS`
 
 ## Route POST pour créer un compte
 
@@ -32,4 +32,26 @@ http://localhost:3000/api/users/profile/update/:id
 
 ## Route DELETE pour supprimer son profile d'utilisateur
 
-http://localhost:3000/api/users/profile/delete/:id
+http://localhost:3000/api/users/profile/delete/:id`
+
+# ROUTES `POSTS`
+
+## Route POST pour créé un post
+
+http://localhost:3000/api/posts
+
+## Route GET pour lire tous les post
+
+http://localhost:3000/api/posts
+
+## Route GET pour lire un seul post
+
+http://localhost:3000/api/posts/:id
+
+## Route PUT pour modifier son post
+
+http://localhost:3000/api/posts/update/:id
+
+## Route DELETE pour supprimer son post
+
+http://localhost:3000/api/posts/delete/:id

@@ -31,11 +31,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Like.init(
     {
-      likes: { type: DataTypes.BOOLEAN, allowNull: true, default: false },
+      likes: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
       sequelize,
-      //define table name
       tableName: "likes",
       modelName: "Like",
     }

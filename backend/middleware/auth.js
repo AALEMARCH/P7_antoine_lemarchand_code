@@ -1,4 +1,3 @@
-// Importation de jwt et dotenv
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
@@ -14,7 +13,7 @@ module.exports = (req, res, next) => {
     if (req.body.userId && req.body.userId !== userId) {
       throw "User ID non valable !";
     } else {
-      next();
+      return userId, next();
     }
   } catch (error) {
     res.status(401).json({ error: error | "Requête non authentifiée !" });

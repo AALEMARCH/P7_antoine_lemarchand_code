@@ -18,6 +18,8 @@ const auth = require("../middleware/auth");
 
 // Importation du middleware multer pour la gestion des images
 const multer = require("../middleware/multer-config");
+const jwtUtils = require("../utils/jwt.utils");
+// const authAdmin = require("../middleware/authAdmin");
 
 // Création des routes utilisateurs
 router.post("/signup", emailControle, password, usersCtrl.signup);
@@ -26,6 +28,7 @@ router.get("/", auth, usersCtrl.getAllUsers);
 router.get("/profile/:id", auth, usersCtrl.userProfile);
 router.put("/profile/update/:id", auth, multer, usersCtrl.modifyProfile);
 router.delete("/profile/delete/:id", auth, usersCtrl.deleteProfile);
+// router.delete("/admin/profile/delete/:id", authAdmin, usersCtrl.deleteProfile);
 
 // Exportation du module
 module.exports = router;

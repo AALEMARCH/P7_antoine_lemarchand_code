@@ -1,9 +1,9 @@
 const express = require("express");
-
 const helmet = require("helmet");
 
 // routes
 const usersRoutes = require("./routes/users");
+const postsRoutes = require("./routes/posts");
 
 // Donne accès au chemin du système de fichiers
 const path = require("path");
@@ -44,5 +44,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 //routes
 app.use("/api/users/", usersRoutes);
+app.use("/api/posts/", postsRoutes);
 
 module.exports = app;

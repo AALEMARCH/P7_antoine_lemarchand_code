@@ -2,6 +2,7 @@
 
 const http = require("http");
 const app = require("./app");
+const { sequelize } = require("./models");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -45,11 +46,10 @@ const errorHandler = (error) => {
 
 const server = http.createServer(app);
 
-server.on("error", errorHandler);
-server.on("listening", () => {
-  const address = server.address();
-  const bind = typeof address === "string" ? "pipe " + address : "port " + port;
-  console.log("Listening on " + bind);
-});
+app.on("error", errorHandler);
 
-server.listen(port);
+app.listen(port, async () => {
+  console.log(`Connection établie sur le port : ${port}`);
+  await sequelize.authenticate();
+  console.log("Connection à la base de donnée réussie");
+});
