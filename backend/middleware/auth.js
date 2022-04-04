@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     if (req.body.userId && req.body.userId !== userId) {
       throw "User ID non valable !";
     } else {
-      return userId, next();
+      next();
     }
   } catch (error) {
     res.status(401).json({ error: error | "Requête non authentifiée !" });

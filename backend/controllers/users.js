@@ -125,7 +125,7 @@ exports.deleteProfile = async (req, res, next) => {
       });
       return res
         .status(200)
-        .json({ message: "votre profile a bien été supprimer!" });
+        .json({ message: "your profile has been deleted!" });
     }
   } catch {
     return res.status(403).json({ message: "unauthorized access!" });

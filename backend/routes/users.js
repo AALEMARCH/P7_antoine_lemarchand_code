@@ -18,8 +18,6 @@ const auth = require("../middleware/auth");
 
 // Importation du middleware multer pour la gestion des images
 const multer = require("../middleware/multer-config");
-const jwtUtils = require("../utils/jwt.utils");
-// const authAdmin = require("../middleware/authAdmin");
 
 // Création des routes utilisateurs
 router.post("/signup", emailControle, password, usersCtrl.signup);
