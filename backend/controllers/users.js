@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt"); // Package de cryptage
 const jwt = require("jsonwebtoken"); // Création et vérification du Token
-// const jwtUtils = require("../utils/jwt.utils");
+const fs = require("fs");
 const dotenv = require("dotenv"); // Importation de dotenv
 const { User } = require("../models");
 dotenv.config();
@@ -102,7 +102,9 @@ exports.modifyProfile = async (req, res, next) => {
         username: req.body.username,
         password: req.body.password,
         bio: req.body.bio,
-        attachment: req.body.attachment,
+        attachment: req.file
+          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
+          : req.body.attachment,
       });
     }
     res.status(200).json({ user });

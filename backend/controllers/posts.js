@@ -10,7 +10,7 @@ exports.createPost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
-  const { title, content, attachment } = req.body;
+  const { title, content } = req.body;
   try {
     const user = await User.findOne({ where: { id: userId } });
     if (!user) {
@@ -19,10 +19,11 @@ exports.createPost = async (req, res, next) => {
     if (user) {
       const post = await Post.create({
         UserId: user.id,
-        idUSERS: userId,
         title,
         content,
-        attachment,
+        attachment: req.file
+          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
+          : req.body.attachment,
       });
       return res.status(201).json(post);
     }
@@ -40,7 +41,7 @@ exports.readAllPosts = async (req, res) => {
     res.json(posts);
   } catch (error) {
     return res.status(500).json({
-      error: "Une erreur est survenu lors de la récupération des posts ",
+      error: "An error has occurred",
     });
   }
 };
@@ -66,7 +67,7 @@ exports.updatePost = async (req, res, next) => {
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
   try {
-    const { title, content, attachment } = req.body;
+    const { title, content } = req.body;
     const user = await User.findOne({
       where: { id: userId },
     });
@@ -80,7 +81,9 @@ exports.updatePost = async (req, res, next) => {
       post.update({
         title,
         content,
-        attachment,
+        attachment: req.file
+          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
+          : req.body.attachment,
       });
       res.status(200).json({ post });
     }
@@ -89,21 +92,31 @@ exports.updatePost = async (req, res, next) => {
   }
 };
 
-// exports.deletePost = async (req, res, next) => {
-//   const token = req.headers.authorization.split(" ")[1];
-//   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
-//   const userId = decodedToken.userId;
-//   try {
-//     const post = await Post.findOne({
-//       where: { id: req.params.id },
-//     });
-//     if (userId === post.userId) {
-//       post.destroy({ truncate: true });
-//       return res.status(200).json({ message: "your post has been deleted" });
-//     } else {
-//       return res.status(403).json({ message: "unauthorized access!" });
-//     }
-//   } catch {
-//     return res.status(500).json({ err: "An error occured" });
-//   }
-// };
+exports.deletePost = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
+  const userId = decodedToken.userId;
+  try {
+    const post = await Post.findOne({
+      attributes: ["id"],
+      where: { id: req.params.postId },
+    });
+    if (post.attachment != null) {
+      const filename = post.attachment.split("/images/")[1];
+
+      fs.unlink(`images/${filename}`, () => {
+        Post.destroy({
+          where: { id: req.params.postId },
+        });
+        res.status(200).json({ message: "your post has been deleted" });
+      });
+    } else {
+      Post.destroy({
+        where: { id: req.params.postId },
+      });
+      res.status(200).json({ message: "your post has been deleted" });
+    }
+  } catch {
+    return res.status(500).json({ err: "An error occured" });
+  }
+};

@@ -44,9 +44,9 @@ http://localhost:3000/api/posts
 
 http://localhost:3000/api/posts
 
-## Route GET pour lire un seul post
+## Route GET pour lire les postes d'un seul utilisateur
 
-http://localhost:3000/api/posts/:id
+http://localhost:3000/api/posts/:userId
 
 ## Route PUT pour modifier son post
 
@@ -54,4 +54,30 @@ http://localhost:3000/api/posts/update/:id
 
 ## Route DELETE pour supprimer son post
 
-http://localhost:3000/api/posts/delete/:id
+http://localhost:3000/api/posts/delete/:postId
+
+## Route POST pour liké un post
+
+http://localhost:3000/api/posts/:postId/like
+
+## Route GET pour voir tous les likes
+
+http://localhost:3000/api/posts/:postId/like
+
+# ROUTES `COMMENTS`
+
+## Route POST pour créé un commentaires
+
+http://localhost:3000/api/comments/:postId
+
+## Route GET pour voir tous les commentaires
+
+http://localhost:3000/api/comments
+
+## Route DELETE pour supprimer son commentaire
+
+http://localhost:3000/api/comments/:commentId
+
+## Route POST pour liké un commentaire
+
+http://localhost:3000/api/comments/:commentId/like

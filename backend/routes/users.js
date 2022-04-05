@@ -26,7 +26,6 @@ router.get("/", auth, usersCtrl.getAllUsers);
 router.get("/profile/:id", auth, usersCtrl.userProfile);
 router.put("/profile/update/:id", auth, multer, usersCtrl.modifyProfile);
 router.delete("/profile/delete/:id", auth, usersCtrl.deleteProfile);
-// router.delete("/admin/profile/delete/:id", authAdmin, usersCtrl.deleteProfile);
 
 // Exportation du module
 module.exports = router;
