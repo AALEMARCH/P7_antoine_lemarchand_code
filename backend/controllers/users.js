@@ -89,6 +89,10 @@ exports.userProfile = async (req, res, next) => {
 };
 
 exports.modifyProfile = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
+  const userId = decodedToken.userId;
+
   try {
     const user = await User.findOne({
       where: { id: req.params.id },
@@ -96,7 +100,7 @@ exports.modifyProfile = async (req, res, next) => {
     if (!user) {
       throw new Error("account not found!");
     }
-    if (user) {
+    if (userId === user.id) {
       user.update({
         email: req.body.email,
         username: req.body.username,
@@ -106,28 +110,49 @@ exports.modifyProfile = async (req, res, next) => {
           ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
           : req.body.attachment,
       });
+      res.status(200).json({ user });
+    } else {
+      return res.status(403).json({ message: "unauthorized access!" });
     }
-    res.status(200).json({ user });
   } catch (err) {
     return res.status(403).json({ message: "unauthorized access!" });
   }
 };
 
 exports.deleteProfile = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
+  const userId = decodedToken.userId;
   try {
     const user = await User.findOne({
       where: { id: req.params.id },
     });
+    const userAdmin = await User.findOne({
+      where: { id: userId },
+    });
     if (!user) {
       throw new Error("account not found!");
     }
-    if (user) {
-      user.destroy({
-        truncate: true,
-      });
-      return res
-        .status(200)
-        .json({ message: "your profile has been deleted!" });
+    if (userId === user.id || userAdmin.isAdmin === true) {
+      if (user.attachment != null) {
+        fs.unlink(`images/${filename}`, () => {
+          user.destroy({
+            truncate: true,
+          });
+          return res
+            .status(200)
+            .json({ message: "you have correctly deleted this profil!" });
+        });
+      } else {
+        user.destroy({
+          truncate: true,
+        });
+        return res
+          .status(200)
+          .json({ message: "you have correctly deleted this profil!" });
+      }
+    } else {
+      return res.status(403).json({ message: "unauthorized access!" });
     }
   } catch {
     return res.status(403).json({ message: "unauthorized access!" });

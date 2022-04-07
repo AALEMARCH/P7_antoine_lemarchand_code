@@ -7,9 +7,6 @@ const router = express.Router();
 // Importation du contrôleur pour les commentaires
 const commentsCtrl = require("../controllers/comments");
 
-// Importation du contrôleur pour les likes
-const likesCtrl = require("../controllers/likes");
-
 // Importation du middleware d'authentification
 const auth = require("../middleware/auth");
 
