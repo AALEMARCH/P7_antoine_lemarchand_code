@@ -77,7 +77,3 @@ http://localhost:3000/api/comments
 ## Route DELETE pour supprimer son commentaire
 
 http://localhost:3000/api/comments/:commentId
-
-## Route POST pour liké un commentaire
-
-http://localhost:3000/api/comments/:commentId/like
