@@ -7,6 +7,9 @@ const router = express.Router();
 // Importation du contrôleur pour les commentaires
 const commentsCtrl = require("../controllers/comments");
 
+// Importation du contrôleur pour les likes
+const likesCtrl = require("../controllers/likes");
+
 // Importation du middleware d'authentification
 const auth = require("../middleware/auth");
 
@@ -17,7 +20,7 @@ const multer = require("../middleware/multer-config");
 router.post("/:postId", auth, multer, commentsCtrl.createComment);
 router.get("/", auth, commentsCtrl.readAllComment);
 router.delete("/:commentId", auth, commentsCtrl.deleteComment);
-// router.post('/:commentId/like', auth, likesCtrl.likeComment);
+router.post("/:commentId/like", auth, likesCtrl.likeComment);
 
 // Exportation du module
 module.exports = router;

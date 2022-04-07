@@ -23,8 +23,8 @@ router.get("/:userId", auth, postsCtrl.readAllPostUser);
 router.put("/update/:id", auth, multer, postsCtrl.updatePost);
 router.delete("/delete/:postId", auth, postsCtrl.deletePost);
 
-// router.post("/:postId/like", auth, likesCtrl.likePost);
-// router.get("/:postId/like", auth, likesCtrl.readAllLikes);
+router.post("/:postId/like", auth, likesCtrl.likePost);
+router.get("/:postId/like", auth, likesCtrl.readAllLikes);
 
 // Exportation du module
 module.exports = router;
