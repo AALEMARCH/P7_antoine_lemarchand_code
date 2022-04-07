@@ -24,18 +24,6 @@ module.exports = {
           key: "id",
         },
       },
-      commentId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Comments",
-          key: "id",
-        },
-      },
-      likes: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

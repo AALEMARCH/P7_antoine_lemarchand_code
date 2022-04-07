@@ -21,18 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         onDelete: "CASCADE",
       });
-      models.Like.belongsTo(models.Comment, {
-        foreignKey: {
-          allowNull: false,
-        },
-        onDelete: "CASCADE",
-      });
     }
   }
   Like.init(
-    {
-      likes: { type: DataTypes.INTEGER, allowNull: false },
-    },
+    {},
     {
       sequelize,
       tableName: "likes",
