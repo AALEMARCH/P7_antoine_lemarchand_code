@@ -11,7 +11,6 @@ exports.createComment = async (req, res, next) => {
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
   try {
-    const { username, content } = req.body;
     const user = await User.findOne({
       where: { id: userId },
     });
@@ -22,8 +21,8 @@ exports.createComment = async (req, res, next) => {
         where: { id: req.params.postId },
       });
       const comment = await Comment.create({
-        username,
-        content,
+        username: user.username,
+        content: req.body.content,
         attachment: req.file
           ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
           : req.body.attachment,
@@ -52,25 +51,40 @@ exports.readAllComment = async (req, res, next) => {
 };
 
 exports.deleteComment = async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
+  const userId = decodedToken.userId;
+
   try {
     const comment = await Comment.findOne({
-      attributes: ["id"],
       where: { id: req.params.commentId },
     });
-    if (comment.attachment != null) {
-      const filename = comment.attachment.split("/images/")[1];
+    const userAdmin = await User.findOne({
+      where: { id: userId },
+    });
 
-      fs.unlink(`images/${filename}`, () => {
+    if (userId === comment.UserId || userAdmin.isAdmin === true) {
+      if (comment.attachment != null) {
+        const filename = comment.attachment.split("/images/")[1];
+
+        fs.unlink(`images/${filename}`, () => {
+          Comment.destroy({
+            where: { id: req.params.commentId },
+          });
+          res
+            .status(200)
+            .json({ message: "you have succesfully deleted this comment !" });
+        });
+      } else {
         Comment.destroy({
           where: { id: req.params.commentId },
         });
-        res.status(200).json({ message: "your comment has been deleted" });
-      });
+        res
+          .status(200)
+          .json({ message: "you have succesfully deleted this comment !" });
+      }
     } else {
-      Comment.destroy({
-        where: { id: req.params.commentId },
-      });
-      res.status(200).json({ message: "your comment has been deleted" });
+      return res.status(403).json({ message: "unauthorized access!" });
     }
   } catch {
     return res.status(500).json({ err: "An error occured" });
