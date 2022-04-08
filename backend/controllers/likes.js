@@ -1,5 +1,4 @@
-const { User, Post, Comment, Like } = require("../models");
-const fs = require("fs");
+const { Post, Like } = require("../models");
 const jwt = require("jsonwebtoken");
 
 const dotenv = require("dotenv");

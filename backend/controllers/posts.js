@@ -14,9 +14,8 @@ exports.createPost = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: userId } });
     if (!user) {
-      throw new Error("Sorry,we can't find your account");
-    }
-    if (user) {
+      throw new Error("Sorry, we can't find your account");
+    } else {
       const post = await Post.create({
         UserId: user.id,
         title,
@@ -68,27 +67,32 @@ exports.updatePost = async (req, res, next) => {
   const userId = decodedToken.userId;
   try {
     const { title, content } = req.body;
-    const user = await User.findOne({
-      where: { id: userId },
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
     });
-    if (!user) {
-      throw new Error("account not found!");
-    }
-    if (user) {
-      const post = await Post.findOne({
-        where: { id: req.params.id },
+    if (!post) {
+      throw new Error("post not found!");
+    } else {
+      const user = await User.findOne({
+        where: { id: userId },
       });
-      post.update({
-        title,
-        content,
-        attachment: req.file
-          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
-          : req.body.attachment,
-      });
-      res.status(200).json({ post });
+      if (userId === post.UserId || user.isAdmin === true) {
+        post.update({
+          title,
+          content,
+          attachment: req.file
+            ? `${req.protocole}://${req.get("host")}/images/${
+                req.file.filename
+              }`
+            : req.body.attachment,
+        });
+        res.status(200).json({ post });
+      } else {
+        return res.status(403).json({ message: "unauthorized access!" });
+      }
     }
   } catch {
-    return res.status(403).json({ message: "unauthorized access!" });
+    return res.status(500).json({ err: "An error occured" });
   }
 };
 
@@ -98,23 +102,33 @@ exports.deletePost = async (req, res, next) => {
   const userId = decodedToken.userId;
   try {
     const post = await Post.findOne({
-      attributes: ["id"],
       where: { id: req.params.postId },
     });
-    if (post.attachment != null) {
-      const filename = post.attachment.split("/images/")[1];
-
-      fs.unlink(`images/${filename}`, () => {
-        Post.destroy({
-          where: { id: req.params.postId },
-        });
-        res.status(200).json({ message: "your post has been deleted" });
-      });
+    if (!post) {
+      throw new Error("post not found!");
     } else {
-      Post.destroy({
-        where: { id: req.params.postId },
+      const user = await User.findOne({
+        where: { id: userId },
       });
-      res.status(200).json({ message: "your post has been deleted" });
+      if (userId === post.UserId || user.isAdmin === true) {
+        if (post.attachment != null) {
+          const filename = post.attachment.split("/images/")[1];
+
+          fs.unlink(`images/${filename}`, () => {
+            Post.destroy({
+              where: { id: req.params.postId },
+            });
+            res.status(200).json({ message: "your post has been deleted" });
+          });
+        } else {
+          Post.destroy({
+            where: { id: req.params.postId },
+          });
+          res.status(200).json({ message: "your post has been deleted" });
+        }
+      } else {
+        return res.status(403).json({ message: "unauthorized access!" });
+      }
     }
   } catch {
     return res.status(500).json({ err: "An error occured" });

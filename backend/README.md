@@ -50,7 +50,7 @@ http://localhost:3000/api/posts/:userId
 
 ## Route PUT pour modifier son post
 
-http://localhost:3000/api/posts/update/:id
+http://localhost:3000/api/posts/update/:postId
 
 ## Route DELETE pour supprimer son post
 
