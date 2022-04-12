@@ -5,20 +5,32 @@ const Navigation = () => {
   return (
     <div className="navigation">
       <div className="navigation_link">
-        <NavLink to="/">
-          <i className="fa-solid fa-house navigation_link--test"></i>
+        <NavLink
+          to="/"
+          className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
+        >
+          <i className="fa-solid fa-house "></i>
         </NavLink>
 
-        <NavLink to="/profil">
-          <i className="fa-solid fa-user navigation_link--test"></i>
+        <NavLink
+          to="/profil"
+          className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
+        >
+          <i className="fa-solid fa-user "></i>
         </NavLink>
 
-        <NavLink to="/reseau">
-          <i className="fa-solid fa-user-group navigation_link--test"></i>
+        <NavLink
+          to="/reseau"
+          className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
+        >
+          <i className="fa-solid fa-user-group "></i>
         </NavLink>
 
-        <NavLink to="/signOut">
-          <i className="fa-solid fa-arrow-right-from-bracket navigation_link--test"></i>
+        <NavLink
+          to="/signOut"
+          className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
+        >
+          <i className="fa-solid fa-arrow-right-from-bracket "></i>
         </NavLink>
       </div>
     </div>

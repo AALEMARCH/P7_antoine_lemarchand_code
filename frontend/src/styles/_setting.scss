@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;400;700&family=Roboto:wght@100;400;700&display=swap');
 
 $font-1: 'Roboto', sans-serif;
+$font-2: 'Josefin Sans', sans-serif;
+$color-1:#FBE0C3;
+$color-2:#FFBB98;
+$color-3:#7D8E95;
+$color-4:#344648;
+$color-5: whitesmoke;
 
 *{
     box-sizing: border-box;
@@ -14,7 +21,7 @@ $font-1: 'Roboto', sans-serif;
 }
 
 body{
-    font-family: $font-1;
+    font-family: $font-2;
     font-weight: 400;
-    color: #344648;
+    color: $color-4;
 }

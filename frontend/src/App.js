@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Profil from "./components/Profil";
-import Reseau from "./components/Reseau";
-import SignOut from "./components/SignOut";
+import Home from "./pages/Home";
+import Profil from "./pages/Profil";
+import Reseau from "./pages/Reseau";
+import SignOut from "./pages/SignOut";
 
 function App() {
   return (
