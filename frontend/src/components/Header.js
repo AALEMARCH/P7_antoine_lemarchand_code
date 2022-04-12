@@ -1,20 +1,15 @@
 import React from "react";
+import Navigation from "./Navigation";
 
 const headers = () => {
-  const JSX = (
+  return (
     <div className="header-container">
       <h1>Groupomania</h1>
       <div className="header-container_link">
-        <i className="fa-solid fa-house"></i>
-        <i className="fa-solid fa-user"></i>
-        <i className="fa-solid fa-user-group"></i>
-        <i className="fa-solid fa-arrow-right-from-bracket"></i>
+        <Navigation />
       </div>
     </div>
   );
-  return JSX;
-
-  // test de commentaire JS
 };
 
 export default headers;
