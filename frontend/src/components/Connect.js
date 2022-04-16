@@ -11,7 +11,7 @@ const Connect = () => {
         <div className="connect_container-img">
           <img
             src="./img/icon-above-font.png"
-            alt="image groupomania log"
+            alt="logo"
             className="log--img"
           />
         </div>

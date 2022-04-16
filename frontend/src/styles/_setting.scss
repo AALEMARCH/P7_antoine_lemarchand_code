@@ -3,11 +3,12 @@
 
 $font-1: 'Roboto', sans-serif;
 $font-2: 'Josefin Sans', sans-serif;
-$color-1: rgb(22, 18, 43);
-$color-2:#291670;
-$color-3:#6c70ab;
-$color-4:#685D79;
-$color-5: #475C7A;
+
+$color-6: #2F4F4F;
+$color-7: #778899;
+$color-8: #696969;
+$color-9: #A9A9A9;
+$color-10: #DCDCDC;
 
 *{
     box-sizing: border-box;
@@ -23,6 +24,4 @@ $color-5: #475C7A;
 body{
     font-family: $font-2;
     font-weight: 400;
-    color: black;
-    background-color: #a6b7cf;
 }

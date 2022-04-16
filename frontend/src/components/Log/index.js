@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import { Button } from "react-bootstrap";
 
 const Log = () => {
   const [signUpModal, setSignUpModal] = useState();
@@ -19,14 +20,24 @@ const Log = () => {
   return (
     <div className="connection-form">
       <div className="form-container">
-        <ul>
+        {/* <ul>
           <li onClick={handleModals} id="register">
             SignUp
           </li>
+
           <li onClick={handleModals} id="login">
             Login
           </li>
-        </ul>
+        </ul> */}
+        <>
+          <Button variant="outline-danger" onClick={handleModals} id="register">
+            SignUp
+          </Button>
+
+          <Button variant="outline-danger" onClick={handleModals} id="login">
+            Login
+          </Button>
+        </>
         {signUpModal && <SignUp />}
         {loginModal && <Login />}
       </div>

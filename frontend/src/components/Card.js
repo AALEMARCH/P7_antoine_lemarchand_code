@@ -1,7 +1,7 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 const Card = ({ post }) => {
-  console.log(post);
   return (
     <div className="card">
       <div className="card_header">
@@ -15,9 +15,15 @@ const Card = ({ post }) => {
       <div className="card_footer">
         <p>{post.createdAt}</p>
         <div>
-          <i className="fa-solid fa-comments"></i>
-          <i className="fa-solid fa-thumbs-up"></i>
-          <i className="fa-solid fa-thumbs-down"></i>
+          <Button variant="outline-secondary">
+            <i className="fa-solid fa-comments test"></i>
+          </Button>{" "}
+          <Button variant="outline-secondary">
+            <i className="fa-solid fa-thumbs-up"></i>
+          </Button>{" "}
+          <Button variant="outline-secondary">
+            <i className="fa-solid fa-thumbs-down"></i>
+          </Button>{" "}
         </div>
       </div>
     </div>
