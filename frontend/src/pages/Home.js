@@ -1,11 +1,12 @@
 import React from "react";
+import Posts from "../components/Posts";
 import Header from "../components/Header";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <h2>Acceuil</h2>
+      <Posts />
     </div>
   );
 };

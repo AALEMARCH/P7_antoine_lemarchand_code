@@ -1,12 +1,16 @@
 .header-container{
-    background: $color-4;
-    color: $color-5;
+    background: $color-5;
     height: 100%;
     width: 100%;
         h1{
         font-weight: 400;
         padding: 0.2rem;
         }  
+        &_picture{
+            height: 20rem;
+            margin: -7rem 1rem -8rem 1rem;
+            padding: 1rem 1rem;
+        }
 
 }
 
