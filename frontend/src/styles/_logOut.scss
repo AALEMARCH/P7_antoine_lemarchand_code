@@ -1,0 +1,18 @@
+.logOut-container{
+    width: 100%;
+    height: 80%;
+    &_img{
+        object-fit: cover;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+    &_text{
+        font-size: 1.2rem;
+    }
+    &_header{
+        font-size: 1.5rem;
+        height: 10%;
+    }
+}

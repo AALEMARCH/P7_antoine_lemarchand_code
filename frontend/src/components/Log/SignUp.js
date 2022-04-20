@@ -5,26 +5,29 @@ const SignUp = () => {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" placeholder="Entrez l'e-mail" />
         <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
+          Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.
         </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Label>Mot de passe</Form.Label>
+        <Form.Control type="password" placeholder="tapez votre mot de passe" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>UserName</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+      <Form.Group className="mb-3" controlId="formBasicPasswordTwo">
+        <Form.Label>Nom d'utilisateur</Form.Label>
+        <Form.Control type="text" placeholder="Nom d'utilisateur" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
+        <Form.Check
+          type="checkbox"
+          label="J'accepte les conditions générales"
+        />
       </Form.Group>
       <Button variant="outline-danger" type="submit">
-        Submit
+        Valider inscription
       </Button>
     </Form>
   );

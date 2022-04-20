@@ -6,10 +6,13 @@ const Posts = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/posts")
+      .get("http://localhost:3000/api/posts", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => setData(res.data));
   }, []);
-
   return (
     <div>
       {data.map((post, index) => (

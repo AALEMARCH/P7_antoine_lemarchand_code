@@ -20,22 +20,23 @@ const Log = () => {
   return (
     <div className="connection-form">
       <div className="form-container">
-        {/* <ul>
-          <li onClick={handleModals} id="register">
-            SignUp
-          </li>
-
-          <li onClick={handleModals} id="login">
-            Login
-          </li>
-        </ul> */}
         <>
-          <Button variant="outline-danger" onClick={handleModals} id="register">
-            SignUp
+          <Button
+            variant="outline-danger"
+            onClick={handleModals}
+            id="register"
+            className="test"
+          >
+            S'inscrire
           </Button>
 
-          <Button variant="outline-danger" onClick={handleModals} id="login">
-            Login
+          <Button
+            variant="outline-danger"
+            onClick={handleModals}
+            id="login"
+            className="test"
+          >
+            Se connecter
           </Button>
         </>
         {signUpModal && <SignUp />}

@@ -6,6 +6,7 @@
     font-family: $font-2;
     font-weight: 700;
     border-radius: 0px 0px 10px 10px;
+    border-color: $color-11;
     &_header{
         padding: 1rem;
         display: flex;
@@ -13,9 +14,7 @@
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px dotted $color-9;
-        background-color: $color-9;
-        color: white;
-        border: -1px solid red;
+        background-color: $color-10;
     }
     &_infos{
         padding: 1rem;
