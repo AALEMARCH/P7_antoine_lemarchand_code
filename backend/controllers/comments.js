@@ -36,13 +36,41 @@ exports.createComment = async (req, res, next) => {
   }
 };
 
+// exports.readAllComment = async (req, res, next) => {
+//   try {
+//     const comments = await Comment.findAll({
+//       attributes: ["username", "content", "attachment", "createdAt"],
+//       order: [["createdAt", "DESC"]],
+//     });
+//     res.json(comments);
+//   } catch (error) {
+//     return res.status(500).json({
+//       error: "An error has occurred",
+//     });
+//   }
+// };
+
+//rajout du postId et condition
 exports.readAllComment = async (req, res, next) => {
   try {
     const comments = await Comment.findAll({
-      attributes: ["username", "content", "attachment", "createdAt"],
+      attributes: [
+        "id",
+        "userId",
+        "postId",
+        "username",
+        "content",
+        "attachment",
+        "createdAt",
+      ],
       order: [["createdAt", "DESC"]],
+      where: { postId: req.params.postId },
     });
-    res.json(comments);
+    if (comments) {
+      res.json(comments);
+    } else {
+      throw new Error("There are no comments");
+    }
   } catch (error) {
     return res.status(500).json({
       error: "An error has occurred",

@@ -1,7 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+// import CommentBtn from "./CommentBtn";
+import Comments from "./Comments";
+import CommentUser from "./CommentUser";
 
 const Card = ({ post }) => {
+  console.log(post);
   return (
     <div className="card">
       <div className="card_header">
@@ -10,6 +14,13 @@ const Card = ({ post }) => {
       </div>
       <div className="card_infos">
         <p>{post.content}</p>
+        <div className="comments-container">
+          <div className="d-grid gap-2">
+            {/* <CommentBtn post={post} /> */}
+            <Comments post={post} />
+            <CommentUser />
+          </div>
+        </div>
       </div>
 
       <div className="card_footer">

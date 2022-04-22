@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Card from "./Card";
+import Api from "../Api/users";
 
 const Posts = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/posts", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => setData(res.data));
+    Api.get("posts/", {}).then((res) => setData(res.data));
   }, []);
   return (
     <div>

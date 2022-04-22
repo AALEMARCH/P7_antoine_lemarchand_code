@@ -34,7 +34,14 @@ exports.createPost = async (req, res, next) => {
 exports.readAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
-      attributes: ["title", "content", "attachment", "createdAt"],
+      attributes: [
+        "id",
+        "userId",
+        "title",
+        "content",
+        "attachment",
+        "createdAt",
+      ],
       order: [["createdAt", "DESC"]],
     });
     res.json(posts);
