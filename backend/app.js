@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const db = require("./models");
 
 // routes
 const usersRoutes = require("./routes/users");
@@ -49,5 +50,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/users/", usersRoutes);
 app.use("/api/posts/", postsRoutes);
 app.use("/api/comments/", commentsRoutes);
+
+db.sequelize.sync();
 
 module.exports = app;

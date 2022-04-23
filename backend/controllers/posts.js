@@ -18,6 +18,7 @@ exports.createPost = async (req, res, next) => {
     } else {
       const post = await Post.create({
         UserId: user.id,
+        username: user.username,
         title,
         content,
         attachment: req.file
@@ -37,6 +38,7 @@ exports.readAllPosts = async (req, res) => {
       attributes: [
         "id",
         "userId",
+        "username",
         "title",
         "content",
         "attachment",

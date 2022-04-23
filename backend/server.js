@@ -3,6 +3,8 @@
 const http = require("http");
 const app = require("./app");
 const { sequelize } = require("./models");
+
+// Importation de dotenv
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -19,7 +21,7 @@ const normalizePort = (val) => {
   return false;
 };
 // Je configure le serveur pour qu'il écoute le port 3000
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || 3000);
 app.set("port", port);
 
 // Recherche les différentes erreurs, les gère, les enregistre dans le serveur
