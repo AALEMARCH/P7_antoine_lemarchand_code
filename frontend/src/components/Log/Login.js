@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <Form action="" onSubmit={handleLogin}>
+    <Form action="" onSubmit={handleLogin} className="form_log">
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
@@ -65,12 +65,6 @@ const Login = () => {
           value={password}
         />
         <div className="password error"></div>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check
-          type="checkbox"
-          label="J'accepte les conditions générales"
-        />
       </Form.Group>
       <Button variant="outline-danger" type="submit">
         Se connecter

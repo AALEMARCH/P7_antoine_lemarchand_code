@@ -1,46 +1,25 @@
-// import React from "react";
-// import { Card } from "react-bootstrap";
-
-// const CommentUser = ({ comment }) => {
-//   console.log(`${comment}`);
-//   if (comment != undefined || comment != null) {
-//     return (
-//       <Card>
-//         <Card.Header>
-//           {/* <h1>test commentaire</h1> */}
-//           {console.log(comment)}
-//           <h1>{comment.username}</h1>
-//         </Card.Header>
-//         <Card.Body>
-//           <blockquote className="blockquote mb-0">
-//             {/* <p>test commentaire</p> */}
-//             <p>{comment.content}</p>
-//             {/* <footer className="blockquote-footer">photo</footer> */}
-//             <footer className="blockquote-footer">{comment.attachment}</footer>
-//           </blockquote>
-//         </Card.Body>
-//       </Card>
-//     );
-//   } else {
-//     return null;
-//   }
-// };
-
-// export default CommentUser;
-
 import React from "react";
-// import { Card } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
+import CommentDelete from "./HomeSetting/CommentDelete";
 
 const CommentUser = ({ comment }) => {
   console.log(`${comment}`);
 
-  if (comment != undefined || comment != null) {
+  if (comment === undefined || comment === null) {
+    return null;
+  } else {
     const date = new Date(comment.createdAt).toLocaleString();
     return (
       <div className="comments">
         <header className="comments_container">
           <h1 className="comments_header">{comment.username}</h1>
-          <div>{date}</div>
+          <div className="comments_handle">
+            <div className="comments_date">{date}</div>
+            {/* <Button variant="outline-secondary">
+              <i className="fa-solid fa-xmark"></i>
+            </Button>{" "} */}
+            <CommentDelete comment={comment} />
+          </div>
         </header>
         <div className="comments_body">
           <div>
@@ -50,8 +29,6 @@ const CommentUser = ({ comment }) => {
         </div>
       </div>
     );
-  } else {
-    return null;
   }
 };
 

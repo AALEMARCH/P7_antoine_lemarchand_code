@@ -1,0 +1,65 @@
+.profil{
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    &_card{
+        width: 100%;
+        border: none;
+        border-radius: 15px;
+        padding: 8px;
+        background-color: #fff;
+        position: relative;
+        height: 370px;
+    }
+    &_image-container{
+        height: 100px;
+        background-color: $color-7;
+        border: none;
+    }
+    &_title{
+        background-color: $color-6;
+        color: white;
+        width: 12rem;
+        height: 12rem;
+        border: none;
+        border-radius: 100px;
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: -6rem auto 0rem auto;
+    }
+    &_body-container{
+        height: 100%;
+        &--button{
+            width: 10rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: $font-2;
+        }
+    }
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto 2rem auto;
+}
+.profil-section{
+margin: 1.5rem;
+&_link{
+   display: flex; 
+   justify-content: space-around;
+   & span{
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+}
+}
+.profil-section h4{
+    margin-top: 5rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid black;
+    
+}

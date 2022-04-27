@@ -22,7 +22,7 @@ exports.createPost = async (req, res, next) => {
         title,
         content,
         attachment: req.file
-          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
+          ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
           : req.body.attachment,
       });
       return res.status(201).json(post);

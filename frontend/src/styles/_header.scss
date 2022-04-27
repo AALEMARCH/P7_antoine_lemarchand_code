@@ -2,10 +2,20 @@
     background: $color-6;
     height: 100%;
     width: 100%;
+    &_items{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
     &_picture{
         height: 20rem;
         margin: -7rem 1rem -8rem 1rem;
         padding: 1rem 1rem;
+    }
+    &_title{
+        padding: 2.2rem 2rem 1rem 0rem;
+        color: white;
     }
 
 }

@@ -76,7 +76,7 @@ exports.login = async (req, res, next) => {
 exports.userProfile = async (req, res, next) => {
   try {
     const user = await User.findOne({
-      attributes: ["id", "email", "username", "bio"],
+      attributes: ["id", "email", "username", "bio", "attachment", "isAdmin"],
       where: { id: req.params.id },
     });
     if (!user) {
