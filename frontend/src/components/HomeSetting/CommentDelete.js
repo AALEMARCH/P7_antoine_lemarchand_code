@@ -3,8 +3,6 @@ import { Button } from "react-bootstrap";
 import Api from "../../Api/users";
 
 const CommentDelete = (comment) => {
-  console.log(comment.comment.id);
-
   const handlCommentDelete = async (e) => {
     e.preventDefault();
 
@@ -21,7 +19,7 @@ const CommentDelete = (comment) => {
   return (
     <div>
       <Button variant="outline-secondary" onClick={handlCommentDelete}>
-        <i className="fa-solid fa-xmark"></i>
+        Supprimer
       </Button>{" "}
     </div>
   );

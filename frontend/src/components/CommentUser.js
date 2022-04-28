@@ -1,10 +1,7 @@
 import React from "react";
-// import { Button } from "react-bootstrap";
 import CommentDelete from "./HomeSetting/CommentDelete";
 
 const CommentUser = ({ comment }) => {
-  console.log(`${comment}`);
-
   if (comment === undefined || comment === null) {
     return null;
   } else {
@@ -15,9 +12,6 @@ const CommentUser = ({ comment }) => {
           <h1 className="comments_header">{comment.username}</h1>
           <div className="comments_handle">
             <div className="comments_date">{date}</div>
-            {/* <Button variant="outline-secondary">
-              <i className="fa-solid fa-xmark"></i>
-            </Button>{" "} */}
             <CommentDelete comment={comment} />
           </div>
         </header>

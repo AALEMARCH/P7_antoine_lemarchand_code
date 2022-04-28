@@ -15,22 +15,23 @@ const CommentBtn = (post) => {
 
   return (
     <div>
-      <>
+      <div className="commentBtn">
         <Button
           variant="outline-secondary"
           onClick={commentHandleModals}
           id="onComment"
         >
-          <i className="fa-solid fa-comments test"></i>
+          Commenter
         </Button>{" "}
         <Button
           variant="outline-secondary"
           onClick={commentHandleModals}
           id="offComment"
+          className="commentBtn_close"
         >
-          <i className="fa-solid fa-xmark"></i>
+          X
         </Button>{" "}
-      </>
+      </div>
       {commentHandle && <CommentCreated post={post} />}
     </div>
   );

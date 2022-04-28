@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const CommentCreated = (post) => {
+const UpdatePost = (post) => {
+  console.log(post.post.post.id);
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [attachment, setAttachment] = useState("");
 
-  const handlCommentCreated = async (e) => {
+  const handlCommentUpdated = async (e) => {
     e.preventDefault();
 
     await axios({
-      method: "post",
+      method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      url: `${process.env.REACT_APP_API_URL}api/comments/${post.post.post.id}`,
+      url: `${process.env.REACT_APP_API_URL}api/posts/update/${post.post.post.id}`,
       withCredentials: true,
       data: {
+        title,
         content,
         attachment,
       },
@@ -32,7 +35,18 @@ const CommentCreated = (post) => {
   };
 
   return (
-    <Form action="" onSubmit={handlCommentCreated}>
+    <Form action="" onSubmit={handlCommentUpdated}>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="content">Titre : </Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Titre de la publication"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          id="title"
+          name="title"
+        />
+      </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="content">Contenu : </Form.Label>
         <Form.Control
@@ -61,4 +75,4 @@ const CommentCreated = (post) => {
   );
 };
 
-export default CommentCreated;
+export default UpdatePost;

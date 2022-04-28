@@ -4,10 +4,10 @@ import Comments from "./Comments";
 import CommentUser from "./CommentUser";
 import PostDelete from "./HomeSetting/PostDelete";
 import CommentBtn from "./HomeSetting/CommentBtn";
+import UpdatePostBtn from "./HomeSetting/UpdatePostBtn";
 
 const Card = ({ post }) => {
   const date = new Date(post.createdAt).toLocaleString();
-  console.log(post);
   return (
     <div className="card">
       <div className="card_header">
@@ -38,27 +38,31 @@ const Card = ({ post }) => {
           <br />
           {date}
         </p>
-        <div className="card_footer--link">
-          <div className="card_footer--linkChange">
-            <Button variant="outline-secondary">
-              <i className="fa-solid fa-user "></i>
-            </Button>{" "}
-          </div>
+        <div>
+          <div className="card_footer--link">
+            <div className="card_footer--linkChange">
+              <Button variant="outline-secondary">
+                <i className="fa-solid fa-user "></i>
+              </Button>{" "}
+            </div>
 
-          <div className="card_footer--linkChange">
-            <Button variant="outline-secondary">
-              <i className="fa-solid fa-thumbs-up"></i>
-            </Button>{" "}
-          </div>
+            <div className="card_footer--linkChange">
+              <Button variant="outline-secondary">
+                <i className="fa-solid fa-thumbs-up"></i>
+              </Button>{" "}
+            </div>
 
-          <div className="card_footer--linkChange">
-            <Button variant="outline-secondary">
-              <i className="fa-solid fa-thumbs-down"></i>
-            </Button>{" "}
+            <div className="card_footer--linkChange">
+              <Button variant="outline-secondary">
+                <i className="fa-solid fa-thumbs-down"></i>
+              </Button>{" "}
+            </div>
           </div>
-
-          <PostDelete post={post} />
         </div>
+      </div>
+      <div className="postHandle">
+        <PostDelete post={post} />
+        <UpdatePostBtn post={post} />
       </div>
     </div>
   );

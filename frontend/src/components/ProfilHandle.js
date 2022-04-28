@@ -27,12 +27,15 @@ const ProfilHandle = () => {
               <h4>Statistiques</h4>
               <div className="profil-section_link">
                 <div>
-                  <h6>Followers</h6> <span>8,797</span>
+                  <h6>Amis</h6> <span>8,797</span>
                 </div>
                 <div>
                   <h6>Posts</h6> <span>142</span>
                 </div>
               </div>
+            </div>
+            <div>
+              <h4>Connaissances</h4>
             </div>
             <div>
               <h4>Photographie</h4>

@@ -3,8 +3,6 @@ import CommentUser from "./CommentUser";
 import Api from "../Api/users";
 
 const Comments = (post) => {
-  console.log(post.post.id);
-  console.log(post.post);
   const [data, setData] = useState([]);
   useEffect(() => {
     Api.get(`comments/${post.post.id}`, {}).then((res) => setData(res.data));

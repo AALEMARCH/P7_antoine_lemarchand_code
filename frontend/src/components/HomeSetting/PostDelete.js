@@ -3,8 +3,6 @@ import { Button } from "react-bootstrap";
 import Api from "../../Api/users";
 
 const PostDelete = (post) => {
-  console.log(post.post.id);
-
   const handlePostDelete = async (e) => {
     e.preventDefault();
 
@@ -21,7 +19,7 @@ const PostDelete = (post) => {
   return (
     <div className="card_footer--linkChange">
       <Button variant="outline-secondary" onClick={handlePostDelete}>
-        <i className="fa-solid fa-xmark"></i>
+        Supprimer la publication
       </Button>{" "}
     </div>
   );

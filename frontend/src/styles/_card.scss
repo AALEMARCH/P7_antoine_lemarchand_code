@@ -61,6 +61,16 @@
     }
 }
 
+.commentBtn{
+    display: flex;
+    &_close{
+        display: flex;
+        width: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .comments{
     width: 100%;
     border-top: 1px dotted $color-9;
@@ -86,4 +96,10 @@
     &_date{
         padding-right: 1rem;
     }
+}
+.postHandle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }

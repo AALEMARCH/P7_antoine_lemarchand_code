@@ -8,8 +8,23 @@
         font-weight: 700;
     }
     &_btn{
-        margin: auto 1rem;
+        margin: auto 0rem;
         width: 100%;
         font-size: 1.5rem;
     }
+}
+.postCreated{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    &_container{
+        display: flex;
+    }
+}
+
+.postBtn_close{
+    display: flex;
+    width: 1rem;
+    align-items: center;
+    justify-content: center;
 }
