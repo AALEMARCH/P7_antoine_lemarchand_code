@@ -1,14 +1,13 @@
 const express = require("express");
-const helmet = require("helmet");
 const db = require("./models");
+// Donne accès au chemin du système de fichiers
+const path = require("path");
+const helmet = require("helmet");
 
 // routes
 const usersRoutes = require("./routes/users");
 const postsRoutes = require("./routes/posts");
 const commentsRoutes = require("./routes/comments");
-
-// Donne accès au chemin du système de fichiers
-const path = require("path");
 
 // Package dotenv (variable d'environnement)
 const dotenv = require("dotenv");
@@ -19,6 +18,9 @@ const app = express(); // create a new express app
 app.get("/", (req, res) => {
   res.send("App running");
 });
+
+//helmet
+app.use(helmet());
 
 // Gestion des CORS
 app.use((req, res, next) => {
@@ -37,19 +39,16 @@ app.use((req, res, next) => {
   next();
 });
 
-//helmet
-app.use(helmet());
-
 // Conversions JSON à la place de body parser
 app.use(express.json());
 
+//routes
+app.use("/api/users", usersRoutes); //modif enleve des slash
+app.use("/api/posts", postsRoutes);
+app.use("/api/comments", commentsRoutes);
+
 //multer
 app.use("/images", express.static(path.join(__dirname, "images")));
-
-//routes
-app.use("/api/users/", usersRoutes);
-app.use("/api/posts/", postsRoutes);
-app.use("/api/comments/", commentsRoutes);
 
 db.sequelize.sync();
 

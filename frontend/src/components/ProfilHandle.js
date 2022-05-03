@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UidContext } from "../components/Context/AppContext";
 import { Button } from "react-bootstrap";
+import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 
 const ProfilHandle = () => {
   const userData = useContext(UidContext);
@@ -16,9 +17,9 @@ const ProfilHandle = () => {
             <Button variant="danger" className="profil_body-container--button">
               Follow
             </Button>
-            <Button variant="outline-danger">
-              <i className="fa-solid fa-user-pen"></i>
-            </Button>{" "}
+            <div className="button-update">
+              <ProfilUpdateBtn />
+            </div>
           </div>
           <div className="profil-section">
             <h4>Biographie</h4>

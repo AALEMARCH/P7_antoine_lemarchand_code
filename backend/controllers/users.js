@@ -7,7 +7,10 @@ dotenv.config();
 
 exports.signup = async (req, res) => {
   try {
-    const { email, username, password, bio, attachment } = req.body;
+    const { email, username, password, bio } = req.body;
+    const attachmentURL = req.file
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : "";
     const user = await User.findOne({
       where: { email: email },
     });
@@ -24,7 +27,7 @@ exports.signup = async (req, res) => {
         password: hash,
         bio,
         isAdmin: false,
-        attachment,
+        attachment: attachmentURL,
       });
       return res.status(201).json({ userId: newUser.id });
     }
@@ -92,6 +95,10 @@ exports.modifyProfile = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
+  const { email, username, password, bio } = req.body;
+  const attachmentURL = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : "";
 
   try {
     const user = await User.findOne({
@@ -101,16 +108,15 @@ exports.modifyProfile = async (req, res, next) => {
       throw new Error("account not found!");
     }
     if (userId === user.id) {
-      user.update({
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
-        bio: req.body.bio,
-        attachment: req.file
-          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
-          : req.body.attachment,
+      const hash = await bcrypt.hash(password, 10);
+      const newUser = await user.update({
+        email,
+        username,
+        password: hash,
+        bio,
+        attachment: attachmentURL,
       });
-      res.status(200).json({ user });
+      res.status(200).json({ newUser });
     } else {
       return res.status(403).json({ message: "unauthorized access!" });
     }

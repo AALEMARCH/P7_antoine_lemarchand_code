@@ -10,6 +10,9 @@ exports.createComment = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
+  const attachmentURL = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : "";
   try {
     const user = await User.findOne({
       where: { id: userId },
@@ -23,9 +26,7 @@ exports.createComment = async (req, res, next) => {
       const comment = await Comment.create({
         username: user.username,
         content: req.body.content,
-        attachment: req.file
-          ? `${req.protocole}://${req.get("host")}/images/${req.file.filename}`
-          : req.body.attachment,
+        attachment: attachmentURL,
         PostId: post.id,
         UserId: user.id,
       });

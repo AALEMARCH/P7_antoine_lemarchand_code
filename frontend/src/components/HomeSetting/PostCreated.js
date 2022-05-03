@@ -11,13 +11,14 @@ const PostCreated = () => {
     e.preventDefault();
 
     await axios({
-      method: "post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       url: `${process.env.REACT_APP_API_URL}api/posts/`,
-      withCredentials: true,
+      // withCredentials: true,
       data: {
         title,
         content,
@@ -34,7 +35,12 @@ const PostCreated = () => {
   };
 
   return (
-    <Form action="" onSubmit={handlePostCreated}>
+    <Form
+      onSubmit={handlePostCreated}
+      method="post"
+      encType="multipart/form-data"
+      action="/images"
+    >
       <Form.Group className="mb-3">
         <Form.Label htmlFor="title">Titre : </Form.Label>
         <Form.Control
@@ -60,11 +66,12 @@ const PostCreated = () => {
       <Form.Group className="mb-3">
         <Form.Label htmlFor="attachment">Images : </Form.Label>
         <Form.Control
-          type="file"
-          name="attachment"
-          onChange={(e) => setAttachment(e.target.value)}
-          value={attachment}
           id="attachment"
+          name="attachment"
+          type="file"
+          onChange={(e) => setAttachment(e.target.value)}
+          // value={attachment}
+          // accept=".jpg, .jpeg, .png, .gif"
         />
       </Form.Group>
       <Button variant="outline-danger" type="submit">

@@ -6,11 +6,42 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+// exports.createPost = async (req, res, next) => {
+//   const token = req.headers.authorization.split(" ")[1];
+//   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
+//   const userId = decodedToken.userId;
+//   const { title, content } = req.body;
+
+//   try {
+//     const user = await User.findOne({ where: { id: userId } });
+//     if (!user) {
+//       throw new Error("Sorry, we can't find your account");
+//     } else {
+//       const post = await Post.create({
+//         UserId: user.id,
+//         username: user.username,
+//         title,
+//         content,
+//         attachment: req.file
+//           ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+//           : req.body.attachment,
+//       });
+//       return res.status(201).json(post);
+//     }
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// };
+
 exports.createPost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
   const { title, content } = req.body;
+  const attachmentURL = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : "";
+
   try {
     const user = await User.findOne({ where: { id: userId } });
     if (!user) {
@@ -21,9 +52,7 @@ exports.createPost = async (req, res, next) => {
         username: user.username,
         title,
         content,
-        attachment: req.file
-          ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-          : req.body.attachment,
+        attachment: attachmentURL,
       });
       return res.status(201).json(post);
     }
@@ -42,6 +71,7 @@ exports.readAllPosts = async (req, res) => {
         "title",
         "content",
         "attachment",
+        "likes",
         "createdAt",
       ],
       order: [["createdAt", "DESC"]],
@@ -74,6 +104,9 @@ exports.updatePost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
+  const attachmentURL = req.file
+    ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    : "";
   try {
     const { title, content } = req.body;
     const post = await Post.findOne({
@@ -89,11 +122,7 @@ exports.updatePost = async (req, res, next) => {
         post.update({
           title,
           content,
-          attachment: req.file
-            ? `${req.protocole}://${req.get("host")}/images/${
-                req.file.filename
-              }`
-            : req.body.attachment,
+          attachment: attachmentURL,
         });
         res.status(200).json({ post });
       } else {

@@ -43,9 +43,23 @@
 
 .button-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 1rem auto 2rem auto;
 }
+
+.button-update{
+    width: 100%;
+    margin: 0.5rem;
+    &--container{
+        display: flex;
+    }
+    &--size{
+        width: 100%;
+    }
+}
+
 .profil-section{
 margin: 1.5rem;
 &_link{
