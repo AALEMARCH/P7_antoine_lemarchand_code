@@ -40,7 +40,10 @@ exports.createPost = async (req, res, next) => {
   const { title, content } = req.body;
   const attachmentURL = req.file
     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-    : "";
+    : req.body.attachment;
+  // const attachmentURL = req.file
+  //   ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+  //   : "";
 
   try {
     const user = await User.findOne({ where: { id: userId } });
@@ -106,7 +109,7 @@ exports.updatePost = async (req, res, next) => {
   const userId = decodedToken.userId;
   const attachmentURL = req.file
     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-    : "";
+    : req.body.attachment;
   try {
     const { title, content } = req.body;
     const post = await Post.findOne({
@@ -119,12 +122,25 @@ exports.updatePost = async (req, res, next) => {
         where: { id: userId },
       });
       if (userId === post.UserId || user.isAdmin === true) {
-        post.update({
-          title,
-          content,
-          attachment: attachmentURL,
-        });
-        res.status(200).json({ post });
+        if (post.attachment != null) {
+          const filename = post.attachment.split("/images/")[1];
+
+          fs.unlink(`images/${filename}`, () => {
+            post.update({
+              title,
+              content,
+              attachment: attachmentURL,
+            });
+            res.status(200).json({ message: "your post has been deleted" });
+          });
+        } else {
+          post.update({
+            title,
+            content,
+            attachment: attachmentURL,
+          });
+          res.status(200).json({ post });
+        }
       } else {
         return res.status(403).json({ message: "unauthorized access!" });
       }

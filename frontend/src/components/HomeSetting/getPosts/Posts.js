@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
-import Api from "../Api/users";
+import { getPosts } from "../../../Api/posts";
 
 const Posts = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    Api.get("posts/", {}).then((res) => setData(res.data));
+    getPosts().then((res) => setData(res.data));
   }, []);
   return (
     <div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import Api from "../../Api/users";
+import Api from "../../../Api/users";
 
 const CommentDelete = (comment) => {
   const handlCommentDelete = async (e) => {

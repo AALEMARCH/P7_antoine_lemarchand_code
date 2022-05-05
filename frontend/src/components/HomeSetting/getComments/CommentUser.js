@@ -1,5 +1,5 @@
 import React from "react";
-import CommentDelete from "./HomeSetting/CommentDelete";
+import CommentDelete from "../../HomeSetting/delete/CommentDelete";
 
 const CommentUser = ({ comment }) => {
   if (comment === undefined || comment === null) {

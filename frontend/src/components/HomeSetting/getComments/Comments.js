@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CommentUser from "./CommentUser";
-import Api from "../Api/users";
+import Api from "../../../Api/users";
 
 const Comments = (post) => {
   const [data, setData] = useState([]);

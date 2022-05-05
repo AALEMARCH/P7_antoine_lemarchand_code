@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import Api from "../../Api/users";
+import { deletePost } from "../../../Api/posts";
 
 const PostDelete = (post) => {
   const handlePostDelete = async (e) => {
     e.preventDefault();
 
-    await Api.delete(`posts/delete/${post.post.id}`, {})
+    await deletePost(post)
       .then((res, req) => {
         console.log(res);
         alert(`le post de ${post.post.username} a bien été supprimer`);

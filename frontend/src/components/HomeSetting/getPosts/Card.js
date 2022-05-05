@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import Comments from "./Comments";
-import CommentUser from "./CommentUser";
-import PostDelete from "./HomeSetting/PostDelete";
-import CommentBtn from "./HomeSetting/CommentBtn";
-import UpdatePostBtn from "./HomeSetting/UpdatePostBtn";
-import PostLike from "./HomeSetting/LikePost/PostLike";
+import Comments from "../getComments/Comments";
+import CommentUser from "../getComments/CommentUser";
+import PostDelete from "../../HomeSetting/delete/PostDelete";
+import CommentBtn from "../CommentBtn";
+import UpdatePostBtn from "../UpdatePostBtn";
+import PostLike from "../LikePost/PostLike";
 
 const Card = ({ post }) => {
   const date = new Date(post.createdAt).toLocaleString();
@@ -30,11 +30,6 @@ const Card = ({ post }) => {
             alt="photographie"
             className="card_infos--img"
           />
-          {/* <img
-            src="./img/ketchup.jpg"
-            alt="photographie"
-            className="card_infos--img"
-          /> */}
         </div>
         <div className="comments-container">
           <div className="d-grid gap-2">

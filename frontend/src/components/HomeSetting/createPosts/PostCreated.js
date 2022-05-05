@@ -1,37 +1,51 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
+import { addPost, getPost, getPosts } from "../../../Api/posts";
 
 const PostCreated = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const [posts, setPosts] = useState(null);
+  const [newPost, setNewPost] = useState({
+    title: "",
+    content: "",
+    attachment: "",
+  });
 
-  const handlePostCreated = async (e) => {
-    e.preventDefault();
-
-    await axios({
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      url: `${process.env.REACT_APP_API_URL}api/posts/`,
-      // withCredentials: true,
-      data: {
-        title,
-        content,
-        attachment,
-      },
-    })
-      .then((res, req) => {
-        console.log(res);
-        window.location = "/home";
+  const handlePosts = () => {
+    getPosts()
+      .then((res) => {
+        setPosts(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handlePostCreated = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", newPost.title);
+    formData.append("content", newPost.content);
+    formData.append("attachment", newPost.attachment);
+
+    await addPost(formData)
+      .then((res, req) => {
+        console.log(res);
+        handlePosts();
+        window.location = "/home";
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handlePost = (e) => {
+    if (e.target.name !== "attachment") {
+      setNewPost({ ...newPost, [e.target.name]: e.target.value });
+    } else {
+      setNewPost({
+        ...newPost,
+        attachment: e.target.files[0],
+      });
+    }
   };
 
   return (
@@ -39,15 +53,14 @@ const PostCreated = () => {
       onSubmit={handlePostCreated}
       method="post"
       encType="multipart/form-data"
-      action="/images"
     >
       <Form.Group className="mb-3">
         <Form.Label htmlFor="title">Titre : </Form.Label>
         <Form.Control
           type="text"
           placeholder="Titre de la publication"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) => handlePost(e)}
+          value={newPost.title}
           id="title"
           name="title"
         />
@@ -57,8 +70,8 @@ const PostCreated = () => {
         <Form.Control
           type="text"
           placeholder="Contenu de la publication"
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
+          onChange={(e) => handlePost(e)}
+          value={newPost.content}
           id="content"
           name="content"
         />
@@ -69,9 +82,8 @@ const PostCreated = () => {
           id="attachment"
           name="attachment"
           type="file"
-          onChange={(e) => setAttachment(e.target.value)}
-          // value={attachment}
-          // accept=".jpg, .jpeg, .png, .gif"
+          width="30%"
+          onChange={(e) => handlePost(e)}
         />
       </Form.Group>
       <Button variant="outline-danger" type="submit">

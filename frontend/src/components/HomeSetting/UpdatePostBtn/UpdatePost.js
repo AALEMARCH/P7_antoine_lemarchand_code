@@ -1,31 +1,48 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { getPost, updatePost } from "../../../Api/posts";
 import axios from "axios";
 
 const UpdatePost = (post) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const [updatePost, setUpdatePost] = useState(null);
+  const [newPost, setNewPost] = useState({
+    title: "",
+    content: "",
+    attachment: "",
+  });
+
+  const handleUpdatePost = () => {
+    getPost()
+      .then((res) => {
+        setUpdatePost(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handlCommentUpdated = async (e) => {
     e.preventDefault();
 
-    await axios({
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      url: `${process.env.REACT_APP_API_URL}api/posts/update/${post.post.post.id}`,
-      withCredentials: true,
-      data: {
-        title,
-        content,
-        attachment,
-      },
-    })
+    const formData = new FormData();
+    formData.append("title", newPost.title);
+    formData.append("content", newPost.content);
+    formData.append("attachment", newPost.attachment);
+
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}api/posts/update/${post.post.post.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
+      )
       .then((res, req) => {
         console.log(res);
+        handleUpdatePost();
         window.location = "/home";
       })
       .catch((err) => {
@@ -33,15 +50,31 @@ const UpdatePost = (post) => {
       });
   };
 
+  const handlePost = (e) => {
+    if (e.target.name !== "attachment") {
+      setNewPost({ ...newPost, [e.target.name]: e.target.value });
+    } else {
+      setNewPost({
+        ...newPost,
+        attachment: e.target.files[0],
+      });
+    }
+  };
+
   return (
-    <Form action="" onSubmit={handlCommentUpdated}>
+    <Form
+      action=""
+      onSubmit={handlCommentUpdated}
+      method="put"
+      encType="multipart/form-data"
+    >
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="content">Titre : </Form.Label>
+        <Form.Label htmlFor="title">Titre : </Form.Label>
         <Form.Control
           type="text"
           placeholder="Titre de la publication"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) => handlePost(e)}
+          value={newPost.title}
           id="title"
           name="title"
         />
@@ -51,8 +84,8 @@ const UpdatePost = (post) => {
         <Form.Control
           type="text"
           placeholder="Contenu de la publication"
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
+          onChange={(e) => handlePost(e)}
+          value={newPost.content}
           id="content"
           name="content"
         />
@@ -62,8 +95,8 @@ const UpdatePost = (post) => {
         <Form.Control
           type="file"
           name="attachment"
-          onChange={(e) => setAttachment(e.target.value)}
-          value={attachment}
+          onChange={(e) => handlePost(e)}
+          width="30%"
           id="attachment"
         />
       </Form.Group>

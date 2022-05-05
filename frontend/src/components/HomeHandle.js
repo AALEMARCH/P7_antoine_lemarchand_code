@@ -1,5 +1,5 @@
 import React from "react";
-import HomeSetting from "./HomeSetting";
+import HomeSetting from "./HomeSetting/createPosts";
 
 const HomeHandle = (props) => {
   const date = new Date(props.date).toLocaleDateString();
