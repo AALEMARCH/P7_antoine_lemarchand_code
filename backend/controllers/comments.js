@@ -37,7 +37,6 @@ exports.createComment = async (req, res, next) => {
   }
 };
 
-//rajout du postId et condition
 exports.readAllComment = async (req, res, next) => {
   try {
     const comments = await Comment.findAll({

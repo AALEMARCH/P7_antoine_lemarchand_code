@@ -1,24 +1,19 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import Comments from "../getComments/Comments";
-import CommentUser from "../getComments/CommentUser";
+// import CommentUser from "../getComments/CommentUser";
 import PostDelete from "../../HomeSetting/delete/PostDelete";
-import CommentBtn from "../CommentBtn";
 import UpdatePostBtn from "../UpdatePostBtn";
 import PostLike from "../LikePost/PostLike";
+import CommentCreated from "../CommentBtn/CommentCreated";
 
 const Card = ({ post }) => {
   const date = new Date(post.createdAt).toLocaleString();
   return (
     <div className="card">
       <div className="card_header">
-        {/* <img
-          src={post.attachment}
-          alt={"photo du profil de " + post.username}
-        /> */}
         <h2>{post.username}</h2>
         <div>
-          {/* <h2>{post.username}</h2> */}
           <h2 className="card_header--title">{post.title}</h2>
         </div>
       </div>
@@ -34,8 +29,8 @@ const Card = ({ post }) => {
         <div className="comments-container">
           <div className="d-grid gap-2">
             <Comments post={post} />
-            <CommentUser />
-            <CommentBtn post={post} />
+            {/* <CommentUser /> */}
+            <CommentCreated post={post} />
           </div>
         </div>
       </div>

@@ -1,25 +1,13 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { getPost, updatePost } from "../../../Api/posts";
 import axios from "axios";
 
 const UpdatePost = (post) => {
-  const [updatePost, setUpdatePost] = useState(null);
   const [newPost, setNewPost] = useState({
     title: "",
     content: "",
     attachment: "",
   });
-
-  const handleUpdatePost = () => {
-    getPost()
-      .then((res) => {
-        setUpdatePost(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handlCommentUpdated = async (e) => {
     e.preventDefault();
@@ -42,7 +30,6 @@ const UpdatePost = (post) => {
       )
       .then((res, req) => {
         console.log(res);
-        handleUpdatePost();
         window.location = "/home";
       })
       .catch((err) => {

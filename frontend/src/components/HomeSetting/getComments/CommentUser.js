@@ -18,8 +18,14 @@ const CommentUser = ({ comment }) => {
         <div className="comments_body">
           <div>
             <p className="comments_body--content">{comment.content}</p>
-            <footer>
-              <img src={comment.attachment} alt="photographie du commentaire" />
+            <footer className="comments_footer">
+              <div className="comments_pictures">
+                <img
+                  src={comment.attachment}
+                  alt="photographie du commentaire"
+                  className="comments_pictures--resize"
+                />
+              </div>
             </footer>
           </div>
         </div>

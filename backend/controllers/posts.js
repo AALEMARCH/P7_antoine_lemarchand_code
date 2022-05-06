@@ -43,6 +43,9 @@ exports.createPost = async (req, res, next) => {
     : req.body.attachment;
   // const attachmentURL = req.file
   //   ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+  //   : null;
+  // const attachmentURL = req.file
+  //   ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
   //   : "";
 
   try {

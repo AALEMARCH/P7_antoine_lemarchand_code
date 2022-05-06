@@ -1,24 +1,13 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { addPost, getPost, getPosts } from "../../../Api/posts";
+import { addPost } from "../../../Api/posts";
 
 const PostCreated = () => {
-  const [posts, setPosts] = useState(null);
   const [newPost, setNewPost] = useState({
     title: "",
     content: "",
     attachment: "",
   });
-
-  const handlePosts = () => {
-    getPosts()
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handlePostCreated = async (e) => {
     e.preventDefault();
@@ -31,7 +20,6 @@ const PostCreated = () => {
     await addPost(formData)
       .then((res, req) => {
         console.log(res);
-        handlePosts();
         window.location = "/home";
       })
       .catch((err) => console.log(err));
