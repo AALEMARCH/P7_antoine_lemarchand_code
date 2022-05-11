@@ -5,7 +5,6 @@ import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 
 const ProfilHandle = () => {
   const userData = useContext(UidContext);
-  console.log(userData.userAttachment);
 
   return (
     <div className="profil">

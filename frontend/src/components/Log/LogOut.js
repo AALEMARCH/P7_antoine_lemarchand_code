@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 const logOut = () => {
   return (
     <Card
+      className="logout-card"
       border="danger"
       style={{ width: "80%", height: "80vh", margin: "2rem auto" }}
     >

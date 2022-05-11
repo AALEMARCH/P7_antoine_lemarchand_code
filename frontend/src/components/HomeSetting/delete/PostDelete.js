@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { deletePost } from "../../../Api/posts";
 import { useNavigate } from "react-router-dom";
+import { UidContext } from "../../Context/AppContext";
 
 const PostDelete = (post) => {
   let navigate = useNavigate();
+  const userData = useContext(UidContext);
 
   const handlePostDelete = async (e) => {
     e.preventDefault();
@@ -21,11 +23,15 @@ const PostDelete = (post) => {
       });
   };
   return (
-    <div className="card_footer--linkChange">
-      <Button variant="outline-secondary" onClick={handlePostDelete}>
-        Supprimer la publication
-      </Button>{" "}
-    </div>
+    <>
+      {userData.userAdmin || userData.userData === post.post.userId ? (
+        <div className="card_footer--linkChange">
+          <Button variant="outline-secondary" onClick={handlePostDelete}>
+            Supprimer la publication
+          </Button>{" "}
+        </div>
+      ) : null}
+    </>
   );
 };
 

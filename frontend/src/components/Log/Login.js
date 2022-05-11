@@ -23,10 +23,7 @@
 //     })
 //       .then((res, req) => {
 //         console.log(res);
-//         if (res.data.errors) {
-//           emailError.innerHTML = res.data.errors.email;
-//           passwordError.innerHTML = res.data.errors.password;
-//         } else if (res.data.token && res.data.userId) {
+//         if (res.data.token && res.data.userId) {
 //           console.log(res.data.token);
 //           console.log(res.data.userId);
 //           localStorage.setItem("token", res.data.token);
@@ -35,7 +32,18 @@
 //         }
 //       })
 //       .catch((err) => {
-//         console.log(err.response.data.error);
+//         console.log(err.response.data.message);
+//         if (err.response.data.message != undefined) {
+//           emailError.innerHTML = err.response.data.message;
+//         } else {
+//           emailError.innerHTML = null;
+//         }
+
+//         if (err.response.data.error) {
+//           passwordError.innerHTML = err.response.data.error;
+//         } else {
+//           passwordError.innerHTML = null;
+//         }
 //       });
 //   };
 
@@ -89,40 +97,78 @@ const Login = () => {
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
 
-    axios({
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      url: `${process.env.REACT_APP_API_URL}api/users/login`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-      },
-    })
-      .then((res, req) => {
-        console.log(res);
-        if (res.data.token && res.data.userId) {
-          console.log(res.data.token);
-          console.log(res.data.userId);
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("userId", res.data.userId);
-          window.location = "/home";
-        }
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        if (err.response.data.message != undefined) {
-          emailError.innerHTML = err.response.data.message;
-        } else {
-          emailError.innerHTML = null;
-        }
+    const emailInput = document.getElementById("formBasicEmail");
+    const passwordInput = document.getElementById("formBasicPassword");
 
-        if (err.response.data.error) {
-          passwordError.innerHTML = err.response.data.error;
-        } else {
-          passwordError.innerHTML = null;
-        }
-      });
+    const emailRegex =
+      /^[a-z0-9\-_]+[a-z0-9.\-_]*@[a-z0-9\-_]{2,}\.[a-z.\-_]+[a-z\-_]+$/i;
+    const passwordRegex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9].*?[0-9]).{8,100}$/g;
+
+    if (!email || !password) {
+      alert("veuillez remplir tous les champs du formulaire");
+    }
+
+    if (
+      emailRegex.test(email) === false ||
+      passwordRegex.test(password) === false
+    ) {
+      if (emailRegex.test(email) === false) {
+        console.log(emailRegex.test(email));
+        emailError.innerText = "Format d'Email invalide";
+        emailInput.style.background = "#dc3545";
+        emailInput.style.color = "white";
+      } else {
+        emailError.innerText = " ";
+        emailInput.style.background = "white";
+        emailInput.style.color = "black";
+      }
+      if (passwordRegex.test(password) === false) {
+        console.log(passwordRegex.test(password));
+        passwordError.innerText = "Le mot de passe n'est pas asez fort !";
+        passwordInput.style.background = "#dc3545";
+        passwordInput.style.color = "white";
+      } else {
+        passwordError.innerText = " ";
+        passwordInput.style.background = "white";
+        passwordInput.style.color = "black";
+      }
+    } else {
+      axios({
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        url: `${process.env.REACT_APP_API_URL}api/users/login`,
+        withCredentials: true,
+        data: {
+          email,
+          password,
+        },
+      })
+        .then((res, req) => {
+          console.log(res);
+          if (res.data.token && res.data.userId) {
+            console.log(res.data.token);
+            console.log(res.data.userId);
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userId", res.data.userId);
+            window.location = "/home";
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          if (err.response.data.message !== undefined) {
+            emailError.innerHTML = err.response.data.message;
+          } else {
+            emailError.innerHTML = null;
+          }
+
+          if (err.response.data.error) {
+            passwordError.innerHTML = err.response.data.error;
+          } else {
+            passwordError.innerHTML = null;
+          }
+        });
+    }
   };
 
   return (

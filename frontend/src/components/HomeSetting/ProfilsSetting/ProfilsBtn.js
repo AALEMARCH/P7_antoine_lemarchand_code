@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import Api from "../../../Api/users";
 import { useNavigate } from "react-router-dom";
+import { UidContext } from "../../Context/AppContext";
 
 const ProfilsBtn = (post) => {
   let navigate = useNavigate();
-  console.log(post);
+  const userData = useContext(UidContext);
 
   const handleProfilsData = async (e) => {
     e.preventDefault();
@@ -21,11 +22,13 @@ const ProfilsBtn = (post) => {
 
   return (
     <div>
-      <>
-        <Button variant="outline-secondary" onClick={handleProfilsData}>
-          <i className="fa-solid fa-user "></i>
-        </Button>{" "}
-      </>
+      {userData.userData !== post.post.userId ? (
+        <>
+          <Button variant="outline-secondary" onClick={handleProfilsData}>
+            <i className="fa-solid fa-user "></i>
+          </Button>{" "}
+        </>
+      ) : null}
     </div>
   );
 };
