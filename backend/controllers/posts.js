@@ -106,6 +106,35 @@ exports.readAllPostUser = async (req, res, next) => {
   }
 };
 
+exports.userProfileByPost = async (req, res, next) => {
+  try {
+    const post = await Post.findOne({
+      attributes: [
+        "id",
+        "userId",
+        "username",
+        "title",
+        "content",
+        "attachment",
+        "likes",
+        "createdAt",
+      ],
+      where: { id: req.params.postId },
+    });
+    const user = await User.findOne({
+      attributes: { exclude: ["email", "password"] },
+      where: { username: post.username },
+    });
+
+    if (!user) {
+      throw new Error("account not found!");
+    }
+    res.status(200).json({ user });
+  } catch (err) {
+    return res.status(403).json({ message: "unauthorized access!" });
+  }
+};
+
 exports.updatePost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -130,17 +159,17 @@ exports.updatePost = async (req, res, next) => {
 
           fs.unlink(`images/${filename}`, () => {
             post.update({
-              title,
-              content,
-              attachment: attachmentURL,
+              title: title || post.title,
+              content: content || post.content,
+              attachment: attachmentURL || post.attachmentURL,
             });
             res.status(200).json({ message: "your post has been deleted" });
           });
         } else {
           post.update({
-            title,
-            content,
-            attachment: attachmentURL,
+            title: title || post.title,
+            content: content || post.content,
+            attachment: attachmentURL || post.attachmentURL,
           });
           res.status(200).json({ post });
         }

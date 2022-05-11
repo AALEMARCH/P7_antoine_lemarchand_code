@@ -1,14 +1,14 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import Comments from "../getComments/Comments";
-// import CommentUser from "../getComments/CommentUser";
 import PostDelete from "../../HomeSetting/delete/PostDelete";
 import UpdatePostBtn from "../UpdatePostBtn";
 import PostLike from "../LikePost/PostLike";
 import CommentCreated from "../CommentBtn/CommentCreated";
+import ProfilsBtn from "../ProfilsSetting/ProfilsBtn";
 
 const Card = ({ post }) => {
   const date = new Date(post.createdAt).toLocaleString();
+
   return (
     <div className="card">
       <div className="card_header">
@@ -19,13 +19,17 @@ const Card = ({ post }) => {
       </div>
       <div className="card_infos">
         <p className="card_infos--content">{post.content}</p>
+
         <div className="card_infos--imgContainer">
-          <img
-            src={post.attachment}
-            alt="photographie"
-            className="card_infos--img"
-          />
+          {post.attachment ? (
+            <img
+              src={post.attachment}
+              alt="photographie"
+              className="card_infos--img"
+            />
+          ) : null}
         </div>
+
         <div className="comments-container">
           <div className="d-grid gap-2">
             <Comments post={post} />
@@ -44,9 +48,7 @@ const Card = ({ post }) => {
         <div>
           <div className="card_footer--link">
             <div className="card_footer--linkChange profilBtn">
-              <Button variant="outline-secondary">
-                <i className="fa-solid fa-user "></i>
-              </Button>{" "}
+              <ProfilsBtn post={post} />
             </div>
             <div className="card_footer--linkChange">
               <div className="card_footer--linkCount">

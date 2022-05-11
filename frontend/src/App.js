@@ -4,6 +4,7 @@ import { UidContext } from "./components/Context/AppContext";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profil from "./pages/Profil";
+import Profils from "./pages/Profils";
 import Reseau from "./pages/Reseau";
 import SignOut from "./pages/SignOut";
 import jwt_decode from "jwt-decode";
@@ -70,6 +71,7 @@ function App() {
           <Route path="/" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profil" element={<Profil />} />
+          <Route path="/profils" element={<Profils />} />
           <Route path="/reseau" element={<Reseau />} />
           <Route path="/signOut" element={<SignOut />} />
           <Route path="*" element={<Home />} />

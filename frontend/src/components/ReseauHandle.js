@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 
 const ReseauHandle = ({ reseau }) => {
   const date = new Date(reseau.createdAt).toLocaleString();
+  console.log(reseau);
 
   if (reseau === undefined || reseau === null) {
     return null;
@@ -16,7 +17,7 @@ const ReseauHandle = ({ reseau }) => {
           <div>
             {" "}
             <Button variant="danger" className="reseau-card_btn">
-              Follow
+              Profile
             </Button>
           </div>{" "}
           <p>Profile créé le {date}</p>

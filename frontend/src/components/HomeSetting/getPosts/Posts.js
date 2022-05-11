@@ -7,6 +7,7 @@ const Posts = () => {
   useEffect(() => {
     getPosts().then((res) => setData(res.data));
   }, []);
+  console.log(data);
   return (
     <div>
       {data.map((post, index) => (

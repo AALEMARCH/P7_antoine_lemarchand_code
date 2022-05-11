@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Api from "../../../Api/users";
+import { useNavigate } from "react-router-dom";
 
 const CommentCreated = (post) => {
   const [newComment, setNewComment] = useState({
     content: "",
     attachment: "",
   });
+
+  let navigate = useNavigate();
 
   const handleCommentCreated = async (e) => {
     e.preventDefault();
@@ -18,7 +21,8 @@ const CommentCreated = (post) => {
     await Api.post(`comments/${post.post.id}`, formData, {})
       .then((res, req) => {
         console.log(res);
-        window.location = "/home";
+        navigate("*");
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);

@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
 
     if (user !== null) {
       if (user.email === email) {
-        return res.status(409).json({ error: "this user already exist !" });
+        return res.status(409).json({ error: "Cet utilisateur existe déja !" });
       }
     } else {
       const hash = await bcrypt.hash(password, 10);
@@ -110,11 +110,11 @@ exports.modifyProfile = async (req, res, next) => {
     if (userId === user.id) {
       const hash = await bcrypt.hash(password, 10);
       const newUser = await user.update({
-        email,
-        username,
-        password: hash,
-        bio,
-        attachment: attachmentURL,
+        email: email || user.email,
+        username: username || user.username,
+        password: hash || user.hash, //ici cela deconne
+        bio: bio || user.bio,
+        attachment: attachmentURL || user.attachmentURL,
       });
       res.status(200).json({ newUser });
     } else {

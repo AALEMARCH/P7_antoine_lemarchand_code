@@ -12,6 +12,11 @@
     height: 100%;
     margin: 2rem auto;
     border-radius: 20px 20px 20px 0px;
+   @media screen and (min-width: 769px){
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
 
     &_title{
         background-color: $color-6;

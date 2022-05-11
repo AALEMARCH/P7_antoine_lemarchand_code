@@ -7,7 +7,7 @@
     background-color: $color-10;
     margin-top: -0.5rem;
     &_log{
-    height: 60%;
+    height: 80vh;
     width: 80vw;
     padding: 2rem;
     margin: 2rem 2rem;
@@ -24,11 +24,14 @@
         }
     }
     &_container-log{
-        width: 50%;
         height: 100%;
+        @media screen and (min-width: 768px){
+            width: 50%;
+            height: 100%;
+        }
     }
     &_container-img{
-        width: 50%;
+          width: 50%;
         height: 100%;
     }
 }
@@ -51,4 +54,28 @@
 }
 .form_log{
     padding: 0.5rem 0rem 0rem;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+}
+// .btn{
+//     font-size: 1.6rem;
+//     @media screen and (max-width: 370px){
+//         font-size: 1.2rem;
+//     }
+// }
+
+.logBtn{
+        font-size: 1.6rem;
+    @media screen and (max-width: 370px){
+        font-size: 1.2rem;
+    }
+}
+.email {
+    color: $color-11;
+}
+.username{
+    color: $color-11;
+}
+.password{
+    color: $color-11;
 }

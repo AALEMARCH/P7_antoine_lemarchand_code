@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { addPost } from "../../../Api/posts";
+import { useNavigate } from "react-router-dom";
 
 const PostCreated = () => {
   const [newPost, setNewPost] = useState({
@@ -8,6 +9,8 @@ const PostCreated = () => {
     content: "",
     attachment: "",
   });
+
+  let navigate = useNavigate();
 
   const handlePostCreated = async (e) => {
     e.preventDefault();
@@ -20,7 +23,8 @@ const PostCreated = () => {
     await addPost(formData)
       .then((res, req) => {
         console.log(res);
-        window.location = "/home";
+        navigate("/Profil");
+        navigate("/Home");
       })
       .catch((err) => console.log(err));
   };

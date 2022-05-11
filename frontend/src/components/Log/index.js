@@ -25,7 +25,7 @@ const Log = () => {
             variant="outline-danger"
             onClick={handleModals}
             id="register"
-            className="test"
+            className="logBtn"
           >
             S'inscrire
           </Button>
@@ -34,7 +34,7 @@ const Log = () => {
             variant="outline-danger"
             onClick={handleModals}
             id="login"
-            className="test"
+            className="logBtn"
           >
             Se connecter
           </Button>

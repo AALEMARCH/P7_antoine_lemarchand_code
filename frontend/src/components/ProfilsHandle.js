@@ -1,38 +1,36 @@
-import React, { useContext } from "react";
-import { UidContext } from "../components/Context/AppContext";
-// import { Button } from "react-bootstrap";
-import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
+import React from "react";
+import { Button } from "react-bootstrap";
+// import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 
-const ProfilHandle = () => {
-  const userData = useContext(UidContext);
-  console.log(userData.userAttachment);
+const ProfilsHandle = () => {
+  let profils = JSON.parse(localStorage.getItem("profils"));
 
+  console.log(profils);
+  console.log(profils.data.user.username);
   return (
     <div className="profil">
       <div className="profil_card">
         <div className="profil_image-container">
-          {userData.userAttachment ? (
+          {" "}
+          {profils.data.user.attachment ? (
             <img
-              src={userData.userAttachment}
+              src={profils.data.user.attachment}
               alt="photographie"
               className="profil_card--img"
             />
           ) : null}
         </div>
 
-        <h4 className="profil_title">{userData.username}</h4>
+        <h4 className="profil_title">{profils.data.user.username}</h4>
         <div className="profil_body-container">
           <div className="button-container">
-            {/* <Button variant="danger" className="profil_body-container--button">
+            <Button variant="danger" className="profil_body-container--button">
               Follow
-            </Button> */}
-            <div className="button-update">
-              <ProfilUpdateBtn />
-            </div>
+            </Button>
           </div>
           <div className="profil-section">
             <h4>Biographie</h4>
-            <p>{userData.userBio}</p>
+            <p>{profils.data.user.bio}</p>
             <div>
               <h4>Statistiques</h4>
               <div className="profil-section_link">
@@ -54,4 +52,4 @@ const ProfilHandle = () => {
   );
 };
 
-export default ProfilHandle;
+export default ProfilsHandle;

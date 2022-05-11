@@ -20,11 +20,13 @@ const CommentUser = ({ comment }) => {
             <p className="comments_body--content">{comment.content}</p>
             <footer className="comments_footer">
               <div className="comments_pictures">
-                <img
-                  src={comment.attachment}
-                  alt="photographie du commentaire"
-                  className="comments_pictures--resize"
-                />
+                {comment.attachment ? (
+                  <img
+                    src={comment.attachment}
+                    alt="photographie du commentaire"
+                    className="comments_pictures--resize"
+                  />
+                ) : null}
               </div>
             </footer>
           </div>

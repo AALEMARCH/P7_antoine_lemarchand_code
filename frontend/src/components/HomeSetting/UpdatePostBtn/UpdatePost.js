@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePost = (post) => {
+  let navigate = useNavigate();
+
   const [newPost, setNewPost] = useState({
     title: "",
     content: "",
@@ -30,7 +33,8 @@ const UpdatePost = (post) => {
       )
       .then((res, req) => {
         console.log(res);
-        window.location = "/home";
+        navigate("/Profil");
+        navigate("/Home");
       })
       .catch((err) => {
         console.log(err);

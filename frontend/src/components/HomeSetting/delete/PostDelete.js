@@ -1,16 +1,20 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { deletePost } from "../../../Api/posts";
+import { useNavigate } from "react-router-dom";
 
 const PostDelete = (post) => {
+  let navigate = useNavigate();
+
   const handlePostDelete = async (e) => {
     e.preventDefault();
 
     await deletePost(post)
       .then((res, req) => {
         console.log(res);
+        navigate("/Profil");
+        navigate("/Home");
         alert(`le post de ${post.post.username} a bien été supprimer`);
-        window.location = "/home";
       })
       .catch((err) => {
         console.log(err);

@@ -31,3 +31,13 @@ export const deletePost = (post) =>
       },
     }
   );
+
+export const getProfilByPost = (post) =>
+  axios.get(
+    `${process.env.REACT_APP_API_URL}api/posts/profile/${post.post.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
