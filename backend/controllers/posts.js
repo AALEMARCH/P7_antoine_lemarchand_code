@@ -6,33 +6,6 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-// exports.createPost = async (req, res, next) => {
-//   const token = req.headers.authorization.split(" ")[1];
-//   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
-//   const userId = decodedToken.userId;
-//   const { title, content } = req.body;
-
-//   try {
-//     const user = await User.findOne({ where: { id: userId } });
-//     if (!user) {
-//       throw new Error("Sorry, we can't find your account");
-//     } else {
-//       const post = await Post.create({
-//         UserId: user.id,
-//         username: user.username,
-//         title,
-//         content,
-//         attachment: req.file
-//           ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-//           : req.body.attachment,
-//       });
-//       return res.status(201).json(post);
-//     }
-//   } catch (error) {
-//     return res.status(500).json(error);
-//   }
-// };
-
 exports.createPost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -41,12 +14,6 @@ exports.createPost = async (req, res, next) => {
   const attachmentURL = req.file
     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     : req.body.attachment;
-  // const attachmentURL = req.file
-  //   ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-  //   : null;
-  // const attachmentURL = req.file
-  //   ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-  //   : "";
 
   try {
     const user = await User.findOne({ where: { id: userId } });
@@ -102,6 +69,20 @@ exports.readAllPostUser = async (req, res, next) => {
     });
     res.status(200).json({ post });
   } catch {
+    return res.status(403).json({ message: "unauthorized access!" });
+  }
+};
+
+exports.readOnePost = async (req, res) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    if (!post) {
+      throw new Error("Post introuvable");
+    }
+    res.status(200).json({ post });
+  } catch (err) {
     return res.status(403).json({ message: "unauthorized access!" });
   }
 };

@@ -1,22 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import Api from "../../../Api/users";
-import { useNavigate } from "react-router-dom";
 import { UidContext } from "../../Context/AppContext";
 
 const PostLike = ({ post }) => {
-  let navigate = useNavigate();
   const userData = useContext(UidContext);
+  const [likes, setLikes] = useState([post.likes]);
 
   const handlePostLike = async (e) => {
     e.preventDefault();
 
     await Api.post(`posts/${post.id}/like`, {})
       .then((res, req) => {
-        console.log(res);
-        navigate("/Profil");
-        navigate("/home");
-        console.log(post.likes);
+        Api.get(`posts/onPost/${post.id}`, {}).then((res, req) => {
+          setLikes(res.data.post.likes);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -30,12 +28,14 @@ const PostLike = ({ post }) => {
           <Button variant="outline-secondary" onClick={handlePostLike}>
             <i className="fa-solid fa-thumbs-up"></i>
           </Button>{" "}
+          <p>{likes}</p>
         </div>
       ) : (
         <div>
           <Button variant="outline-secondary" onClick={handlePostLike} disabled>
             <i className="fa-solid fa-thumbs-up"></i>
           </Button>{" "}
+          <p>{likes}</p>
         </div>
       )}
     </>

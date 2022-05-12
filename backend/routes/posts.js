@@ -22,7 +22,8 @@ router.put("/update/:postId", auth, multer, postsCtrl.updatePost);
 router.delete("/delete/:postId", auth, postsCtrl.deletePost);
 router.get("/", auth, postsCtrl.readAllPosts);
 router.get("/:userId", auth, postsCtrl.readAllPostUser);
-router.get("/profile/:postId", auth, postsCtrl.userProfileByPost); //tentative folow
+router.get("/profile/:postId", auth, postsCtrl.userProfileByPost);
+router.get("/onPost/:postId", auth, postsCtrl.readOnePost);
 
 router.post("/:postId/like", auth, likesCtrl.likePost);
 router.get("/:postId/like", auth, likesCtrl.readAllLikes);

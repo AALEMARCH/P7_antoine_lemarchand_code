@@ -53,7 +53,7 @@ const Card = ({ post }) => {
             <div className="card_footer--linkChange">
               <div className="card_footer--linkCount">
                 <PostLike post={post} />
-                <p>{post.likes}</p>
+                {/* <p>{post.likes}</p> */}
               </div>
             </div>{" "}
           </div>
