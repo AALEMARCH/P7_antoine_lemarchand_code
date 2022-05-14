@@ -130,7 +130,7 @@ exports.modifyProfile = async (req, res, next) => {
           email: email || user.email,
           username: username || user.username,
           bio: bio || user.bio,
-          attachment: attachmentURL,
+          attachment: user.attachment,
         });
         res.status(200).json({ user });
       }

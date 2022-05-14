@@ -13,6 +13,7 @@ const ProfilUpdate = () => {
     username: "",
     bio: "",
     attachment: "",
+    // attachment: `${userData.userAttachment}`,
   });
 
   const handleProfilUpdate = async (e) => {
@@ -76,8 +77,8 @@ const ProfilUpdate = () => {
           <Form.Label htmlFor="username">Nom d'utilisateur</Form.Label>
           <Form.Control
             type="text"
-            placeholder={userData.username}
             onChange={(e) => handleProfil(e)}
+            defaultValue={userData.username}
             id="username"
             name="username"
           />
@@ -88,7 +89,7 @@ const ProfilUpdate = () => {
           <Form.Label htmlFor="email">Email</Form.Label>
           <Form.Control
             type="email"
-            placeholder={userData.userEmail}
+            defaultValue={userData.userEmail}
             name="email"
             id="email"
             onChange={(e) => handleProfil(e)}
@@ -100,7 +101,7 @@ const ProfilUpdate = () => {
           <Form.Label htmlFor="bio">Biographie</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Biographie"
+            defaultValue={userData.userBio}
             onChange={(e) => handleProfil(e)}
             id="bio"
             name="bio"
@@ -111,7 +112,6 @@ const ProfilUpdate = () => {
           <Form.Label htmlFor="attachment">Photographie</Form.Label>
           <Form.Control
             type="file"
-            placeholder="Photographie"
             onChange={(e) => handleProfil(e)}
             id="attachment"
             name="attachment"
