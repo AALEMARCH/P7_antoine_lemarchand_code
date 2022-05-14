@@ -4,20 +4,24 @@ import Api from "../../../Api/users";
 import { useNavigate } from "react-router-dom";
 
 const CommentCreated = (post) => {
+  //Initialisation de l'état du commentaire
   const [newComment, setNewComment] = useState({
     content: "",
     attachment: "",
   });
 
+  //Préparation a la navigation
   let navigate = useNavigate();
 
   const handleCommentCreated = async (e) => {
     e.preventDefault();
 
+    //Préparation des données du formulaire
     const formData = new FormData();
     formData.append("content", newComment.content);
     formData.append("attachment", newComment.attachment);
 
+    //Récupération des données de l'API
     await Api.post(`comments/${post.post.id}`, formData, {})
       .then((res, req) => {
         console.log(res);
@@ -29,6 +33,7 @@ const CommentCreated = (post) => {
       });
   };
 
+  //Evenement au click si il y a un fichier ou non
   const handleComment = (e) => {
     if (e.target.name !== "attachment") {
       setNewComment({ ...newComment, [e.target.name]: e.target.value });

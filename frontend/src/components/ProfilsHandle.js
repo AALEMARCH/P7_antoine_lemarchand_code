@@ -2,7 +2,9 @@ import React from "react";
 import { Button } from "react-bootstrap";
 // import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 
+//Sous structure de la page Profils, profil des autres utilisateurs
 const ProfilsHandle = () => {
+  //Récupération des données de profil dans le local storage
   let profils = JSON.parse(localStorage.getItem("profils"));
 
   console.log(profils);

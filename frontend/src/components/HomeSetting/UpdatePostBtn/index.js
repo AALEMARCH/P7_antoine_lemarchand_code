@@ -4,9 +4,11 @@ import { Button } from "react-bootstrap";
 import { UidContext } from "../../Context/AppContext";
 
 const UpdatePostBtn = (post) => {
+  //Initialisation de l'état du post avant update et récupération du context
   const [updatePostBtn, setUpdatePostBtn] = useState();
   const userData = useContext(UidContext);
 
+  //Modal qui définit l'état actif ou non des boutons
   const updatePostModals = (e) => {
     if (e.target.id === "onUpdate") {
       setUpdatePostBtn(true);

@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
 import Api from "./Api/users";
 
 function App() {
+  //Fonction de vérification de la validité du Token
   const [userToken, setUserToken] = useState(null);
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,6 +28,7 @@ function App() {
     }
   }, [userToken]);
 
+  //Récupération de données utilisateurs à utiliser dans UseContext
   const [userData, setUserData] = useState([]);
   const [username, setUsername] = useState([]);
   const [userEmail, setUserEmail] = useState([]);
@@ -42,7 +44,6 @@ function App() {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       }).then((res) => {
-        console.log(res.data.user);
         setUserData(res.data.user.id);
         setUsername(res.data.user.username);
         setUserEmail(res.data.user.email);
@@ -54,6 +55,7 @@ function App() {
     fetchUser();
   }, [userData, username, userBio, userAttachment]);
 
+  //Routage de l'application
   return (
     <BrowserRouter>
       <UidContext.Provider

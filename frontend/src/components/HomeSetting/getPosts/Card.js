@@ -6,6 +6,7 @@ import PostLike from "../LikePost/PostLike";
 import CommentCreated from "../CommentBtn/CommentCreated";
 import ProfilsBtn from "../ProfilsSetting/ProfilsBtn";
 
+//Utilisation du props "post" définie sur le composant Posts. Structure des posts.
 const Card = ({ post }) => {
   const date = new Date(post.createdAt).toLocaleString();
 
@@ -51,9 +52,8 @@ const Card = ({ post }) => {
               <ProfilsBtn post={post} />
             </div>
             <div className="card_footer--linkChange">
-              <div className="card_footer--linkCount">
+              <div>
                 <PostLike post={post} />
-                {/* <p>{post.likes}</p> */}
               </div>
             </div>{" "}
           </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import HomeSetting from "./HomeSetting/createPosts";
 
+//Sous structure de la page Home
 const HomeHandle = (props) => {
+  //Conversion de la date dans un format utilisable
   const date = new Date(props.date).toLocaleDateString();
   return (
     <div className="homeHandle">

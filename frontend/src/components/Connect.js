@@ -1,6 +1,7 @@
 import React from "react";
 import Log from "./Log";
 
+//Structure de la page Register
 const Connect = () => {
   return (
     <div className="connect">

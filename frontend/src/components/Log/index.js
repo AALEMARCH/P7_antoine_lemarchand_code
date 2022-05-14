@@ -4,9 +4,11 @@ import SignUp from "./SignUp";
 import { Button } from "react-bootstrap";
 
 const Log = () => {
+  //Initialisation de l'état des boutons d'accès au formulaire de Login et Signup
   const [signUpModal, setSignUpModal] = useState();
   const [loginModal, setLoginModal] = useState();
 
+  //Activation au click sur l'un ou l'autre des boutons
   const handleModals = (e) => {
     if (e.target.id === "register") {
       setLoginModal(false);
@@ -17,6 +19,7 @@ const Log = () => {
     }
   };
 
+  //Structure des Boutons
   return (
     <div className="connection-form">
       <div className="form-container">

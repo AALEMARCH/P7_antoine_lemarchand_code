@@ -1,10 +1,11 @@
+// Importation des models, de Json web Token et Dotenv
 const { Post, Like } = require("../models");
 const jwt = require("jsonwebtoken");
 
 const dotenv = require("dotenv");
-
 dotenv.config();
 
+// CTRL de création des likes
 exports.likePost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -52,6 +53,7 @@ exports.likePost = async (req, res, next) => {
   }
 };
 
+// CTRL de lecture des likes
 exports.readAllLikes = async (req, res, next) => {
   try {
     const like = await Post.findAll({

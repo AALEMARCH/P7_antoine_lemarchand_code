@@ -64,6 +64,14 @@ http://localhost:3000/api/posts/:postId/like
 
 http://localhost:3000/api/posts/:postId/like
 
+## Route GET pour la lecture d'un profil en rapport avec un post
+
+http://localhost:3000/api/posts/profile/:postId
+
+## Route GET pour la lecture d'un seul post
+
+http://localhost:3000/api/posts/onPost/:postId
+
 # ROUTES `COMMENTS`
 
 ## Route POST pour créé un commentaires
@@ -72,7 +80,7 @@ http://localhost:3000/api/comments/:postId
 
 ## Route GET pour voir tous les commentaires
 
-http://localhost:3000/api/comments
+http://localhost:3000/api/comments/:postId
 
 ## Route DELETE pour supprimer son commentaire
 

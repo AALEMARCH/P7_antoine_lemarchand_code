@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//Exportation de divers appels API en lien avec les posts
+//Lecture des posts
 export const getPosts = () =>
   axios.get(`${process.env.REACT_APP_API_URL}api/posts/`, {
     headers: {
@@ -7,6 +9,7 @@ export const getPosts = () =>
     },
   });
 
+//Lecture d'un post
 export const getPost = (UserId) =>
   axios.get(`${process.env.REACT_APP_API_URL}api/posts/${UserId}`, {
     headers: {
@@ -14,6 +17,7 @@ export const getPost = (UserId) =>
     },
   });
 
+//Creation d'un post
 export const addPost = (formData) =>
   axios.post(`${process.env.REACT_APP_API_URL}api/posts/`, formData, {
     headers: {
@@ -22,6 +26,7 @@ export const addPost = (formData) =>
     },
   });
 
+//Supprimer un post
 export const deletePost = (post) =>
   axios.delete(
     `${process.env.REACT_APP_API_URL}api/posts/delete/${post.post.id}`,
@@ -32,6 +37,7 @@ export const deletePost = (post) =>
     }
   );
 
+//Récupérer un profil par rapport à son post
 export const getProfilByPost = (post) =>
   axios.get(
     `${process.env.REACT_APP_API_URL}api/posts/profile/${post.post.id}`,

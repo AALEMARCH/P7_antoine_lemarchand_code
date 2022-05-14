@@ -1,11 +1,15 @@
+// Importation des models, du système de fichiers et de Json web Token
 const { User, Post, Comment } = require("../models");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 
+// Importation de Dotenv pour utiliser les variables d'environnement
 const dotenv = require("dotenv");
+const { REPL_MODE_SLOPPY } = require("repl");
 
 dotenv.config();
 
+// CTRL de création des commentaires
 exports.createComment = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -37,6 +41,7 @@ exports.createComment = async (req, res, next) => {
   }
 };
 
+// CTRL de lecture des commentaires
 exports.readAllComment = async (req, res, next) => {
   try {
     const comments = await Comment.findAll({
@@ -64,6 +69,7 @@ exports.readAllComment = async (req, res, next) => {
   }
 };
 
+// CTRL de suppression des commentaires
 exports.deleteComment = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);

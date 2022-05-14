@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReseauHandle from "../ReseauHandle";
 import Api from "../../Api/users";
 
+//Appel des données pour la page Reseau
 const ReseauCallData = () => {
   const [data, setData] = useState([]);
 
@@ -15,7 +16,7 @@ const ReseauCallData = () => {
   }, []);
 
   return (
-    <div>
+    <div className="reseau-container">
       {data.map((reseau, index) => (
         <ReseauHandle key={index} reseau={reseau} />
       ))}

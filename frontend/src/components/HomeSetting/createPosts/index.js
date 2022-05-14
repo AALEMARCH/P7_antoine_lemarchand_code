@@ -3,6 +3,7 @@ import PostCreated from "./PostCreated";
 import { Button } from "react-bootstrap";
 
 const HomeSetting = () => {
+  //Initialisation de l'état actif ou inactif des boutons
   const [homeHandle, setHomeHandle] = useState();
 
   const homeHandleModals = (e) => {

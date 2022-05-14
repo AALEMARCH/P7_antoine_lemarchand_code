@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommentUser from "./CommentUser";
 import Api from "../../../Api/users";
 
+//Récupération et mappage des données de l'API, lecture des commentaires
 const Comments = (post) => {
   const [data, setData] = useState([]);
   useEffect(() => {

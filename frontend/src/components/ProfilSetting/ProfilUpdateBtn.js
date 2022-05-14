@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProfilUpdate from "./ProfilUpdate";
 import { Button } from "react-bootstrap";
 
+//Gestion du bouton pour la modification du profil
 const ProfilUpdateBtn = () => {
   const [profilUpdateBtn, setProfilUpdateBtn] = useState();
 

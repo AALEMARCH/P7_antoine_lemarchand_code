@@ -4,13 +4,16 @@ import Api from "../../../Api/users";
 import { useNavigate } from "react-router-dom";
 import { UidContext } from "../../Context/AppContext";
 
+//Utilisation du props "post" définie sur le composant Posts. Structure du bouton d'accès au profil sur les posts.
 const ProfilsBtn = (post) => {
+  //Préparation a la navigation et récupération du context
   let navigate = useNavigate();
   const userData = useContext(UidContext);
 
   const handleProfilsData = async (e) => {
     e.preventDefault();
 
+    //Récupération des données de l'API et envoie dans le local storage
     await Api.get(`posts/profile/${post.post.id}`, {}).then((res, req) => {
       console.log(res);
       const data = res;

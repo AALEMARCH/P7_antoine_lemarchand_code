@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { UidContext } from "../../Context/AppContext";
 
 const PostDelete = (post) => {
+  //Préparation a la navigation et récupération du context
   let navigate = useNavigate();
   const userData = useContext(UidContext);
 
   const handlePostDelete = async (e) => {
     e.preventDefault();
 
+    //Récupération des données de l'API
     await deletePost(post)
       .then((res, req) => {
         console.log(res);

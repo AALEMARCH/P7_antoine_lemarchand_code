@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { UidContext } from "../../components/Context/AppContext";
 import Navigation from "./Navigation";
+import Sticky from "react-sticky-el";
 
+//Structure du Header de l'application
 const Header = () => {
+  //Récupération du context
   const userData = useContext(UidContext);
 
   return (
@@ -15,10 +18,11 @@ const Header = () => {
         />
         <h2 className="header-container_title">{userData.username}</h2>
       </div>
-
-      <div className="header-container_link">
-        <Navigation />
-      </div>
+      <Sticky>
+        <div className="header-container_link">
+          <Navigation />
+        </div>
+      </Sticky>
     </div>
   );
 };

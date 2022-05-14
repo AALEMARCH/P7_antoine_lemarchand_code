@@ -5,6 +5,7 @@ const dotenv = require("dotenv"); // Importation de dotenv
 const { User } = require("../models");
 dotenv.config();
 
+// CTRL de création des utilisateurs
 exports.signup = async (req, res) => {
   try {
     const { email, username, password, bio } = req.body;
@@ -36,6 +37,7 @@ exports.signup = async (req, res) => {
   }
 };
 
+// CTRL de lecture des utilisateurs
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -47,6 +49,7 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
+// CTRL de login des utilisateurs
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -76,6 +79,7 @@ exports.login = async (req, res, next) => {
   }
 };
 
+// CTRL de récupération du profil des utilisateurs
 exports.userProfile = async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -91,14 +95,15 @@ exports.userProfile = async (req, res, next) => {
   }
 };
 
+// CTRL de modification du profil des utilisateurs
 exports.modifyProfile = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
-  const { email, username, password, bio } = req.body;
+  const { email, username, bio } = req.body;
   const attachmentURL = req.file
     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-    : "";
+    : req.body.attachment;
 
   try {
     const user = await User.findOne({
@@ -108,15 +113,27 @@ exports.modifyProfile = async (req, res, next) => {
       throw new Error("account not found!");
     }
     if (userId === user.id) {
-      const hash = await bcrypt.hash(password, 10);
-      const newUser = await user.update({
-        email: email || user.email,
-        username: username || user.username,
-        password: hash || user.hash, //ici cela deconne
-        bio: bio || user.bio,
-        attachment: attachmentURL || user.attachmentURL,
-      });
-      res.status(200).json({ newUser });
+      if (user.attachment != null) {
+        const filename = user.attachment.split("/images/")[1];
+
+        fs.unlink(`images/${filename}`, () => {
+          user.update({
+            email: email || user.email,
+            username: username || user.username,
+            bio: bio || user.bio,
+            attachment: attachmentURL,
+          });
+          res.status(200).json({ user });
+        });
+      } else {
+        user.update({
+          email: email || user.email,
+          username: username || user.username,
+          bio: bio || user.bio,
+          attachment: attachmentURL,
+        });
+        res.status(200).json({ user });
+      }
     } else {
       return res.status(403).json({ message: "unauthorized access!" });
     }
@@ -125,6 +142,7 @@ exports.modifyProfile = async (req, res, next) => {
   }
 };
 
+// CTRL de suppression du profil des utilisateurs
 exports.deleteProfile = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -141,17 +159,19 @@ exports.deleteProfile = async (req, res, next) => {
     }
     if (userId === user.id || userAdmin.isAdmin === true) {
       if (user.attachment != null) {
+        const filename = user.attachment.split("/images/")[1];
+
         fs.unlink(`images/${filename}`, () => {
-          user.destroy({
-            truncate: true,
+          User.destroy({
+            where: { id: req.params.id },
           });
           return res
             .status(200)
             .json({ message: "you have correctly deleted this profil!" });
         });
       } else {
-        user.destroy({
-          truncate: true,
+        User.destroy({
+          where: { id: req.params.id },
         });
         return res
           .status(200)

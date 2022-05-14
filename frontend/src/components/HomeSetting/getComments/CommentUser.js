@@ -1,6 +1,7 @@
 import React from "react";
 import CommentDelete from "../../HomeSetting/delete/CommentDelete";
 
+//Utilisation du props "comment" définie sur le composant Comments. Structure des commentaires.
 const CommentUser = ({ comment }) => {
   if (comment === undefined || comment === null) {
     return null;

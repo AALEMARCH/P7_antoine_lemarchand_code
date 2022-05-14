@@ -1,3 +1,4 @@
+// Importation des models, du système de fichiers, de Json web Token et Dotenv
 const { User, Post } = require("../models");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
@@ -6,6 +7,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+// CTRL de création des posts
 exports.createPost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -34,6 +36,7 @@ exports.createPost = async (req, res, next) => {
   }
 };
 
+// CTRL de lecture de tous les posts
 exports.readAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
@@ -57,6 +60,7 @@ exports.readAllPosts = async (req, res) => {
   }
 };
 
+// CTRL de lecture de tous les posts d'un utilisateur
 exports.readAllPostUser = async (req, res, next) => {
   try {
     const post = await Post.findAll({
@@ -73,6 +77,7 @@ exports.readAllPostUser = async (req, res, next) => {
   }
 };
 
+// CTRL de lecture d'un post
 exports.readOnePost = async (req, res) => {
   try {
     const post = await Post.findOne({
@@ -87,6 +92,7 @@ exports.readOnePost = async (req, res) => {
   }
 };
 
+// CTRL de lecture d'un utilisateur en rapport avec son post
 exports.userProfileByPost = async (req, res, next) => {
   try {
     const post = await Post.findOne({
@@ -116,6 +122,7 @@ exports.userProfileByPost = async (req, res, next) => {
   }
 };
 
+// CTRL de modification d'un post
 exports.updatePost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -142,7 +149,7 @@ exports.updatePost = async (req, res, next) => {
             post.update({
               title: title || post.title,
               content: content || post.content,
-              attachment: attachmentURL || post.attachmentURL,
+              attachment: attachmentURL,
             });
             res.status(200).json({ message: "your post has been deleted" });
           });
@@ -150,7 +157,7 @@ exports.updatePost = async (req, res, next) => {
           post.update({
             title: title || post.title,
             content: content || post.content,
-            attachment: attachmentURL || post.attachmentURL,
+            attachment: attachmentURL,
           });
           res.status(200).json({ post });
         }
@@ -163,6 +170,7 @@ exports.updatePost = async (req, res, next) => {
   }
 };
 
+// CTRL de suppression d'un post
 exports.deletePost = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);

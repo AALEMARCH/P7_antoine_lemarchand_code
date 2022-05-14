@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+//Structure de la navBarre de l'application
 const Navigation = () => {
   return (
     <div className="navigation">

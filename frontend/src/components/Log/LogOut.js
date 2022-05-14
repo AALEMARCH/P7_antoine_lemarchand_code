@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
+//Structure de la page de déconnexion
 const logOut = () => {
   return (
     <Card

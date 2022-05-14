@@ -1,7 +1,14 @@
+
 .profil{
     height: 100%;
     width: 90%;
     margin: auto;
+    @media screen and (max-width: 425px){
+        width: 100%;
+    }
+    @media screen and (min-width: 768px){
+        width: 70%;
+    }
     &_card{
         width: 100%;
         border: none;
@@ -22,7 +29,7 @@
     &_image-container{
         width: 100%;
         position: relative;
-        min-height: 67%;
+        min-height: 55%;
         max-height: 67%;
         border: none;
         
@@ -90,6 +97,9 @@ margin: 1.5rem;
         font-size: 1.5rem;
         font-weight: 700;
     }
+}
+&_delete{
+    margin-top: 5rem;
 }
 }
 .profil-section h4{

@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { UidContext } from "../../Context/AppContext";
 
 const CommentDelete = (comment) => {
+  //Préparation a la navigation et récupération du context
   let navigate = useNavigate();
   const userData = useContext(UidContext);
 
   const handlCommentDelete = async (e) => {
     e.preventDefault();
 
+    //Récupération des données de l'API
     await Api.delete(`comments/${comment.comment.id}`, {})
       .then((res, req) => {
         console.log(res);

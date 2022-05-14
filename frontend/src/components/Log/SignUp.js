@@ -3,15 +3,20 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Login from "./Login";
 
+//Structure de la page Signup
 const SignUp = () => {
+  //Etat de base des données attendu
   const [formSubmit, setFormSubmit] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
 
+  //Fonction d'envoi du formulaire
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    //Gestion des erreurs avec Regexp et conditions
     const terms = document.getElementById("terms");
     const usernameError = document.querySelector(".username.error");
     const emailError = document.querySelector(".email.error");
@@ -91,6 +96,7 @@ const SignUp = () => {
         passwordInput.style.color = "black";
       }
     } else {
+      //Récupération des données de l'API
       await axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}api/users/signup`,

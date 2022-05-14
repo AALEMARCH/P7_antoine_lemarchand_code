@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { UidContext } from "../components/Context/AppContext";
-// import { Button } from "react-bootstrap";
+import ProfilDelete from "./ProfilSetting/ProfilDelete";
 import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 
+//Sous structure de la page Profil
 const ProfilHandle = () => {
+  //Récupération des données de l'utilisateur connecté avec use context
   const userData = useContext(UidContext);
 
   return (
@@ -22,9 +24,6 @@ const ProfilHandle = () => {
         <h4 className="profil_title">{userData.username}</h4>
         <div className="profil_body-container">
           <div className="button-container">
-            {/* <Button variant="danger" className="profil_body-container--button">
-              Follow
-            </Button> */}
             <div className="button-update">
               <ProfilUpdateBtn />
             </div>
@@ -45,6 +44,9 @@ const ProfilHandle = () => {
             </div>
             <div>
               <h4>Connaissances</h4>
+            </div>
+            <div className="profil-section_delete">
+              <ProfilDelete />
             </div>
           </div>
         </div>

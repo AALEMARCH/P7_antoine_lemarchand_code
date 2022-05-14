@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { UidContext } from "./Context/AppContext";
 import Api from "../Api/users";
 
+//Utilisation du props "reseau" définie sur le composant ReseauCallData. Structure de la page Reseau.
 const ReseauHandle = ({ reseau }) => {
   const date = new Date(reseau.createdAt).toLocaleString();
   let navigate = useNavigate();
   const userData = useContext(UidContext);
   console.log(reseau);
 
+  //Récupération des données de l'API.
   const handleReseauProfilsBtn = async (e) => {
     e.preventDefault();
     await Api.get(`users/profile/${reseau.id}`, {}).then((res) => {
