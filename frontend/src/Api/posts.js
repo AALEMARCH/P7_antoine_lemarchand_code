@@ -10,8 +10,8 @@ export const getPosts = () =>
   });
 
 //Lecture d'un post
-export const getPost = (UserId) =>
-  axios.get(`${process.env.REACT_APP_API_URL}api/posts/${UserId}`, {
+export const getPost = (userData) =>
+  axios.get(`${process.env.REACT_APP_API_URL}api/posts/${userData.userData}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -27,11 +27,20 @@ export const addPost = (formData) =>
   });
 
 //Supprimer un post
-export const deletePost = (post) =>
-  axios.delete(
-    `${process.env.REACT_APP_API_URL}api/posts/delete/${post.post.id}`,
+export const deletePost = (id) =>
+  axios.delete(`${process.env.REACT_APP_API_URL}api/posts/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+export const updatePost = ({ formData, post }) =>
+  axios.put(
+    `${process.env.REACT_APP_API_URL}api/posts/update/${post.id}`,
+    formData,
     {
       headers: {
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }

@@ -15,3 +15,22 @@ const Reseau = () => {
 };
 
 export default Reseau;
+
+// // import Header from "../components/nav/Header";
+// import ReseauCallData from "../components/ReseauSetting/ReseauCallData";
+// import ScrollBtn from "../components/ScrollBtn";
+// import { motion } from "framer-motion";
+
+// //Page avec visuel de tous les utilisateurs de Groupomania
+// const Reseau = () => {
+//   return (
+//     <motion.div exit={{ opacity: 0 }}>
+//       {/* <Header /> */}
+//       <h2 className="reseau">Connaissez-vous...</h2>
+//       <ReseauCallData />
+//       <ScrollBtn />
+//     </motion.div>
+//   );
+// };
+
+// export default Reseau;

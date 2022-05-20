@@ -1,5 +1,5 @@
 import React from "react";
-import HomeSetting from "./HomeSetting/createPosts";
+import { Card } from "react-bootstrap";
 
 //Sous structure de la page Home
 const HomeHandle = (props) => {
@@ -11,7 +11,7 @@ const HomeHandle = (props) => {
         Aujourd'hui nous sommes le : <br /> {date}
       </p>
       <div className="homeHandle_btn">
-        <HomeSetting />
+        <Card />
       </div>
     </div>
   );

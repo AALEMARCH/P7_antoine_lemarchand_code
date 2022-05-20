@@ -60,7 +60,7 @@ Groupomania est une ébauche de réseau social d'entreprise.
 
 Les utilisateurs ont la possibilité de créer un compte non administrateur et de se connecter/déconnecter.
 Ils peuvent créer un post, un commentaire, implementer leur profil ou encore liké ou disliké les posts des autres utilisateurs.
-Ils peuvent modifier ou supprimer leurs propres posts ou commentaires.
+Ils peuvent modifier ou supprimer leurs propres posts, commentaires ou profil.
 Il peuvent visiter la page profils des autres utilisateurs depuis leurs posts, ou depuis la page Réseau de l'application.
 
 Par mesure de sécurité, seul le gestionnaire de la base de données est en mesure de créer un compte administrateur. Il pourra également transformer un compte non Admin en compte Admin.
