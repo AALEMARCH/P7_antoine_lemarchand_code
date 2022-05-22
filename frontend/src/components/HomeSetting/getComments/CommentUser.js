@@ -1,8 +1,11 @@
-import React from "react";
-import CommentDelete from "../../HomeSetting/delete/CommentDelete";
+import React, { useContext } from "react";
+import { UidContext } from "../../Context/AppContext";
+import { Button } from "react-bootstrap";
 
 //Utilisation du props "comment" définie sur le composant Comments. Structure des commentaires.
-const CommentUser = ({ comment }) => {
+const CommentUser = ({ comment, handleDeleteComment }) => {
+  const userData = useContext(UidContext);
+
   if (comment === undefined || comment === null) {
     return null;
   } else {
@@ -13,7 +16,18 @@ const CommentUser = ({ comment }) => {
           <h1 className="comments_header">{comment.username}</h1>
           <div className="comments_handle">
             <div className="comments_date">{date}</div>
-            <CommentDelete comment={comment} />
+            <>
+              {userData.userAdmin || userData.userData === comment.userId ? (
+                <div>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => handleDeleteComment(comment.id)}
+                  >
+                    Supprimer
+                  </Button>{" "}
+                </div>
+              ) : null}
+            </>
           </div>
         </header>
         <div className="comments_body">

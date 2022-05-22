@@ -124,6 +124,10 @@
         background-color: $color-10;
         border: 1px dotted $color-9;
     }
+    &_area{
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .commentBtn{
@@ -238,10 +242,6 @@
     display: none;
     display: block;
     font-weight: 700;
-}
-.form{
-// display: flex;
-// flex-direction: column;
-// justify-content: flex-start;
-// align-items: flex-start;
+    margin: 0rem auto;
+    width: 90%;
 }

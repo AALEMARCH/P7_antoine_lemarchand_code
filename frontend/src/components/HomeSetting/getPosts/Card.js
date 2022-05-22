@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import Comments from "../getComments/Comments";
 import { Form, Button } from "react-bootstrap";
 import PostLike from "../LikePost/PostLike";
-import CommentCreated from "../CommentBtn/CommentCreated";
 import ProfilsBtn from "../ProfilsSetting/ProfilsBtn";
 import { UidContext } from "../../Context/AppContext";
 import { getPosts } from "../../../Api/posts";
@@ -10,10 +9,7 @@ import { getPosts } from "../../../Api/posts";
 //Utilisation du props "post" définie sur le composant Posts. Structure des posts.
 const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
   const userData = useContext(UidContext);
-  console.log(userData);
   const date = new Date(post.createdAt).toLocaleString();
-  console.log(post);
-  console.log(post.id);
 
   const [posts, setPosts] = useState(null);
   const [newPost, setNewPost] = useState({
@@ -27,12 +23,10 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
       handlePosts();
     }
   }, [posts]);
-  console.log(posts);
 
   const handlePosts = () => {
     getPosts()
       .then((res) => {
-        console.log(res.data);
         setPosts(res.data);
       })
       .catch((err) => console.log(err));
@@ -93,7 +87,6 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
         <div className="comments-container">
           <div className="d-grid gap-2">
             <Comments post={post} />
-            <CommentCreated post={post} />
           </div>
         </div>
       </div>

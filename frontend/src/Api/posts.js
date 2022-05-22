@@ -34,6 +34,7 @@ export const deletePost = (id) =>
     },
   });
 
+//Modifier un post
 export const updatePost = ({ formData, post }) =>
   axios.put(
     `${process.env.REACT_APP_API_URL}api/posts/update/${post.id}`,

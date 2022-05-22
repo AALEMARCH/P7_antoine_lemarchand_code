@@ -24,7 +24,6 @@ const Posts = (props) => {
   const handlePosts = () => {
     getPosts()
       .then((res) => {
-        console.log(res.data);
         setPosts(res.data);
       })
       .catch((err) => console.log(err));
@@ -35,13 +34,10 @@ const Posts = (props) => {
       handlePosts();
     }
   }, [posts]);
-  console.log(posts);
 
-  console.log(userData);
   const handlePostsByUserId = (userData) => {
     getPost(userData.userData)
       .then((res) => {
-        console.log(res.data);
         setPosts(res.data);
       })
       .catch((err) => {
@@ -59,7 +55,6 @@ const Posts = (props) => {
 
     addPost(formData)
       .then((res) => {
-        console.log(res.data);
         handlePosts();
       })
       .catch((err) => console.log(err));
@@ -80,7 +75,6 @@ const Posts = (props) => {
     console.log(id);
     deletePost(id)
       .then((res) => {
-        console.log(res.data);
         const data = posts.filter((post) => post.id !== id);
         setPosts(data);
       })
@@ -93,7 +87,6 @@ const Posts = (props) => {
     console.log(post.id);
     updatePost({ formData, post })
       .then((res, req) => {
-        console.log(res.data);
         handlePosts();
       })
       .catch((err) => {
