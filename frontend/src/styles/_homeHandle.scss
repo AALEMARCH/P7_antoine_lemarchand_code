@@ -24,8 +24,6 @@
 
 
 .postBtn_close{
-    display: flex;
-    width: 1rem;
-    align-items: center;
-    justify-content: center;
+    @include flexbox();
+    width: 1rem;  
 }

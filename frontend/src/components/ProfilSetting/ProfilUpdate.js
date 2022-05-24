@@ -29,27 +29,33 @@ const ProfilUpdate = () => {
     const usernameError = document.querySelector(".username.error");
     const emailError = document.querySelector(".email.error");
 
-    axios
-      .put(
-        `${process.env.REACT_APP_API_URL}api/users/profile/update/${userData.userData}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        if (res.data.errors) {
-          usernameError.innerHTML = res.data.errors.username;
-          emailError.innerHTML = res.data.errors.email;
-        } else {
-          console.log(res);
-          window.location.reload();
-        }
-      })
-      .catch((err) => console.log(err));
+    if (newProfil.attachment !== "") {
+      await axios
+        .put(
+          `${process.env.REACT_APP_API_URL}api/users/profile/update/${userData.userData}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          if (res.data.errors) {
+            usernameError.innerHTML = res.data.errors.username;
+            emailError.innerHTML = res.data.errors.email;
+          } else {
+            console.log(res);
+            window.location.reload();
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert(
+        "Veuillez sélectionner une nouvelle image ou fermer l'onglet de modification"
+      );
+    }
   };
 
   const handleProfil = (e) => {

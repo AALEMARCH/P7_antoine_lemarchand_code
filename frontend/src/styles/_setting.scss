@@ -11,6 +11,12 @@ $color-9: #A9A9A9;
 $color-10: #DCDCDC;
 $color-11: #dc3545;
 
+@mixin flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 *{
     box-sizing: border-box;
     list-style: none;

@@ -9,7 +9,6 @@ const ReseauHandle = ({ reseau }) => {
   const date = new Date(reseau.createdAt).toLocaleString();
   let navigate = useNavigate();
   const userData = useContext(UidContext);
-  console.log(reseau);
 
   //Récupération des données de l'API.
   const handleReseauProfilsBtn = async (e) => {
@@ -32,10 +31,19 @@ const ReseauHandle = ({ reseau }) => {
     return (
       <div className="reseau-card">
         <div className="reseau-card_title">
-          <h4>{reseau.username}</h4>
+          {reseau.attachment ? (
+            <img
+              src={reseau.attachment}
+              alt="photographie"
+              className="reseau-card_title--img"
+            />
+          ) : (
+            <h4>{reseau.username}</h4>
+          )}
         </div>
         <div className="reseau-card_body">
-          <div>
+          <div className="reseau-card_body--img">
+            {reseau.attachment ? <h4>{reseau.username}</h4> : null}
             <Button
               variant="danger"
               className="reseau-card_btn"

@@ -1,18 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Form, Button } from "react-bootstrap";
-import {
-  getPosts,
-  getPost,
-  addPost,
-  deletePost,
-  updatePost,
-} from "../../../Api/posts";
-import { UidContext } from "../../Context/AppContext";
+import { getPosts, addPost, deletePost, updatePost } from "../../../Api/posts";
 
 //Récupération et mappage des données de l'API, lecture des posts
 const Posts = (props) => {
-  const userData = useContext(UidContext);
+  // const userData = useContext(UidContext);
   const date = new Date(props.date).toLocaleDateString();
   const [posts, setPosts] = useState(null);
   const [newPost, setNewPost] = useState({
@@ -34,16 +27,6 @@ const Posts = (props) => {
       handlePosts();
     }
   }, [posts]);
-
-  const handlePostsByUserId = (userData) => {
-    getPost(userData.userData)
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -72,7 +55,6 @@ const Posts = (props) => {
   };
 
   const handleDeletePost = (id) => {
-    console.log(id);
     deletePost(id)
       .then((res) => {
         const data = posts.filter((post) => post.id !== id);
@@ -111,7 +93,6 @@ const Posts = (props) => {
             <p>
               Aujourd'hui nous sommes le : <br /> {date}
             </p>
-            {/* <div className="postCreated"> */}
             <div className="homeHandle_btn">
               <div className="postCreated_container">
                 <Button
@@ -121,15 +102,7 @@ const Posts = (props) => {
                   id="on"
                 >
                   Créer une publication
-                </Button>{" "}
-                <Button
-                  variant="outline-secondary"
-                  onClick={homeHandleModals}
-                  id="off"
-                  className="postBtn_close"
-                >
-                  X
-                </Button>{" "}
+                </Button>
               </div>
             </div>
           </div>
@@ -174,9 +147,26 @@ const Posts = (props) => {
                     id="attachment"
                   />
                 </Form.Group>
-                <Button variant="outline-danger" type="submit">
-                  Envoyer la publication
-                </Button>
+                {newPost.title || newPost.content || newPost.attachment ? (
+                  <Button
+                    variant="outline-danger"
+                    onClick={homeHandleModals}
+                    id="off"
+                  >
+                    Annuler
+                  </Button>
+                ) : null}
+                {newPost.title !== "" ||
+                newPost.content !== "" ||
+                newPost.attachment !== "" ? (
+                  <Button variant="outline-danger" type="submit">
+                    Envoyer la publication
+                  </Button>
+                ) : (
+                  <Button variant="outline-danger" type="submit" disabled>
+                    Envoyer la publication
+                  </Button>
+                )}
               </Form>
             </div>
           ) : null}
@@ -188,7 +178,6 @@ const Posts = (props) => {
                   <Card
                     key={post.id}
                     post={post}
-                    handlePostsByUserId={handlePostsByUserId}
                     handleUpdatePost={handleUpdatePost}
                     handleDeletePost={handleDeletePost}
                   />

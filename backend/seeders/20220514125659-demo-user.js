@@ -14,7 +14,7 @@ module.exports = {
           password: hash,
           bio: "Je suis le testeur moderateur",
           isAdmin: true,
-          attachment: " ",
+          attachment: "",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -41,6 +41,7 @@
         object-fit: cover;
     }
     &_title{
+        @include flexbox();
         background-color: $color-6;
         color: white;
         width: 12rem;
@@ -49,9 +50,6 @@
         border-radius: 100px;
         text-align: center;
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         margin: -6rem auto 0rem auto;
     }
     &_body-container{
@@ -66,10 +64,8 @@
 }
 
 .button-container{
-    display: flex;
+    @include flexbox();
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin: 1rem auto 2rem auto;
 }
 
