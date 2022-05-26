@@ -50,7 +50,11 @@ const ProfilUpdate = () => {
             window.location.reload();
           }
         })
-        .catch((err) => console.log(err));
+        // .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          alert("taille d'image maximal atteinte: 600ko");
+        });
     } else {
       alert(
         "Veuillez sélectionner une nouvelle image ou fermer l'onglet de modification"

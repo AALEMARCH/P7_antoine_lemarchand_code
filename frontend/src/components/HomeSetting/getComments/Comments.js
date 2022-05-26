@@ -42,7 +42,11 @@ const Comments = (post) => {
       .then((res) => {
         handleComments();
       })
-      .catch((err) => console.log(err));
+      // .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("taille d'image maximal atteinte: 600ko");
+      });
   };
 
   //Evenement au click si il y a un fichier ou non

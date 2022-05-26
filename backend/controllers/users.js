@@ -18,6 +18,7 @@ exports.signup = async (req, res) => {
 
     if (user !== null) {
       if (user.email === email) {
+        // if(user.username === username) {
         return res.status(409).json({ error: "Cet utilisateur existe déja !" });
       }
     } else {

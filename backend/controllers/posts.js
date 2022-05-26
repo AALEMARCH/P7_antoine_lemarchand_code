@@ -1,5 +1,5 @@
 // Importation des models, du système de fichiers, de Json web Token et Dotenv
-const { User, Post } = require("../models");
+const { User, Post, Comment } = require("../models");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 
@@ -121,54 +121,6 @@ exports.userProfileByPost = async (req, res, next) => {
     return res.status(403).json({ message: "unauthorized access!" });
   }
 };
-
-// // CTRL de modification d'un post
-// exports.updatePost = async (req, res, next) => {
-//   const token = req.headers.authorization.split(" ")[1];
-//   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
-//   const userId = decodedToken.userId;
-//   const attachmentURL = req.file
-//     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-//     : req.body.attachment;
-//   try {
-//     const { title, content } = req.body;
-//     const post = await Post.findOne({
-//       where: { id: req.params.postId },
-//     });
-//     if (!post) {
-//       throw new Error("post not found!");
-//     } else {
-//       const user = await User.findOne({
-//         where: { id: userId },
-//       });
-//       if (userId === post.UserId || user.isAdmin === true) {
-//         if (post.attachment != null) {
-//           const filename = post.attachment.split("/images/")[1];
-
-//           fs.unlink(`images/${filename}`, () => {
-//             post.update({
-//               title: title || post.title,
-//               content: content || post.content,
-//               attachment: attachmentURL,
-//             });
-//             res.status(200).json({ message: "your post has been deleted" });
-//           });
-//         } else {
-//           post.update({
-//             title: title || post.title,
-//             content: content || post.content,
-//             attachment: attachmentURL,
-//           });
-//           res.status(200).json({ post });
-//         }
-//       } else {
-//         return res.status(403).json({ message: "unauthorized access!" });
-//       }
-//     }
-//   } catch {
-//     return res.status(500).json({ err: "An error occured" });
-//   }
-// };
 
 // CTRL de modification d'un post
 exports.updatePost = async (req, res, next) => {

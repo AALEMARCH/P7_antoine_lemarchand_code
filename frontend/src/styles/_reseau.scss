@@ -63,5 +63,8 @@
         background-color:#dc3545;
         width: 20vw;
         margin-bottom: 1rem;
+        @media screen and (min-width: 1440px){
+            width: 18vw;
+        }
     }
 }

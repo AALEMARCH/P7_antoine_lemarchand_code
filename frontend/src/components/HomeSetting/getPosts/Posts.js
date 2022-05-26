@@ -40,7 +40,11 @@ const Posts = (props) => {
       .then((res) => {
         handlePosts();
       })
-      .catch((err) => console.log(err));
+      // .catch((err) =>  console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("taille d'image maximal atteinte: 600ko");
+      });
   };
 
   const handlePost = (e) => {
