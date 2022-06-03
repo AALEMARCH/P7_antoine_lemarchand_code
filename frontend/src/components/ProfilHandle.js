@@ -7,6 +7,7 @@ import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
 const ProfilHandle = () => {
   //Récupération des données de l'utilisateur connecté avec use context
   const userData = useContext(UidContext);
+  console.log(userData);
 
   return (
     <div className="profil">
@@ -32,18 +33,16 @@ const ProfilHandle = () => {
             <h4>Biographie</h4>
             <p>{userData.userBio}</p>
             <div>
-              <h4>Statistiques</h4>
-              <div className="profil-section_link">
-                <div>
-                  <h6>Amis</h6> <span>8,797</span>
-                </div>
-                <div>
-                  <h6>Posts</h6> <span>142</span>
-                </div>
-              </div>
+              <h4>Contact</h4>
+              <p>{userData.userEmail}</p>
             </div>
             <div>
-              <h4>Connaissances</h4>
+              <h4>Status</h4>
+              {userData.userAdmin === true ? (
+                <p>Je suis un modérateur de Groupomania</p>
+              ) : (
+                <p>Je suis un simple utilisateur de Groupomania</p>
+              )}
             </div>
             <div className="profil-section_delete">
               <ProfilDelete />

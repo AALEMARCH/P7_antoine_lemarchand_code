@@ -5,7 +5,6 @@ const dotenv = require("dotenv"); // Importation de dotenv
 const { User } = require("../models");
 dotenv.config();
 
-// CTRL de création des utilisateurs
 exports.signup = async (req, res) => {
   try {
     const { email, username, password, bio } = req.body;
@@ -15,11 +14,19 @@ exports.signup = async (req, res) => {
     const user = await User.findOne({
       where: { email: email },
     });
+    const userFind = await User.findOne({
+      where: { username: username },
+    });
 
     if (user !== null) {
-      if (user.email === email) {
-        // if(user.username === username) {
+      if (user.email === email || userFind.username === username) {
         return res.status(409).json({ error: "Cet utilisateur existe déja !" });
+      }
+    } else if (userFind != null) {
+      if (userFind.username === username) {
+        return res
+          .status(409)
+          .json({ error: "Ce nom d'utilisateur existe déja !" });
       }
     } else {
       const hash = await bcrypt.hash(password, 10);

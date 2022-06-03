@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 
 // Importation de Dotenv pour utiliser les variables d'environnement
 const dotenv = require("dotenv");
-const { REPL_MODE_SLOPPY } = require("repl");
 
 dotenv.config();
 

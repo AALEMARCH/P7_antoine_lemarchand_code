@@ -12,16 +12,24 @@ const ProfilDelete = () => {
   const handleProfilDelete = async (e) => {
     e.preventDefault();
 
-    //Récupération des données de l'API
-    await Api.delete(`users/profile/delete/${userData.userData}`, {})
-      .then((res, req) => {
-        console.log(res);
-        alert("le profil a bien été supprimer");
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      window.confirm(
+        `Vous vous apprêtez à supprimer votre profil, êtes-vous sûr de vouloir faire ça?`
+      )
+    ) {
+      //Récupération des données de l'API
+      await Api.delete(`users/profile/delete/${userData.userData}`, {})
+        .then((res, req) => {
+          console.log(res);
+          alert("le profil a bien été supprimer");
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      navigate("/Home");
+    }
   };
 
   return (

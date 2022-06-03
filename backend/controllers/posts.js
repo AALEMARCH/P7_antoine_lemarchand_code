@@ -177,29 +177,75 @@ exports.deletePost = async (req, res, next) => {
   const userId = decodedToken.userId;
   try {
     const post = await Post.findOne({
+      attributes: [
+        "id",
+        "userId",
+        "username",
+        "title",
+        "content",
+        "attachment",
+        "likes",
+        "createdAt",
+      ],
       where: { id: req.params.postId },
     });
+
     if (!post) {
       throw new Error("post not found!");
     } else {
       const user = await User.findOne({
         where: { id: userId },
       });
-      if (userId === post.UserId || user.isAdmin === true) {
-        if (post.attachment != null) {
-          const filename = post.attachment.split("/images/")[1];
 
-          fs.unlink(`images/${filename}`, () => {
+      if (userId === post.dataValues.userId || user.isAdmin === true) {
+        const comment = await Comment.findAll({
+          attributes: ["PostId", "attachment"],
+          where: { PostId: post.id },
+        });
+
+        if (comment != null) {
+          for (i = 0; i < comment.length; i++) {
+            const filename = comment[i].attachment.split("/images/")[1];
+            console.log(filename);
+            fs.unlink(`images/${filename}`, () => {
+              Comment.destroy({
+                where: { PostId: post.id },
+              });
+            });
+          }
+
+          if (post.attachment != null) {
+            const filename = post.attachment.split("/images/")[1];
+
+            fs.unlink(`images/${filename}`, () => {
+              Post.destroy({
+                where: { id: req.params.postId },
+              });
+              res.status(200).json({ message: "your post has been deleted" });
+            });
+          } else {
             Post.destroy({
               where: { id: req.params.postId },
             });
             res.status(200).json({ message: "your post has been deleted" });
-          });
+          }
         } else {
-          Post.destroy({
-            where: { id: req.params.postId },
-          });
-          res.status(200).json({ message: "your post has been deleted" });
+          if (post.attachment != null) {
+            console.log("le post a une image");
+            const filename = post.attachment.split("/images/")[1];
+
+            fs.unlink(`images/${filename}`, () => {
+              Post.destroy({
+                where: { id: req.params.postId },
+              });
+              res.status(200).json({ message: "your post has been deleted" });
+            });
+          } else {
+            Post.destroy({
+              where: { id: req.params.postId },
+            });
+            res.status(200).json({ message: "your post has been deleted" });
+          }
         }
       } else {
         return res.status(403).json({ message: "unauthorized access!" });

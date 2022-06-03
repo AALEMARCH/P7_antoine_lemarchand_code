@@ -36,18 +36,16 @@ const ProfilsHandle = () => {
             <h4>Biographie</h4>
             <p>{profils.data.user.bio}</p>
             <div>
-              <h4>Statistiques</h4>
-              <div className="profil-section_link">
-                <div>
-                  <h6>Amis</h6> <span>8,797</span>
-                </div>
-                <div>
-                  <h6>Posts</h6> <span>142</span>
-                </div>
-              </div>
+              <h4>Contact</h4>
+              <p>{profils.data.user.email}</p>
             </div>
             <div>
-              <h4>Connaissances</h4>
+              <h4>Status</h4>
+              {profils.data.user.isAdmin === true ? (
+                <p>Je suis un modérateur de Groupomania</p>
+              ) : (
+                <p>Je suis un simple utilisateur de Groupomania</p>
+              )}
             </div>
             {userData.userAdmin ? (
               <div className="profil-section_delete">

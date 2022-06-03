@@ -12,18 +12,26 @@ const ProfilsAdminDelete = () => {
   const handleProfilAdminDelete = async (e) => {
     e.preventDefault();
 
-    //Récupération des données de l'API
-    await Api.delete(`users/profile/delete/${profils.data.user.id}`, {})
-      .then((res, req) => {
-        console.log(res);
-        alert(
-          `le profil de l'utilisateur ${profils.data.user.username} a bien été supprimer`
-        );
-        navigate("/Home");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      window.confirm(
+        `Vous vous apprêtez à supprimer le profil de ${profils.data.user.username}, êtes-vous sûr de vouloir faire ça?`
+      )
+    ) {
+      //Récupération des données de l'API
+      await Api.delete(`users/profile/delete/${profils.data.user.id}`, {})
+        .then((res, req) => {
+          console.log(res);
+          alert(
+            `le profil de l'utilisateur ${profils.data.user.username} a bien été supprimer`
+          );
+          navigate("/Home");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      navigate("/Home");
+    }
   };
 
   return (
