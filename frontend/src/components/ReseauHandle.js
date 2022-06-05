@@ -82,7 +82,6 @@ const ReseauHandle = ({ reseau }) => {
   const handleReseauProfilsBtn = async (e) => {
     e.preventDefault();
     await Api.get(`users/profile/${reseau.id}`, {}).then((res) => {
-      console.log(res);
       const data = res;
       localStorage.setItem("profils", JSON.stringify(data));
       navigate("/profils");

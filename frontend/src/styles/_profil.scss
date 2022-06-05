@@ -32,7 +32,13 @@
         min-height: 55%;
         max-height: 67%;
         border: none;
-        
+        &--none{
+            display: none;
+        }
+    }
+    &_image-containerEmpty{
+        width: 100%;
+        height: 20%;   
     }
     &_card--img{
         position: absolute;
@@ -68,6 +74,7 @@
     flex-direction: column;
     margin: 1rem auto 2rem auto;
 }
+
 
 .button-update{
     width: 100%;

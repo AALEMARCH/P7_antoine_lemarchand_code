@@ -78,6 +78,7 @@ exports.login = async (req, res, next) => {
           userId: user.id,
           token: jwt.sign({ userId: user.id }, process.env.JWT_DECODEDTOKEN, {
             expiresIn: "24h",
+            // expiresIn: "10000",
           }),
         });
       }

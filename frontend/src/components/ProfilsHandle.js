@@ -9,8 +9,6 @@ const ProfilsHandle = () => {
   //Récupération des données de profil dans le local storage
   let profils = JSON.parse(localStorage.getItem("profils"));
 
-  console.log(profils);
-  console.log(profils.data.user.username);
   return (
     <div className="profil">
       <div className="profil_card">

@@ -70,7 +70,6 @@ const Posts = (props) => {
   };
 
   const handleUpdatePost = ({ formData, post }) => {
-    console.log(post.id);
     updatePost({ formData, post })
       .then((res, req) => {
         handlePosts();

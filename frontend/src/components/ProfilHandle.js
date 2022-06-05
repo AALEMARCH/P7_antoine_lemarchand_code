@@ -1,56 +1,261 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UidContext } from "../components/Context/AppContext";
 import ProfilDelete from "./ProfilSetting/ProfilDelete";
-import ProfilUpdateBtn from "./ProfilSetting/ProfilUpdateBtn";
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import Api from "../Api/users";
+import jwt_decode from "jwt-decode";
 
 //Sous structure de la page Profil
 const ProfilHandle = () => {
   //Récupération des données de l'utilisateur connecté avec use context
   const userData = useContext(UidContext);
-  console.log(userData);
+
+  const [profils, setProfils] = useState();
+  const [newProfil, setNewProfil] = useState({
+    email: "",
+    username: "",
+    bio: "",
+    attachment: "",
+  });
+  const token = localStorage.getItem("token");
+  const decodedToken = jwt_decode(token);
+  const userId = decodedToken.userId;
+
+  const handleProfils = () => {
+    Api.get(`users/profile/${userId}`, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    })
+      .then((res) => {
+        setProfils(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if (!profils) {
+      handleProfils();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profils]);
+
+  const handleProfilUpdate = async (e) => {
+    e.preventDefault();
+
+    //Préparation des données du formulaire
+    const formData = new FormData();
+    formData.append("email", newProfil.email);
+    formData.append("username", newProfil.username);
+    formData.append("bio", newProfil.bio);
+    formData.append("attachment", newProfil.attachment);
+
+    const usernameError = document.querySelector(".username.error");
+    const emailError = document.querySelector(".email.error");
+
+    if (newProfil.attachment !== "") {
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URL}api/users/profile/update/${userId}`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          if (res.data.errors) {
+            usernameError.innerHTML = res.data.errors.username;
+            emailError.innerHTML = res.data.errors.email;
+          } else {
+            handleProfils();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("taille d'image maximal atteinte: 600ko");
+        });
+    } else {
+      alert(
+        "Veuillez sélectionner une nouvelle image ou fermer l'onglet de modification"
+      );
+    }
+  };
+
+  const handleProfil = (e) => {
+    if (e.target.name !== "attachment") {
+      setNewProfil({ ...newProfil, [e.target.name]: e.target.value });
+    } else {
+      setNewProfil({
+        ...newProfil,
+        attachment: e.target.files[0],
+      });
+    }
+  };
+
+  const [profilUpdateBtn, setProfilUpdateBtn] = useState(false);
+
+  const profilUpdateModals = (e) => {
+    if (e.target.id === "ok") {
+      setProfilUpdateBtn(true);
+    } else if (e.target.id === "ko") {
+      setProfilUpdateBtn(false);
+    }
+  };
 
   return (
-    <div className="profil">
-      <div className="profil_card">
-        <div className="profil_image-container">
+    <>
+      <div className="profil">
+        <div className="profil_card">
           {userData.userAttachment ? (
-            <img
-              src={userData.userAttachment}
-              alt="photographie"
-              className="profil_card--img"
-            />
-          ) : null}
-        </div>
-
-        <h4 className="profil_title">{userData.username}</h4>
-        <div className="profil_body-container">
-          <div className="button-container">
-            <div className="button-update">
-              <ProfilUpdateBtn />
-            </div>
-          </div>
-          <div className="profil-section">
-            <h4>Biographie</h4>
-            <p>{userData.userBio}</p>
-            <div>
-              <h4>Contact</h4>
-              <p>{userData.userEmail}</p>
-            </div>
-            <div>
-              <h4>Status</h4>
-              {userData.userAdmin === true ? (
-                <p>Je suis un modérateur de Groupomania</p>
+            <div className="profil_image-container">
+              {profils ? (
+                <img
+                  src={profils.user.attachment}
+                  alt="photographie"
+                  className="profil_card--img"
+                />
               ) : (
-                <p>Je suis un simple utilisateur de Groupomania</p>
+                <img
+                  src={userData.userAttachment}
+                  alt="photographie"
+                  className="profil_card--img"
+                />
               )}
+              <div className="profil_image-container--none">
+                {profils
+                  ? (userData.userAttachment = profils.user.attachment)
+                  : null}
+              </div>
             </div>
-            <div className="profil-section_delete">
-              <ProfilDelete />
+          ) : (
+            <div className="profil_image-containerEmpty">
+              {profils
+                ? (userData.userAttachment = profils.user.attachment)
+                : null}
+            </div>
+          )}
+          <h4 className="profil_title">
+            {!profils ? userData.username : profils.user.username}
+          </h4>
+          <div className="profil_body-container">
+            <div className="button-container">
+              <div className="button-update">
+                <>
+                  <div className="button-update--container">
+                    <Button
+                      variant="outline-danger"
+                      onClick={profilUpdateModals}
+                      id="ok"
+                      className="button-update--size"
+                    >
+                      modifier le profile
+                    </Button>{" "}
+                    <Button
+                      variant="outline-danger"
+                      onClick={profilUpdateModals}
+                      id="ko"
+                    >
+                      X
+                    </Button>{" "}
+                  </div>
+                  {profilUpdateBtn !== false ? (
+                    <div>
+                      <Form
+                        action=""
+                        onSubmit={handleProfilUpdate}
+                        method="put"
+                        id="sign-up-form"
+                        className="form_log"
+                        encType="multipart/form-data"
+                      >
+                        <Form.Group className="mb-3">
+                          <Form.Label htmlFor="username">
+                            Nom d'utilisateur
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            onChange={(e) => handleProfil(e)}
+                            defaultValue={profils.user.username}
+                            id="username"
+                            name="username"
+                          />
+                          <div className="username error"></div>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                          <Form.Label htmlFor="email">Email</Form.Label>
+                          <Form.Control
+                            type="email"
+                            defaultValue={profils.user.email}
+                            name="email"
+                            id="email"
+                            onChange={(e) => handleProfil(e)}
+                          />
+                          <div className="email error"></div>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                          <Form.Label htmlFor="bio">Biographie</Form.Label>
+                          <Form.Control
+                            type="text"
+                            defaultValue={profils.user.bio}
+                            onChange={(e) => handleProfil(e)}
+                            id="bio"
+                            name="bio"
+                          />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                          <Form.Label htmlFor="attachment">
+                            Photographie
+                          </Form.Label>
+                          <Form.Control
+                            type="file"
+                            onChange={(e) => handleProfil(e)}
+                            id="attachment"
+                            name="attachment"
+                          />
+                        </Form.Group>
+
+                        <Button
+                          variant="outline-danger"
+                          type="submit"
+                          value="Valider inscription"
+                        >
+                          Valider les modifications
+                        </Button>
+                      </Form>
+                    </div>
+                  ) : null}
+                </>
+              </div>
+            </div>
+            <div className="profil-section">
+              <h4>Biographie</h4>
+              <p>{!profils ? userData.userBio : profils.user.bio}</p>
+              <div>
+                <h4>Contact</h4>
+                <p>{!profils ? userData.userEmail : profils.user.email}</p>
+              </div>
+              <div>
+                <h4>Status</h4>
+                {userData.userAdmin === true ? (
+                  <p>Je suis un modérateur de Groupomania</p>
+                ) : (
+                  <p>Je suis un simple utilisateur de Groupomania</p>
+                )}
+              </div>
+              <div className="profil-section_delete">
+                <ProfilDelete />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

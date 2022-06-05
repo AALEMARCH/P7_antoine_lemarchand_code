@@ -6,6 +6,7 @@ import {
   createComments,
   deleteComments,
 } from "../../../Api/comments";
+// import axios from "axios";
 
 //Récupération et mappage des données de l'API, lecture des commentaires
 const Comments = (post) => {
@@ -25,9 +26,10 @@ const Comments = (post) => {
 
   useEffect(() => {
     if (!comments) {
-      handleComments();
+      handleComments(post);
     }
-  }, [comments]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [comments, post]);
 
   const handleCommentCreated = (e) => {
     e.preventDefault();
