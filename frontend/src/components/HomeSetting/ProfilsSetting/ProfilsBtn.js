@@ -27,7 +27,11 @@ const ProfilsBtn = (post) => {
     <div>
       {userData.userData !== post.post.userId ? (
         <>
-          <Button variant="outline-secondary" onClick={handleProfilsData}>
+          <Button
+            variant="outline-secondary"
+            aria-label="Profil : Chemin vers le profil de l'utilisateur liée à ce message"
+            onClick={handleProfilsData}
+          >
             <i className="fa-solid fa-user "></i>
           </Button>{" "}
         </>

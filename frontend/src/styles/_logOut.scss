@@ -15,6 +15,18 @@
         font-size: 1.5rem;
         height: 10%;
     }
+    &_writter{
+        @media screen and (min-width: 600px){
+            font-size: 1.2rem;
+        }
+        @media screen and (min-width: 1000px){
+            font-size: 1.4rem;
+        }
+        @media screen and (min-width: 1440px){
+            font-size: 1.6rem;
+        }
+    }
+   
 }
 .logout-card{
     width: 90%;
@@ -26,6 +38,9 @@
     font-weight: 700;
     border-radius: 0px 0px 10px 10px;
     border-color: $color-11;
+    @media screen and (max-width: 425px){
+        width: 100%;
+    }
     @media screen and (min-width: 622px){
         display: flex;
         width: 70%;
@@ -33,5 +48,18 @@
     @media screen and (min-width: 1024px){
         font-size: 1.5rem;
      
+    }
+    &_btn{
+        font-size: 1rem;
+        @media screen and (min-width: 600px){
+            font-size: 1.2rem;
+        }
+        @media screen and (min-width: 1000px){
+            font-size: 1.4rem;
+        }
+        @media screen and (min-width: 1440px){
+            width: 18vw;
+            font-size: 1.6rem;
+        }
     }
 }

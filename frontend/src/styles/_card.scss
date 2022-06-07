@@ -46,6 +46,7 @@
             font-weight: 900;
             font-size: 1.8rem;
         }
+        
     }
     &_infos{
         height: 100%;
@@ -108,6 +109,22 @@
             & p{
                 font-size: 1.5rem;
             }
+        }
+    }
+    &-btn{
+        transition: 0.4s;
+        @media screen and (min-width: 600px){
+            font-size: 1.2rem;
+        }
+        @media screen and (min-width: 1000px){
+            font-size: 1.3rem;
+        }
+        @media screen and (min-width: 1440px){
+            font-size: 1.4rem;
+        }
+        &:hover{
+            background-color: $color-6;
+            
         }
     }
 }
@@ -231,6 +248,7 @@
 .content-aréa{
     height: 3rem;
 }
+
 .sendCommentBtn-container{
     display: flex;
     align-self: flex-end;

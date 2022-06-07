@@ -26,6 +26,7 @@ const Navigation = () => {
       <div className="navigation_link">
         <NavLink
           to="/home"
+          aria-label="Navigation : Chemin vers la page d'accueil"
           className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           onClick={handleTestToken}
         >
@@ -34,6 +35,7 @@ const Navigation = () => {
 
         <NavLink
           to="/profil"
+          aria-label="Navigation : Chemin vers la page de profil"
           className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           onClick={handleTestToken}
         >
@@ -42,6 +44,7 @@ const Navigation = () => {
 
         <NavLink
           to="/reseau"
+          aria-label="Navigation : Chemin vers la page reseau"
           className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           onClick={handleTestToken}
         >
@@ -50,6 +53,7 @@ const Navigation = () => {
 
         <NavLink
           to="/signOut"
+          aria-label="Navigation : Chemin vers la page de deconnexion"
           className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           onClick={handleTestToken}
         >

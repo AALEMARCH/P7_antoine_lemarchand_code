@@ -103,6 +103,7 @@ const Posts = (props) => {
                   className="homeHandle_btn"
                   onClick={homeHandleModals}
                   id="on"
+                  aria-label="Créer une publication : ouverture du formulaire de création d'un message"
                 >
                   Créer une publication
                 </Button>
@@ -127,6 +128,7 @@ const Posts = (props) => {
                     value={newPost.title}
                     id="title"
                     name="title"
+                    aria-labelledby="title"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -138,6 +140,7 @@ const Posts = (props) => {
                     value={newPost.content}
                     id="content"
                     name="content"
+                    aria-labelledby="content"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -148,6 +151,7 @@ const Posts = (props) => {
                     onChange={(e) => handlePost(e)}
                     width="30%"
                     id="attachment"
+                    aria-labelledby="attachment"
                   />
                 </Form.Group>
                 {newPost.title || newPost.content || newPost.attachment ? (
@@ -155,6 +159,7 @@ const Posts = (props) => {
                     variant="outline-danger"
                     onClick={homeHandleModals}
                     id="off"
+                    aria-label="Annuler : Fermeture du formulaire de création d'un message"
                   >
                     Annuler
                   </Button>
@@ -162,11 +167,22 @@ const Posts = (props) => {
                 {newPost.title !== "" ||
                 newPost.content !== "" ||
                 newPost.attachment !== "" ? (
-                  <Button variant="outline-danger" type="submit">
+                  <Button
+                    variant="outline-danger"
+                    type="submit"
+                    aria-label="Envoyer la publication : Envoie du formulaire"
+                    className="card-btn"
+                  >
                     Envoyer la publication
                   </Button>
                 ) : (
-                  <Button variant="outline-danger" type="submit" disabled>
+                  <Button
+                    variant="outline-danger"
+                    type="submit"
+                    aria-label="Envoyer la publication : Envoie du formulaire"
+                    className="card-btn"
+                    disabled
+                  >
                     Envoyer la publication
                   </Button>
                 )}

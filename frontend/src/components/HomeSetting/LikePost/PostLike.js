@@ -27,15 +27,26 @@ const PostLike = ({ post }) => {
   return (
     <div className="card_footer--linkCount">
       {userData.userData !== post.userId ? (
-        <div className="card_footer--linkCount">
-          <Button variant="outline-secondary" onClick={handlePostLike}>
+        <div className="card_footer--linkCount ">
+          <Button
+            variant="outline-secondary"
+            aria-label="Like - dislike : fonctionnalité"
+            onClick={handlePostLike}
+            className="card-btn"
+          >
             <i className="fa-solid fa-thumbs-up"></i>
           </Button>{" "}
           <p>{likes}</p>
         </div>
       ) : (
-        <div className="card_footer--linkCount">
-          <Button variant="outline-secondary" onClick={handlePostLike} disabled>
+        <div className="card_footer--linkCount ">
+          <Button
+            variant="outline-secondary"
+            aria-label="Like - dislike : fonctionnalité"
+            onClick={handlePostLike}
+            className="card-btn"
+            disabled
+          >
             <i className="fa-solid fa-thumbs-up"></i>
           </Button>{" "}
           <p>{likes}</p>

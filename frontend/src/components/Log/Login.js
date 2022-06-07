@@ -99,6 +99,7 @@ const Login = () => {
           type="email"
           placeholder="Entrez l'e-mail"
           name="email"
+          aria-labelledby="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
@@ -113,13 +114,19 @@ const Login = () => {
         <Form.Control
           type="password"
           name="password"
+          aria-labelledby="password"
           placeholder="tapez votre mot de passe"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
         <div className="password error"></div>
       </Form.Group>
-      <Button variant="outline-danger" type="submit" className="logBtn">
+      <Button
+        variant="outline-danger"
+        type="submit"
+        className="logBtn"
+        aria-label="Se connecter : Envoie du formulaire"
+      >
         Se connecter
       </Button>
     </Form>

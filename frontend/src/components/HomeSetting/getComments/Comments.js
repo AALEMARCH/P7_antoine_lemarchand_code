@@ -82,7 +82,6 @@ const Comments = (post) => {
             onSubmit={handleCommentCreated}
             method="post"
             encType="multipart/form-data"
-            className="form-comment"
           >
             <div className="commentPublication-container">
               <Form.Group className="mb-3 content-container">
@@ -94,6 +93,7 @@ const Comments = (post) => {
                   value={newComment.content}
                   id="content"
                   name="content"
+                  aria-labelledby="content"
                   className="content-area"
                 />
               </Form.Group>
@@ -101,6 +101,7 @@ const Comments = (post) => {
                 <Button
                   variant="outline-danger"
                   type="submit"
+                  aria-label="Envoie du commentaire"
                   className="sending-comment"
                 >
                   <i className="fa-solid fa-paper-plane iconSendComment"></i>
@@ -108,7 +109,7 @@ const Comments = (post) => {
               </div>
             </div>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 comment-form">
               <Form.Label htmlFor="attachment">
                 <i className="fa-solid fa-image iconSendPictures"></i>
               </Form.Label>
@@ -116,8 +117,9 @@ const Comments = (post) => {
                 id="attachment"
                 name="attachment"
                 type="file"
+                aria-labelledby="attachment"
                 onChange={(e) => handleComment(e)}
-                className="test-inputSend"
+                className="test-inputSend "
               />
             </Form.Group>
           </Form>

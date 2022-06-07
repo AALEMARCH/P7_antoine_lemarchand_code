@@ -8,9 +8,11 @@ const logOut = () => {
     <Card
       className="logout-card"
       border="danger"
-      style={{ width: "80%", height: "80vh", margin: "2rem auto" }}
+      style={{ height: "80vh", margin: "2rem auto" }}
     >
-      <Card.Header className="logOut-container_header">Déconnexion</Card.Header>
+      <Card.Header className="logOut-container_header logOut-container_writter">
+        Déconnexion
+      </Card.Header>
       <Card.Body style={{ height: "90%" }}>
         <div className="logOut-container">
           <img
@@ -20,7 +22,7 @@ const logOut = () => {
           />
         </div>
         <div className="logOut-container_text">
-          <Card.Text>
+          <Card.Text className="logOut-container_writter">
             Vous vous apprêter à vous déconnecter. Êtes-vous sûr de vouloir
             faire Ça?
           </Card.Text>
@@ -29,7 +31,13 @@ const logOut = () => {
             to="/"
             className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           >
-            <Button variant="danger">Se déconnecter</Button>
+            <Button
+              variant="danger"
+              className="logout-card_btn"
+              aria-label="Se déconnecter : Chemin vers le formulaire de connexion"
+            >
+              Se déconnecter
+            </Button>
           </NavLink>
         </div>
       </Card.Body>

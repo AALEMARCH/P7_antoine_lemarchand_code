@@ -78,7 +78,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
           {post.attachment ? (
             <img
               src={post.attachment}
-              alt="photographie"
+              alt="photographie du message"
               className="card_infos--img"
             />
           ) : null}
@@ -116,7 +116,9 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
             <div className="card_footer--linkChange">
               <Button
                 variant="outline-secondary"
+                aria-label="Supprimer la publication"
                 onClick={() => handleDeletePost(post.id)}
+                className="card-btn"
               >
                 Supprimer la publication
               </Button>{" "}
@@ -130,6 +132,8 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                 variant="outline-secondary"
                 onClick={updatePostModals}
                 id="onUpdate"
+                aria-label="modifier la publication"
+                className="card-btn"
               >
                 modifier la publication
               </Button>{" "}
@@ -137,7 +141,8 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                 variant="outline-secondary"
                 onClick={updatePostModals}
                 id="offUpdate"
-                className="commentBtn_close"
+                className="commentBtn_close card-btn"
+                aria-label="fermeture du formulaire de modification du message"
               >
                 X
               </Button>{" "}
@@ -162,6 +167,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                     value={newPost.title}
                     id="title"
                     name="title"
+                    aria-labelledby="title"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -173,6 +179,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                     value={newPost.content}
                     id="content"
                     name="content"
+                    aria-labelledby="content"
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -183,9 +190,15 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                     onChange={(e) => handlePost(e)}
                     width="30%"
                     id="attachment"
+                    aria-labelledby="attachment"
                   />
                 </Form.Group>
-                <Button variant="outline-danger" type="submit">
+                <Button
+                  variant="outline-danger"
+                  type="submit"
+                  aria-label="Envoyer la publication : Envoie de la modification du message"
+                  className="card-btn"
+                >
                   Envoyer la publication
                 </Button>
               </Form>

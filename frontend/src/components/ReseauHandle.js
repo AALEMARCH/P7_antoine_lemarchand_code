@@ -100,7 +100,7 @@ const ReseauHandle = ({ reseau }) => {
         <div className="reseau-card_title">
           <img
             src={`./img/pngfind.com-placeholder-png-6104451.png`}
-            alt="photographie"
+            alt="Représentation un utilisateur"
             className="reseau-card_title--img"
           />
         </div>
@@ -110,9 +110,10 @@ const ReseauHandle = ({ reseau }) => {
             <Button
               variant="danger"
               className="reseau-card_btn"
+              aria-label="Profile : Chemin vers la page de profil d'un utilisateur de Groupomania"
               onClick={handleReseauProfilsBtn}
             >
-              Profile
+              Profil
             </Button>
           </div>
 

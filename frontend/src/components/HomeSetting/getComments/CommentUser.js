@@ -21,7 +21,9 @@ const CommentUser = ({ comment, handleDeleteComment }) => {
                 <div>
                   <Button
                     variant="outline-secondary"
+                    aria-label="Supprimer : suppression du commentaire"
                     onClick={() => handleDeleteComment(comment.id)}
+                    className="card-btn"
                   >
                     Supprimer
                   </Button>{" "}

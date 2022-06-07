@@ -29,6 +29,7 @@ const Log = () => {
             onClick={handleModals}
             id="register"
             className="logBtn"
+            aria-label="S'inscrire : Chemin vers le formulaire d'inscription"
           >
             S'inscrire
           </Button>
@@ -38,6 +39,7 @@ const Log = () => {
             onClick={handleModals}
             id="login"
             className="logBtn"
+            aria-label="Se connecter : Chemin vers le formulaire de connexion"
           >
             Se connecter
           </Button>

@@ -114,13 +114,13 @@ const ProfilHandle = () => {
               {profils ? (
                 <img
                   src={profils.user.attachment}
-                  alt="photographie"
+                  alt="photographie de l'utilisateur"
                   className="profil_card--img"
                 />
               ) : (
                 <img
                   src={userData.userAttachment}
-                  alt="photographie"
+                  alt="photographie de l'utilisateur"
                   className="profil_card--img"
                 />
               )}
@@ -149,12 +149,14 @@ const ProfilHandle = () => {
                       variant="outline-danger"
                       onClick={profilUpdateModals}
                       id="ok"
-                      className="button-update--size"
+                      className="button-update--size profil-btn"
+                      aria-label="Modifier le profil : Bouton de modification"
                     >
-                      modifier le profile
+                      modifier le profil
                     </Button>{" "}
                     <Button
                       variant="outline-danger"
+                      className="profil-btn"
                       onClick={profilUpdateModals}
                       id="ko"
                     >
@@ -181,6 +183,7 @@ const ProfilHandle = () => {
                             defaultValue={profils.user.username}
                             id="username"
                             name="username"
+                            aria-labelledby="username"
                           />
                           <div className="username error"></div>
                         </Form.Group>
@@ -192,6 +195,7 @@ const ProfilHandle = () => {
                             defaultValue={profils.user.email}
                             name="email"
                             id="email"
+                            aria-labelledby="email"
                             onChange={(e) => handleProfil(e)}
                           />
                           <div className="email error"></div>
@@ -205,6 +209,7 @@ const ProfilHandle = () => {
                             onChange={(e) => handleProfil(e)}
                             id="bio"
                             name="bio"
+                            aria-labelledby="bio"
                           />
                         </Form.Group>
 
@@ -217,6 +222,7 @@ const ProfilHandle = () => {
                             onChange={(e) => handleProfil(e)}
                             id="attachment"
                             name="attachment"
+                            aria-labelledby="attachment"
                           />
                         </Form.Group>
 
@@ -224,6 +230,7 @@ const ProfilHandle = () => {
                           variant="outline-danger"
                           type="submit"
                           value="Valider inscription"
+                          aria-label="Valider les modifications : Envoie du formulaire"
                         >
                           Valider les modifications
                         </Button>
@@ -248,7 +255,7 @@ const ProfilHandle = () => {
                   <p>Je suis un simple utilisateur de Groupomania</p>
                 )}
               </div>
-              <div className="profil-section_delete">
+              <div className="profil-section_delete profil-btn">
                 <ProfilDelete />
               </div>
             </div>

@@ -5,7 +5,11 @@ import ScrollToTop from "react-scroll-to-top";
 export default function ScrollBtn() {
   return (
     <div className="scrollToTop">
-      <ScrollToTop smooth color="#6f00ff" />
+      <ScrollToTop
+        smooth
+        color="#6f00ff"
+        aria-label="Bouton vers le haut de la page"
+      />
     </div>
   );
 }

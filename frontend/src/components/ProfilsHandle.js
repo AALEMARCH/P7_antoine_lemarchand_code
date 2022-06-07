@@ -17,7 +17,7 @@ const ProfilsHandle = () => {
           {profils.data.user.attachment ? (
             <img
               src={profils.data.user.attachment}
-              alt="photographie"
+              alt="photographie de l'utilisateur"
               className="profil_card--img"
             />
           ) : null}
@@ -26,7 +26,11 @@ const ProfilsHandle = () => {
         <h4 className="profil_title">{profils.data.user.username}</h4>
         <div className="profil_body-container">
           <div className="button-container">
-            <Button variant="danger" className="profil_body-container--button">
+            <Button
+              variant="danger"
+              className="profil_body-container--button"
+              aria-label="Follow : Bouton destiné à la fonctionnalité de suivi des utilisateurs de Groupomania"
+            >
               Follow
             </Button>
           </div>

@@ -2,7 +2,12 @@ const express = require("express");
 const db = require("./models");
 // Donne accès au chemin du système de fichiers
 const path = require("path");
+
+// Importation de helmet - aide à protéger l'application de certaines des vulnérabilités connues du Web en configurant de manière appropriée des en-têtes HTTP
 const helmet = require("helmet");
+
+// Importation du package de limite de débit
+const rateLimit = require("express-rate-limit");
 
 // routes
 const usersRoutes = require("./routes/users");
@@ -13,11 +18,23 @@ const commentsRoutes = require("./routes/comments");
 const dotenv = require("dotenv");
 dotenv.config();
 
+// Limite le nombre de requêtes par IP envoyées vers le serveur Express
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 500, // Limiter chaque IP à 500 requêtes par `window` de 15 minutes
+  message: "trop de requete",
+  standardHeaders: true, // Renvoie les informations de limite de débit dans les en-têtes
+  legacyHeaders: false, // Désactive les en-têtes `X-RateLimit-*`
+});
+
 const app = express(); // create a new express app
 
 app.get("/", (req, res) => {
   res.send("App running");
 });
+
+// Applique le middleware de limitation de débit à toutes les requêtes
+app.use(limiter);
 
 //helmet
 app.use(helmet());

@@ -40,9 +40,10 @@ const ProfilsAdminDelete = () => {
         variant="outline-danger"
         onClick={handleProfilAdminDelete}
         id="ok"
-        className="button-update--size"
+        className="button-update--size profil-btn"
+        aria-label="Supprimer le profil : Bouton de suppression"
       >
-        Supprimer le profile
+        Supprimer le profil
       </Button>{" "}
     </div>
   );
