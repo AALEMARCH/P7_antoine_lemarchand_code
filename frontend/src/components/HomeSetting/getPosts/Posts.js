@@ -99,7 +99,7 @@ const Posts = (props) => {
             <div className="homeHandle_btn">
               <div className="postCreated_container">
                 <Button
-                  variant="outline-danger"
+                  variant="custom"
                   className="homeHandle_btn"
                   onClick={homeHandleModals}
                   id="on"
@@ -156,10 +156,11 @@ const Posts = (props) => {
                 </Form.Group>
                 {newPost.title || newPost.content || newPost.attachment ? (
                   <Button
-                    variant="outline-danger"
+                    variant="custom"
                     onClick={homeHandleModals}
                     id="off"
                     aria-label="Annuler : Fermeture du formulaire de création d'un message"
+                    className="card-btn"
                   >
                     Annuler
                   </Button>
@@ -168,7 +169,7 @@ const Posts = (props) => {
                 newPost.content !== "" ||
                 newPost.attachment !== "" ? (
                   <Button
-                    variant="outline-danger"
+                    variant="custom"
                     type="submit"
                     aria-label="Envoyer la publication : Envoie du formulaire"
                     className="card-btn"
@@ -177,7 +178,7 @@ const Posts = (props) => {
                   </Button>
                 ) : (
                   <Button
-                    variant="outline-danger"
+                    variant="custom"
                     type="submit"
                     aria-label="Envoyer la publication : Envoie du formulaire"
                     className="card-btn"

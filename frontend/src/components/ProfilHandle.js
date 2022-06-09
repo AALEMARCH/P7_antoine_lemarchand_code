@@ -146,7 +146,7 @@ const ProfilHandle = () => {
                 <>
                   <div className="button-update--container">
                     <Button
-                      variant="outline-danger"
+                      variant="custom"
                       onClick={profilUpdateModals}
                       id="ok"
                       className="button-update--size profil-btn"
@@ -155,7 +155,7 @@ const ProfilHandle = () => {
                       modifier le profil
                     </Button>{" "}
                     <Button
-                      variant="outline-danger"
+                      variant="custom"
                       className="profil-btn"
                       onClick={profilUpdateModals}
                       id="ko"
@@ -227,7 +227,7 @@ const ProfilHandle = () => {
                         </Form.Group>
 
                         <Button
-                          variant="outline-danger"
+                          variant="custom"
                           type="submit"
                           value="Valider inscription"
                           aria-label="Valider les modifications : Envoie du formulaire"

@@ -7,7 +7,6 @@ import Api from "../../Api/users";
 const ProfilsAdminDelete = () => {
   let navigate = useNavigate();
   let profils = JSON.parse(localStorage.getItem("profils"));
-  console.log(profils.data.user.username);
 
   const handleProfilAdminDelete = async (e) => {
     e.preventDefault();
@@ -37,7 +36,7 @@ const ProfilsAdminDelete = () => {
   return (
     <div>
       <Button
-        variant="outline-danger"
+        variant="custom"
         onClick={handleProfilAdminDelete}
         id="ok"
         className="button-update--size profil-btn"

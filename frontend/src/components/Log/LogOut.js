@@ -32,7 +32,7 @@ const logOut = () => {
             className={(nav) => (nav.isActive ? "nav-active" : "nav-passive")}
           >
             <Button
-              variant="danger"
+              variant="custom"
               className="logout-card_btn"
               aria-label="Se déconnecter : Chemin vers le formulaire de connexion"
             >

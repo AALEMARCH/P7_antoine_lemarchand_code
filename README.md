@@ -6,11 +6,11 @@ Pour démarrer le projet, il vous faudra cloner ce répertoire `github`. Il cont
 
 ### Backend
 
-#### Installer les dépendances
+#### Installation des dependances pour MySql
 
-Placer votre terminal sur le dossier Backend, puis tapez la commande:
-`$ npm install`
-Cette commande permettra de télécharger les dépendances se trouvant dans le fichier `package.json`. Elle initialisera également un dossier `node_module`.
+Pour un meilleur contrôle sur la base de donnée, ainsi que pour la création d'un utilisateur Administrateur, Je recommande d'utiliser `Wampserver` et `phpMyAdmin`. La création de cet utilisateur Admin se fera depuis la base de données. Il sera nécessaire d'éditer directement un utilisateur depuis la table users, et de passer le rang isAdmin à 1.
+
+Creation d'une Base de donnée MySQL
 
 #### Préparation de la base de données
 
@@ -24,6 +24,12 @@ JWT_DECODEDTOKEN permet à json web token de créer des tokens d'authentificatio
 
 PORT est le port sur lequel l'application va s'ouvrir.
 
+#### Installer les dépendances
+
+Placer votre terminal sur le dossier Backend, puis tapez la commande:
+`$ npm install`
+Cette commande permettra de télécharger les dépendances se trouvant dans le fichier `package.json`. Elle initialisera également un dossier `node_module`.
+
 #### Préparation au stockage des images
 
 Créer un dossier `images` a la racine du dossier backend.
@@ -31,8 +37,12 @@ Créer un dossier `images` a la racine du dossier backend.
 #### Lancement de l'API
 
 Placer votre terminal sur le dossier Backend, puis tapez la commande:
-`$ nodemon serveur`
-A ce moment, l'utilisation du logiciel `Postman` pourrait vous permettre d'effectuer vos propres tests sur les routes de l'API.
+`$ nodemon server` ou bien `node server`
+
+#### Création des utilisateurs de test
+
+Lancer la commande `npx sequelize-cli db:seed:all` qui permettra d'implementer la table users de cet utilisateur test.
+Relancer ensuite le server (`nodemon server` ou `node server`)
 
 ### Frontend
 
@@ -47,12 +57,6 @@ L'installation des dépendances se fait avec la commande:
 On lance ensuite l'application avec la commande:
 `npm start`
 Il faudra ensuite appuyer sur `y` afin de faire tourner le frontend sur le port `3001`. Le port `3000` etant déjà utilisé par le backend.
-
-#### Recommandation
-
-Pour un meilleur contrôle sur la base de donnée, ainsi que pour la création d'un utilisateur Administrateur, Je recommande d'utiliser `Wampserver` et `phpMyAdmin`. La création de cet utilisateur Admin se fera depuis la base de données. Il sera nécessaire d'éditer directement un utilisateur depuis la table users, et de passer le rang isAdmin à 1.
-
-Pour la création d'un utilisateur test Administrateur, placez-vous dans votre terminal sur le dossier backend, lancer la commande `npx sequelize-cli seed:generate --name demo-user`ce qui génèrera un fichier de test dans le dossier `seeders` présent dans le dossier backend. Implémenter ensuite ce fichier sur le modèle da la table users. Lancer ensuite la commande `npx sequelize-cli db:seed:all` qui permettra d'implementer la table users de cet utilisateur test.
 
 #### UTILISATION
 

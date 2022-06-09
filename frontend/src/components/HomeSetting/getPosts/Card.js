@@ -66,7 +66,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
   return (
     <div className="card">
       <div className="card_header">
-        <h2>{post.username}</h2>
+        <h2 className="card_header--size">{post.username}</h2>
         <div>
           <h2 className="card_header--title">{post.title}</h2>
         </div>
@@ -194,7 +194,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                   />
                 </Form.Group>
                 <Button
-                  variant="outline-danger"
+                  variant="custom"
                   type="submit"
                   aria-label="Envoyer la publication : Envoie de la modification du message"
                   className="card-btn"

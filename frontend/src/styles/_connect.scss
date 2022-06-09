@@ -1,9 +1,8 @@
 .connect{
     @include flexbox();
-    width: 100%;
-    height: 100%;
+    @include size();
     min-height: 100vh; 
-    background-color: $color-10;
+    background-color: $color-6;
     margin-top: -0.5rem;
     &_log{
         display: flex;
@@ -45,10 +44,10 @@
     padding: 0.5rem 0rem 0rem 0rem;
 }
 .terms.error{
-    color: $color-11;
+    color: $color-8;
 }
 .password-confirm.error{
-    color: $color-11;
+    color: $color-8;
 }
 .form_log{
     padding: 0.5rem 0rem 0rem;
@@ -58,16 +57,26 @@
 
 .logBtn{
     font-size: 1.6rem;
+    color: $color-8;
     @media screen and (max-width: 370px){
         font-size: 1.2rem;
     }
 }
 .email {
-    color: $color-11;
+    color: $color-8;
 }
 .username{
-    color: $color-11;
+    color: $color-8;
 }
 .password{
-    color: $color-11;
+    color: $color-8;
+}
+.btn-custom{
+    background-color: white;
+    color: $color-8;
+    border: 1px solid $color-8;
+    &:hover{
+        @include linearGradientTwo();
+        color: white;
+    }
 }

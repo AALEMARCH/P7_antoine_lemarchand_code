@@ -6,7 +6,6 @@ import {
   createComments,
   deleteComments,
 } from "../../../Api/comments";
-// import axios from "axios";
 
 //Récupération et mappage des données de l'API, lecture des commentaires
 const Comments = (post) => {
@@ -99,7 +98,7 @@ const Comments = (post) => {
               </Form.Group>
               <div className="sendCommentBtn-container">
                 <Button
-                  variant="outline-danger"
+                  variant="custom"
                   type="submit"
                   aria-label="Envoie du commentaire"
                   className="sending-comment"

@@ -34,7 +34,7 @@ const SignUp = () => {
     const passwordInput = document.getElementById("password");
     const passwordConfInput = document.getElementById("password-conf");
 
-    const nameRegex = /^[a-z]{2,20}$/i;
+    const nameRegex = /^[a-z]{2,10}$/i;
     const emailRegex =
       /^[a-z0-9\-_]+[a-z0-9.\-_]*@[a-z0-9\-_]{2,}\.[a-z.\-_]+[a-z\-_]+$/i;
     const passwordRegex =
@@ -47,7 +47,7 @@ const SignUp = () => {
       if (password !== controlPassword) {
         passwordConfirmError.innerHTML =
           "Les mots de passe ne correspondent pas";
-        passwordConfInput.style.background = "#dc3545";
+        passwordConfInput.style.background = "#FD2D01";
         passwordConfInput.style.color = "white";
       } else if (password === controlPassword) {
         passwordConfirmError.innerHTML = " ";
@@ -66,8 +66,9 @@ const SignUp = () => {
       password !== controlPassword
     ) {
       if (nameRegex.test(username) === false) {
-        usernameError.innerText = "Nom utilisateur invalide";
-        usernameInput.style.background = "#dc3545";
+        usernameError.innerText =
+          "Saisir un nom d'utilisateur valide (2-10 caractères / pas de chiffres)";
+        usernameInput.style.background = "#FD2D01";
         usernameInput.style.color = "white";
       } else {
         usernameError.innerText = " ";
@@ -76,7 +77,7 @@ const SignUp = () => {
       }
       if (emailRegex.test(email) === false) {
         emailError.innerText = "Format d'Email invalide";
-        emailInput.style.background = "#dc3545";
+        emailInput.style.background = "#FD2D01";
         emailInput.style.color = "white";
       } else {
         emailError.innerText = " ";
@@ -84,8 +85,9 @@ const SignUp = () => {
         emailInput.style.color = "black";
       }
       if (passwordRegex.test(password) === false) {
-        passwordError.innerText = "Le mot de passe n'est pas asez fort !";
-        passwordInput.style.background = "#dc3545";
+        passwordError.innerText =
+          "Saisir un mot de passe valide (8 - 100 caractères / minimums deux chiffres / minuscules et majuscules obligatoires)";
+        passwordInput.style.background = "#FD2D01";
         passwordInput.style.color = "white";
       } else {
         passwordError.innerText = " ";
@@ -114,7 +116,7 @@ const SignUp = () => {
               err.response.data.error === "Ce nom d'utilisateur existe déja !"
             ) {
               usernameError.innerHTML = err.response.data.error;
-              usernameInput.style.background = "#dc3545";
+              usernameInput.style.background = "#FD2D01";
               usernameInput.style.color = "white";
             } else {
               usernameError.innerHTML = null;
@@ -123,7 +125,7 @@ const SignUp = () => {
             }
             if (err.response.data.error === "Cet utilisateur existe déja !") {
               emailError.innerHTML = err.response.data.error;
-              emailInput.style.background = "#dc3545";
+              emailInput.style.background = "#FD2D01";
               emailInput.style.color = "white";
             } else {
               emailError.innerHTML = null;
@@ -229,7 +231,7 @@ const SignUp = () => {
           </Form.Group>
 
           <Button
-            variant="outline-danger"
+            variant="custom"
             type="submit"
             value="Valider inscription"
             className="logBtn"

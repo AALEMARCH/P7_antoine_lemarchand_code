@@ -25,7 +25,7 @@ const Log = () => {
       <div className="form-container">
         <>
           <Button
-            variant="outline-danger"
+            variant="custom"
             onClick={handleModals}
             id="register"
             className="logBtn"
@@ -35,7 +35,7 @@ const Log = () => {
           </Button>
 
           <Button
-            variant="outline-danger"
+            variant="custom"
             onClick={handleModals}
             id="login"
             className="logBtn"

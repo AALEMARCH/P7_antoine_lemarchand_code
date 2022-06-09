@@ -35,7 +35,7 @@ const ProfilDelete = () => {
   return (
     <div>
       <Button
-        variant="outline-danger"
+        variant="custom"
         onClick={handleProfilDelete}
         id="ok"
         className="button-update--size profil-btn"

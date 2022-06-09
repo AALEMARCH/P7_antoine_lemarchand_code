@@ -27,7 +27,7 @@ const ProfilsHandle = () => {
         <div className="profil_body-container">
           <div className="button-container">
             <Button
-              variant="danger"
+              variant="custom"
               className="profil_body-container--button"
               aria-label="Follow : Bouton destiné à la fonctionnalité de suivi des utilisateurs de Groupomania"
             >

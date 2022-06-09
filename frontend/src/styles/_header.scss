@@ -1,7 +1,6 @@
 .header-container{
+    @include size();
     background: $color-6;
-    height: 100%;
-    width: 100%;
     &_items{
         display: flex;
         flex-direction: row;
@@ -23,5 +22,3 @@
 .sticky{
     z-index: 999;
 }
-
- 

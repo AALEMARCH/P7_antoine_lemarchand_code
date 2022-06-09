@@ -31,6 +31,7 @@ const ProfilsBtn = (post) => {
             variant="outline-secondary"
             aria-label="Profil : Chemin vers le profil de l'utilisateur liée à ce message"
             onClick={handleProfilsData}
+            className="card-btn"
           >
             <i className="fa-solid fa-user "></i>
           </Button>{" "}

@@ -35,7 +35,7 @@ const Login = () => {
       if (emailRegex.test(email) === false) {
         console.log(emailRegex.test(email));
         emailError.innerText = "Format d'Email invalide";
-        emailInput.style.background = "#dc3545";
+        emailInput.style.background = "#FD2D01";
         emailInput.style.color = "white";
       } else {
         emailError.innerText = " ";
@@ -45,7 +45,7 @@ const Login = () => {
       if (passwordRegex.test(password) === false) {
         console.log(passwordRegex.test(password));
         passwordError.innerText = "Le mot de passe n'est pas asez fort !";
-        passwordInput.style.background = "#dc3545";
+        passwordInput.style.background = "#FD2D01";
         passwordInput.style.color = "white";
       } else {
         passwordError.innerText = " ";
@@ -122,7 +122,7 @@ const Login = () => {
         <div className="password error"></div>
       </Form.Group>
       <Button
-        variant="outline-danger"
+        variant="custom"
         type="submit"
         className="logBtn"
         aria-label="Se connecter : Envoie du formulaire"
