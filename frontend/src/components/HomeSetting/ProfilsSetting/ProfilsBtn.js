@@ -15,10 +15,8 @@ const ProfilsBtn = (post) => {
 
     //Récupération des données de l'API et envoie dans le local storage
     await Api.get(`posts/profile/${post.post.id}`, {}).then((res, req) => {
-      console.log(res);
       const data = res;
       localStorage.setItem("profils", JSON.stringify(data));
-      console.log(data.data.user);
       navigate("/profils");
     });
   };

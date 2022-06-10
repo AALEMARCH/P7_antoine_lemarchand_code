@@ -56,7 +56,6 @@ L'installation des dépendances se fait avec la commande:
 
 On lance ensuite l'application avec la commande:
 `npm start`
-Il faudra ensuite appuyer sur `y` afin de faire tourner le frontend sur le port `3001`. Le port `3000` etant déjà utilisé par le backend.
 
 #### UTILISATION
 
