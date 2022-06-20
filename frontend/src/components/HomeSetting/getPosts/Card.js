@@ -15,7 +15,6 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
   const [newPost, setNewPost] = useState({
     title: post.title,
     content: post.content,
-    attachment: post.attachment,
   });
 
   useEffect(() => {
@@ -38,20 +37,12 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
     const formData = new FormData();
     formData.append("title", newPost.title);
     formData.append("content", newPost.content);
-    formData.append("attachment", newPost.attachment);
 
     handleUpdatePost({ formData, post });
   };
 
   const handlePost = (e) => {
-    if (e.target.name !== "attachment") {
-      setNewPost({ ...newPost, [e.target.name]: e.target.value });
-    } else {
-      setNewPost({
-        ...newPost,
-        attachment: e.target.files[0],
-      });
-    }
+    setNewPost({ ...newPost, [e.target.name]: e.target.value });
   };
 
   const [updatePostBtn, setUpdatePostBtn] = useState(false);
@@ -182,17 +173,7 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                     aria-labelledby="content"
                   />
                 </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label htmlFor="attachment">Images : </Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="attachment"
-                    onChange={(e) => handlePost(e)}
-                    width="30%"
-                    id="attachment"
-                    aria-labelledby="attachment"
-                  />
-                </Form.Group>
+
                 <Button
                   variant="custom"
                   type="submit"

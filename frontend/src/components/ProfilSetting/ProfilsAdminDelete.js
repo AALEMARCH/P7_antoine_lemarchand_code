@@ -19,7 +19,6 @@ const ProfilsAdminDelete = () => {
       //Récupération des données de l'API
       await Api.delete(`users/profile/delete/${profils.data.user.id}`, {})
         .then((res, req) => {
-          console.log(res);
           alert(
             `le profil de l'utilisateur ${profils.data.user.username} a bien été supprimer`
           );

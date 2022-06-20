@@ -13,8 +13,6 @@ const ProfilHandle = () => {
 
   const [profils, setProfils] = useState();
   const [newProfil, setNewProfil] = useState({
-    email: "",
-    username: "",
     bio: "",
     attachment: "",
   });
@@ -45,13 +43,8 @@ const ProfilHandle = () => {
 
     //Préparation des données du formulaire
     const formData = new FormData();
-    formData.append("email", newProfil.email);
-    formData.append("username", newProfil.username);
     formData.append("bio", newProfil.bio);
     formData.append("attachment", newProfil.attachment);
-
-    const usernameError = document.querySelector(".username.error");
-    const emailError = document.querySelector(".email.error");
 
     if (newProfil.attachment !== "") {
       axios
@@ -66,12 +59,7 @@ const ProfilHandle = () => {
           }
         )
         .then((res) => {
-          if (res.data.errors) {
-            usernameError.innerHTML = res.data.errors.username;
-            emailError.innerHTML = res.data.errors.email;
-          } else {
-            handleProfils();
-          }
+          handleProfils();
         })
         .catch((err) => {
           console.log(err);
@@ -174,34 +162,6 @@ const ProfilHandle = () => {
                         encType="multipart/form-data"
                       >
                         <Form.Group className="mb-3">
-                          <Form.Label htmlFor="username">
-                            Nom d'utilisateur
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            onChange={(e) => handleProfil(e)}
-                            defaultValue={profils.user.username}
-                            id="username"
-                            name="username"
-                            aria-labelledby="username"
-                          />
-                          <div className="username error"></div>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                          <Form.Label htmlFor="email">Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            defaultValue={profils.user.email}
-                            name="email"
-                            id="email"
-                            aria-labelledby="email"
-                            onChange={(e) => handleProfil(e)}
-                          />
-                          <div className="email error"></div>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
                           <Form.Label htmlFor="bio">Biographie</Form.Label>
                           <Form.Control
                             type="text"
@@ -215,7 +175,7 @@ const ProfilHandle = () => {
 
                         <Form.Group className="mb-3">
                           <Form.Label htmlFor="attachment">
-                            Photographie
+                            Photographie *
                           </Form.Label>
                           <Form.Control
                             type="file"
@@ -225,7 +185,7 @@ const ProfilHandle = () => {
                             aria-labelledby="attachment"
                           />
                         </Form.Group>
-
+                        <h6>* Champs obligatoire</h6>
                         <Button
                           variant="custom"
                           type="submit"
@@ -255,7 +215,7 @@ const ProfilHandle = () => {
                   <p>Je suis un simple utilisateur de Groupomania</p>
                 )}
               </div>
-              <div className="profil-section_delete profil-btn">
+              <div className="profil-section_delete profil-btn deleteBtn">
                 <ProfilDelete />
               </div>
             </div>

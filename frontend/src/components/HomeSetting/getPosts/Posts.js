@@ -40,7 +40,6 @@ const Posts = (props) => {
       .then((res) => {
         handlePosts();
       })
-      // .catch((err) =>  console.log(err));
       .catch((err) => {
         console.log(err);
         alert("taille d'image maximal atteinte: 600ko");
@@ -144,7 +143,7 @@ const Posts = (props) => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label htmlFor="attachment">Images : </Form.Label>
+                  <Form.Label htmlFor="attachment">Images : *</Form.Label>
                   <Form.Control
                     type="file"
                     name="attachment"
@@ -154,6 +153,7 @@ const Posts = (props) => {
                     aria-labelledby="attachment"
                   />
                 </Form.Group>
+                <h6>* L'image ne sera ensuite plus modifiable !</h6>
                 {newPost.title || newPost.content || newPost.attachment ? (
                   <Button
                     variant="custom"

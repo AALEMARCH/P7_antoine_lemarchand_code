@@ -17,22 +17,12 @@ const SignUp = () => {
     e.preventDefault();
 
     //Gestion des erreurs avec Regexp et conditions
-    const terms = document.getElementById("terms");
     const usernameError = document.querySelector(".username.error");
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
     const passwordConfirmError = document.querySelector(
       ".password-confirm.error"
     );
-    const termsError = document.querySelector(".terms.error");
-
-    passwordConfirmError.innerHTML = "";
-    termsError.innerHTML = "";
-
-    const usernameInput = document.getElementById("username");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const passwordConfInput = document.getElementById("password-conf");
 
     const nameRegex = /^[a-z]{2,10}$/i;
     const emailRegex =
@@ -42,59 +32,47 @@ const SignUp = () => {
 
     if (!username || !email || !password || !controlPassword) {
       alert("veuillez remplir tous les champs du formulaire");
-    }
-    if (password !== controlPassword || password === controlPassword) {
+    } else {
+      passwordConfirmError.innerHTML = " ";
+
+      if (nameRegex.test(username)) {
+        usernameError.innerText = " ";
+      } else {
+        usernameError.innerText =
+          "Saisir un nom d'utilisateur valide (2-10 caractères / pas de chiffres)";
+        usernameError.style.background = "#FD2D01";
+        usernameError.style.color = "white";
+      }
+      if (emailRegex.test(email)) {
+        emailError.innerText = " ";
+      } else {
+        emailError.innerText = "Format d'Email invalide";
+        emailError.style.background = "#FD2D01";
+        emailError.style.color = "white";
+      }
+      if (passwordRegex.test(password)) {
+        passwordError.innerText = " ";
+      } else {
+        passwordError.innerText =
+          "Saisir un mot de passe valide (8 - 100 caractères / minimums deux chiffres / minuscules et majuscules obligatoires)";
+        passwordError.style.background = "#FD2D01";
+        passwordError.style.color = "white";
+      }
       if (password !== controlPassword) {
         passwordConfirmError.innerHTML =
           "Les mots de passe ne correspondent pas";
-        passwordConfInput.style.background = "#FD2D01";
-        passwordConfInput.style.color = "white";
-      } else if (password === controlPassword) {
+        passwordConfirmError.style.background = "#FD2D01";
+        passwordConfirmError.style.color = "white";
+      } else {
         passwordConfirmError.innerHTML = " ";
-        passwordConfInput.style.background = "white";
-        passwordConfInput.style.color = "black";
       }
-    }
-    if (!terms.checked) {
-      termsError.innerHTML = "Veuillez valider les conditions générales";
     }
     if (
-      nameRegex.test(username) === false ||
-      emailRegex.test(email) === false ||
-      passwordRegex.test(password) === false ||
-      !terms.checked ||
-      password !== controlPassword
+      nameRegex.test(username) &&
+      emailRegex.test(email) &&
+      !passwordRegex.test(password) &&
+      password === controlPassword
     ) {
-      if (nameRegex.test(username) === false) {
-        usernameError.innerText =
-          "Saisir un nom d'utilisateur valide (2-10 caractères / pas de chiffres)";
-        usernameInput.style.background = "#FD2D01";
-        usernameInput.style.color = "white";
-      } else {
-        usernameError.innerText = " ";
-        usernameInput.style.background = "white";
-        usernameInput.style.color = "black";
-      }
-      if (emailRegex.test(email) === false) {
-        emailError.innerText = "Format d'Email invalide";
-        emailInput.style.background = "#FD2D01";
-        emailInput.style.color = "white";
-      } else {
-        emailError.innerText = " ";
-        emailInput.style.background = "white";
-        emailInput.style.color = "black";
-      }
-      if (passwordRegex.test(password) === false) {
-        passwordError.innerText =
-          "Saisir un mot de passe valide (8 - 100 caractères / minimums deux chiffres / minuscules et majuscules obligatoires)";
-        passwordInput.style.background = "#FD2D01";
-        passwordInput.style.color = "white";
-      } else {
-        passwordError.innerText = " ";
-        passwordInput.style.background = "white";
-        passwordInput.style.color = "black";
-      }
-    } else {
       //Récupération des données de l'API
       await axios({
         method: "post",
@@ -106,31 +84,25 @@ const SignUp = () => {
         },
       })
         .then((res) => {
-          console.log(res.response);
           setFormSubmit(true);
         })
         .catch((err) => {
-          console.log(err.response);
-          if (err.response.data.error !== undefined) {
+          if (err.response.data.error) {
             if (
               err.response.data.error === "Ce nom d'utilisateur existe déja !"
             ) {
               usernameError.innerHTML = err.response.data.error;
-              usernameInput.style.background = "#FD2D01";
-              usernameInput.style.color = "white";
+              usernameError.style.background = "#FD2D01";
+              usernameError.style.color = "white";
             } else {
               usernameError.innerHTML = null;
-              usernameInput.style.background = "white";
-              usernameInput.style.color = "black";
             }
             if (err.response.data.error === "Cet utilisateur existe déja !") {
               emailError.innerHTML = err.response.data.error;
-              emailInput.style.background = "#FD2D01";
-              emailInput.style.color = "white";
+              emailError.style.background = "#FD2D01";
+              emailError.style.color = "white";
             } else {
               emailError.innerHTML = null;
-              emailInput.style.background = "white";
-              emailInput.style.color = "black";
             }
           }
         });
@@ -212,22 +184,6 @@ const SignUp = () => {
               value={controlPassword}
             />
             <div className="password-confirm error"></div>
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Check
-              type="checkbox"
-              id="terms"
-              aria-label="terme et condition"
-            />
-            <label htmlFor="terms">
-              J'accepte les{" "}
-              <a href="/" target="_blank" rel="noopener noreferrer">
-                {" "}
-                conditions générales
-              </a>
-            </label>
-            <div className="terms error"></div>
           </Form.Group>
 
           <Button

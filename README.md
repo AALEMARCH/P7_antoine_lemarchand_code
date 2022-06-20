@@ -8,7 +8,7 @@ Pour démarrer le projet, il vous faudra cloner ce répertoire `github`. Il cont
 
 #### Installation des dependances pour MySql
 
-Pour un meilleur contrôle sur la base de donnée, ainsi que pour la création d'un utilisateur Administrateur, Je recommande d'utiliser `Wampserver` et `phpMyAdmin`. La création de cet utilisateur Admin se fera depuis la base de données. Il sera nécessaire d'éditer directement un utilisateur depuis la table users, et de passer le rang isAdmin à 1.
+Pour un meilleur contrôle sur la base de donnée, ainsi que pour la création d'un utilisateur Administrateur, Je recommande d'utiliser `Wampserver`. La création de cet utilisateur Admin se fera depuis la base de données. Il sera nécessaire d'éditer directement un utilisateur depuis la table users, et de passer le rang isAdmin à 1.
 
 Creation d'une Base de donnée MySQL
 

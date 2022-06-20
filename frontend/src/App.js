@@ -37,7 +37,6 @@ function App() {
       });
     };
 
-    // if (userToken === true) {
     let userToken = "";
     const handleToken = () => {
       const token = localStorage.getItem("token");
@@ -55,8 +54,6 @@ function App() {
     if (userToken === true) {
       fetchUser();
     }
-
-    // }
   }, [userData, username, userBio, userAttachment]);
 
   //Routage de l'application

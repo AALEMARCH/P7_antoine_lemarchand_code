@@ -20,7 +20,6 @@ const ProfilDelete = () => {
       //Récupération des données de l'API
       await Api.delete(`users/profile/delete/${userData.userData}`, {})
         .then((res, req) => {
-          console.log(res);
           alert("le profil a bien été supprimer");
           navigate("/");
         })

@@ -16,42 +16,8 @@ const Login = () => {
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
 
-    const emailInput = document.getElementById("formBasicEmail");
-    const passwordInput = document.getElementById("formBasicPassword");
-
-    const emailRegex =
-      /^[a-z0-9\-_]+[a-z0-9.\-_]*@[a-z0-9\-_]{2,}\.[a-z.\-_]+[a-z\-_]+$/i;
-    const passwordRegex =
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9].*?[0-9]).{8,100}$/g;
-
     if (!email || !password) {
       alert("veuillez remplir tous les champs du formulaire");
-    }
-
-    if (
-      emailRegex.test(email) === false ||
-      passwordRegex.test(password) === false
-    ) {
-      if (emailRegex.test(email) === false) {
-        console.log(emailRegex.test(email));
-        emailError.innerText = "Format d'Email invalide";
-        emailInput.style.background = "#FD2D01";
-        emailInput.style.color = "white";
-      } else {
-        emailError.innerText = " ";
-        emailInput.style.background = "white";
-        emailInput.style.color = "black";
-      }
-      if (passwordRegex.test(password) === false) {
-        console.log(passwordRegex.test(password));
-        passwordError.innerText = "Le mot de passe n'est pas asez fort !";
-        passwordInput.style.background = "#FD2D01";
-        passwordInput.style.color = "white";
-      } else {
-        passwordError.innerText = " ";
-        passwordInput.style.background = "white";
-        passwordInput.style.color = "black";
-      }
     } else {
       //Récupération des données de l'API
       axios({
@@ -78,12 +44,16 @@ const Login = () => {
           console.log(err.response.data.message);
           if (err.response.data.message !== undefined) {
             emailError.innerHTML = err.response.data.message;
+            emailError.style.background = "#FD2D01";
+            emailError.style.color = "white";
           } else {
             emailError.innerHTML = null;
           }
 
           if (err.response.data.error) {
             passwordError.innerHTML = err.response.data.error;
+            passwordError.style.background = "#FD2D01";
+            passwordError.style.color = "white";
           } else {
             passwordError.innerHTML = null;
           }

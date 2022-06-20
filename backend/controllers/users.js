@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt"); // Package de cryptage
 const jwt = require("jsonwebtoken"); // Création et vérification du Token
 const fs = require("fs");
 const dotenv = require("dotenv"); // Importation de dotenv
-const { User } = require("../models");
+const { User, Post, Comment } = require("../models");
 dotenv.config();
 
 exports.signup = async (req, res) => {
@@ -108,7 +108,7 @@ exports.modifyProfile = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
   const userId = decodedToken.userId;
-  const { email, username, bio } = req.body;
+  const { bio } = req.body;
   const attachmentURL = req.file
     ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     : req.body.attachment;
@@ -126,8 +126,6 @@ exports.modifyProfile = async (req, res, next) => {
 
         fs.unlink(`images/${filename}`, () => {
           user.update({
-            email: email || user.email,
-            username: username || user.username,
             bio: bio || user.bio,
             attachment: attachmentURL,
           });
@@ -135,8 +133,6 @@ exports.modifyProfile = async (req, res, next) => {
         });
       } else {
         user.update({
-          email: email || user.email,
-          username: username || user.username,
           bio: bio || user.bio,
           attachment: user.attachment,
         });
@@ -150,7 +146,6 @@ exports.modifyProfile = async (req, res, next) => {
   }
 };
 
-// CTRL de suppression du profil des utilisateurs
 exports.deleteProfile = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.JWT_DECODEDTOKEN);
@@ -166,24 +161,71 @@ exports.deleteProfile = async (req, res, next) => {
       throw new Error("account not found!");
     }
     if (userId === user.id || userAdmin.isAdmin === true) {
-      if (user.attachment != null) {
-        const filename = user.attachment.split("/images/")[1];
+      const post = await Post.findAll({
+        attributes: ["id", "UserId", "attachment"],
+        where: { UserId: user.id },
+      });
 
-        fs.unlink(`images/${filename}`, () => {
+      if (post) {
+        for (let y = 0; y < post.length; y++) {
+          const comment = await Comment.findAll({
+            attributes: ["PostId", "attachment"],
+            where: { PostId: post[y].id },
+          });
+          if (comment) {
+            for (let b = 0; b < comment.length; b++) {
+              const filename = comment[b].attachment.split("/images/")[1];
+              console.log(filename);
+              fs.unlink(`images/${filename}`, () => {
+                Comment.destroy({
+                  where: { PostId: post[y].id },
+                });
+              });
+            }
+          }
+        }
+
+        for (let i = 0; i < post.length; i++) {
+          const filename = post[i].attachment.split("/images/")[1];
+          console.log(filename);
+          fs.unlink(`images/${filename}`, () => {
+            Post.destroy({
+              where: { UserId: user.id },
+            });
+          });
+        }
+        if (user.attachment != null) {
+          const filename = user.attachment.split("/images/")[1];
+
+          fs.unlink(`images/${filename}`, () => {
+            User.destroy({
+              where: { id: req.params.id },
+            });
+            return res
+              .status(200)
+              .json({ message: "you have correctly deleted this profil!" });
+          });
+        }
+      } else {
+        if (user.attachment != null) {
+          const filename = user.attachment.split("/images/")[1];
+
+          fs.unlink(`images/${filename}`, () => {
+            User.destroy({
+              where: { id: req.params.id },
+            });
+            return res
+              .status(200)
+              .json({ message: "you have correctly deleted this profil!" });
+          });
+        } else {
           User.destroy({
             where: { id: req.params.id },
           });
           return res
             .status(200)
             .json({ message: "you have correctly deleted this profil!" });
-        });
-      } else {
-        User.destroy({
-          where: { id: req.params.id },
-        });
-        return res
-          .status(200)
-          .json({ message: "you have correctly deleted this profil!" });
+        }
       }
     } else {
       return res.status(403).json({ message: "unauthorized access!" });
