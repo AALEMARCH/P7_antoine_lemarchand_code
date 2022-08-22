@@ -21,7 +21,7 @@ dotenv.config();
 // Limite le nombre de requêtes par IP envoyées vers le serveur Express
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 500, // Limiter chaque IP à 500 requêtes par `window` de 15 minutes
+  max: 200, // Limiter chaque IP à 200 requêtes par `window` de 15 minutes
   message: "trop de requete",
   standardHeaders: true, // Renvoie les informations de limite de débit dans les en-têtes
   legacyHeaders: false, // Désactive les en-têtes `X-RateLimit-*`

@@ -24,7 +24,7 @@ const SignUp = () => {
       ".password-confirm.error"
     );
 
-    const nameRegex = /^[a-z]{2,10}$/i;
+    const nameRegex = /^[a-zA-ZÀ-ž[0-9]{2,10}$/i;
     const emailRegex =
       /^[a-z0-9\-_]+[a-z0-9.\-_]*@[a-z0-9\-_]{2,}\.[a-z.\-_]+[a-z\-_]+$/i;
     const passwordRegex =
@@ -39,7 +39,7 @@ const SignUp = () => {
         usernameError.innerText = " ";
       } else {
         usernameError.innerText =
-          "Saisir un nom d'utilisateur valide (2-10 caractères / pas de chiffres)";
+          "Saisir un nom d'utilisateur valide (2-10 caractères / chiffres et accents autorisé / espace interdit)";
         usernameError.style.background = "#FD2D01";
         usernameError.style.color = "white";
       }
