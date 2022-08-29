@@ -27,3 +27,10 @@
     @include flexbox();
     width: 1rem;  
 }
+
+.post-container{
+    @media screen and (min-width: 1200px){
+        height: 100%;
+        padding-bottom: 5rem;
+    }  
+}

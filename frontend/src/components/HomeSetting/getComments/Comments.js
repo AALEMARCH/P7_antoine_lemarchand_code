@@ -42,6 +42,8 @@ const Comments = (post) => {
     createComments({ formData, post })
       .then((res) => {
         handleComments();
+        newComment.content = "";
+        newComment.attachment = "";
       })
       // .catch((err) => console.log(err));
       .catch((err) => {
@@ -96,15 +98,28 @@ const Comments = (post) => {
                   className="content-area"
                 />
               </Form.Group>
+
               <div className="sendCommentBtn-container">
-                <Button
-                  variant="custom"
-                  type="submit"
-                  aria-label="Envoie du commentaire"
-                  className="sending-comment"
-                >
-                  <i className="fa-solid fa-paper-plane iconSendComment"></i>
-                </Button>
+                {newComment.content !== "" || newComment.attachment !== "" ? (
+                  <Button
+                    variant="custom"
+                    type="submit"
+                    aria-label="Envoie du commentaire"
+                    className="sending-comment"
+                  >
+                    <i className="fa-solid fa-paper-plane iconSendComment"></i>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="custom"
+                    type="submit"
+                    aria-label="Envoie du commentaire"
+                    className="sending-comment"
+                    disabled
+                  >
+                    <i className="fa-solid fa-paper-plane iconSendComment"></i>
+                  </Button>
+                )}
               </div>
             </div>
 

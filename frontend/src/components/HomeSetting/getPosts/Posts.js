@@ -39,6 +39,9 @@ const Posts = (props) => {
     addPost(formData)
       .then((res) => {
         handlePosts();
+        newPost.title = "";
+        newPost.content = "";
+        newPost.attachment = "";
       })
       .catch((err) => {
         console.log(err);

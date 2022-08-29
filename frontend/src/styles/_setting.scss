@@ -73,6 +73,12 @@ $color-11: #DCDCDC;
 body{
     font-family: $font-1;
     font-weight: 400;
+    margin: auto !important;
+    max-width: 1200px;
+    min-height: 100vh;
+    @media screen and (min-width: 1200px){
+    box-shadow: 0px 10px 20px -2px #888; 
+    }
 }
 
 .btn{

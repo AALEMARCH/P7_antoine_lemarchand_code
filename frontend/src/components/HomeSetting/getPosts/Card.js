@@ -39,6 +39,8 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
     formData.append("content", newPost.content);
 
     handleUpdatePost({ formData, post });
+    newPost.title = "";
+    newPost.content = "";
   };
 
   const handlePost = (e) => {
@@ -173,15 +175,26 @@ const Card = ({ post, handleDeletePost, handleUpdatePost }) => {
                     aria-labelledby="content"
                   />
                 </Form.Group>
-
-                <Button
-                  variant="custom"
-                  type="submit"
-                  aria-label="Envoyer la publication : Envoie de la modification du message"
-                  className="card-btn"
-                >
-                  Envoyer la publication
-                </Button>
+                {newPost.title !== "" || newPost.content !== "" ? (
+                  <Button
+                    variant="custom"
+                    type="submit"
+                    aria-label="Envoyer la publication : Envoie de la modification du message"
+                    className="card-btn"
+                  >
+                    Envoyer la publication
+                  </Button>
+                ) : (
+                  <Button
+                    variant="custom"
+                    type="submit"
+                    aria-label="Envoyer la publication : Envoie de la modification du message"
+                    className="card-btn"
+                    disabled
+                  >
+                    Envoyer la publication
+                  </Button>
+                )}
               </Form>
             </div>
           ) : null}

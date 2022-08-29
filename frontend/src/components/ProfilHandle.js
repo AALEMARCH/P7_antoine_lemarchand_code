@@ -60,6 +60,7 @@ const ProfilHandle = () => {
         )
         .then((res) => {
           handleProfils();
+          alert("modifications effectuées");
         })
         .catch((err) => {
           console.log(err);

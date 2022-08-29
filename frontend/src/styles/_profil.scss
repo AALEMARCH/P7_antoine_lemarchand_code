@@ -7,6 +7,7 @@
     }
     @media screen and (min-width: 768px){
         width: 70%;
+        height: 100%;
     }
     &_card{
         width: 100%;
@@ -15,14 +16,9 @@
         padding: 8px;
         background-color: #fff;
         position: relative;
-        height: 370px;
+        height: 100%;
         @media screen and (min-width: 1024px){
-            height: 500px;
-         
-        }
-        @media screen and (min-width: 1440px){
-            height: 700px;
-         
+            height: 100%;
         }
     }
     &_image-container{
@@ -31,6 +27,19 @@
         min-height: 55%;
         max-height: 67%;
         border: none;
+        height: 150px;
+        @media screen and (min-width: 400px){
+            height: 200px;
+        }
+        @media screen and (min-width: 500px){
+            height: 250px;
+        }
+        @media screen and (min-width: 700px){
+            height: 300px;
+        }
+        @media screen and (min-width: 1024px){
+        height: 370px;
+        }
         &--none{
             display: none;
         }
